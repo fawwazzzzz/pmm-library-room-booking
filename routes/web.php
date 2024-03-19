@@ -11,5 +11,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/form-available', [MainController::class, 'formavailable']);
+
+Route::get('/form-available', [MainController::class, 'available']);
+
+Route::get('/form-details', [MainController::class, 'details']);
 
