@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="flex-start">
-            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 45px;"></i></a>
+            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
             <h2 class="ms-5">Tempahan Bilik.</h2>
         </div>
         
@@ -108,7 +108,7 @@
                     </div>
 
                     <div class="flex-end mt-2 w-100">
-                        <input type="submit" class="btn btn-primary disabled" value="Next" style="width: 180px;">
+                        <input type="submit" class="btn btn-primary" value="Next" style="width: 180px;">
                     </div>
                 </form>
             </div>

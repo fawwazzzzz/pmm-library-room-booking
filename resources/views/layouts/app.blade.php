@@ -19,7 +19,9 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])
+    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.0"></script>
 </head>
 <body>
     <div id="app">
