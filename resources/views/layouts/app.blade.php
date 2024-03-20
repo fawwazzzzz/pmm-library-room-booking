@@ -19,8 +19,9 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])
-    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/bootstrap.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.0"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="{{ url('/') }}">
-                    Aliya & Friends
+                    STBPP
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +44,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Pentadbir</a>
+                            <a href="/" class="nav-link">Pentadbir</a>
                         </li>
                       </li>
                     </ul>
