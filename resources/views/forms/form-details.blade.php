@@ -48,54 +48,89 @@
             <div class="row mt-5">
 
                 {{-- left side of form --}}
-                <div class="col-md-6 px-4">
+                <div class="col-md-12 px-4">
 
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" id="name">
+                    <div class="row">
 
-                    <div class="my-2">
-                        <label for="matriks" class="form-label">No Matriks</label>
-                        <input type="text" name="matriks" class="form-control" id="matriks">
+                        <div class="col-md-8">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" name="name" class="form-control" id="name">
+                        </div>
+
+                        <div class="col-md-4 my-2 my-md-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <label for="matriks" class="form-label">No Matriks</label> 
+
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                                        <label class="form-check-label" for="inlineRadio1">Student</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">Staff</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="text" name="matriks" class="form-control" id="matriks">
+                        </div>
+
+                        <div class="my-md-2 my-0"></div>
+
+                        <div class="col-md-6 my-2 my-md-0">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" name="email" class="form-control" id="email">
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-10">
+                                    <label for="jabatan" class="form-label">Jabatan</label>
+                                    <select class="form-select" aria-label="Jabatan" id="jabatan">
+                                        <option selected disabled hidden>Select ..</option>
+                                        <option value="JP">Jabatan Perdagangan</option>
+                                        <option value="JPH">JPH</option>
+                                        <option value="JKM">Jabatan Kejuruteraan Mekanikal</option>
+                                        <option value="JKA">Jabatan Kejuruteraan Awan</option>
+                                        <option value="JKE">Jabatan Kejuruteraan Elektrik</option>
+                                        <option value="TVET">TVET</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="semester" class="form-label">Semester</label>
+                                    <select class="form-select" aria-label="semester" id="semester">
+                                        <option selected disabled hidden></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-1"></div>
+
+                        <div class="my-2"></div>
+
+                        <div class="col-md-8">
+                            <label for="purpose" class="form-label">Purpose</label>
+                            <input type="text" name="purpose" class="form-control" id="purpose" onkeydown="allowOnlyNumbers(event)">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="groupnum" class="form-label">Number Of Group Members</label>
+                            <input type="text" name="groupnum" class="form-control" id="groupnum" onkeydown="allowOnlyNumbers(event)">
+                        </div>
+                        
+                        
                     </div>
-
-                    <label for="jabatan" class="form-label">Jabatan</label>
-                    <select class="form-select" aria-label="Jabatan" id="jabatan">
-                        <option selected disabled hidden>Select ..</option>
-                        <option value="Jabatan Perdagangan">Jabatan Perdagangan</option>
-                        <option value="Jabatan Teknologi Maklumat & Komunikasi">Jabatan Teknologi Maklumat & Komunikasi</option>
-                        <option value="Jabatan Mekanikal">Jabatan Mekanikal</option>
-                    </select>
-
                 </div>
 
                 {{-- right side of form --}}
-                <div class="col-md-6 px-4">
-
-                    <label for="nophone" class="form-label">No Phone</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="addon-nophone">+60</span>
-                        <input type="text" name="nophone" class="form-control" id="nophone" onkeydown="allowOnlyNumbers(event)" aria-describedby="addon-nophone">
-                    </div>
-
-                    <div class="my-2">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control" id="email">
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <label for="groupnum" class="form-label">Group Number</label>
-                        {{-- <button class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-title="This top tooltip is themed via CSS variables."><i class="bi bi-info"></i></button> --}}
-                        {{-- <button type="button" class="btn btn-secondary"
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip"
-                                data-bs-title="This top tooltip is themed via CSS variables.">
-                        Custom tooltip
-                        </button> --}}
-                    </div>
-                    <input type="text" name="groupnum" class="form-control" id="groupnum" onkeydown="allowOnlyNumbers(event)">
-                </div>
                 <div class="flex-end mt-3 pe-md-4 w-100">
                     <input type="submit" class="btn btn-primary" value="Submit" style="width: 180px;">
                 </div>

@@ -3,14 +3,14 @@
 @section('content')
     <div class="container">
         <div class="flex-start">
-            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
+            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 45px;"></i></a>
             <h2 class="ms-5">Tempahan Bilik.</h2>
         </div>
         
 
         <div class="row flex-center time-form">
             <div class="col-md-6 py-3 px-5">
-                <form action="#">
+                <form action="">
                     <label for="">Tarikh</label>
                     <input type="date" id="date-flatpickr" style="width: 100%" class="form-control">
 
@@ -63,7 +63,7 @@
                     <div class="my-4"></div>
 
                     <div class="flex-end w-100">
-                        <input type="submit" class="btn btn-primary" value="Check Availability">
+                        <input id="checkAvailabilityButton" type="submit" class="btn btn-primary" value="Check Availability">
                     </div>
                 </form>
             </div>
@@ -115,6 +115,7 @@
         </div>
     </div>
 @endsection
+
 @push('scripts')
     <script>
         config = {
@@ -145,6 +146,14 @@
             selectMenu[1].firstElementChild.insertAdjacentHTML("afterend", option); 
             selectMenu[4].firstElementChild.insertAdjacentHTML("afterend", option); 
         }
+
+        // let testBtn = document.getElement
+        
+        $('#checkAvailabilityButton').on('click', function () {
+            const startTime = `${selectMenu[0].value}:${selectMenu[1].value} ${selectMenu[2].value}`;
+            console.log(startTime);
+        })
+        
 
     </script>
 @endpush

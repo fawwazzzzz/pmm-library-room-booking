@@ -35,6 +35,10 @@ body {
     }
 }
 
+input[type="time"] {
+    width: 100%;
+}
+
 .content {
     width: 100%;
     justify-content: space-between;
