@@ -9,4 +9,7 @@ class MainController extends Controller
     public function formavailable() {
         return view('form-available');
     }
+    public function admin() {
+        return view('admin.admin');
+    }
 }

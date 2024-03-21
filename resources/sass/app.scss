@@ -8,6 +8,17 @@
 @import 'bootstrap/scss/bootstrap';
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
+//Vendor CSS Files
+@import "./bootstrap-icons/bootstrap-icons.css";
+@import "./boxicons/css/boxicons.min.css";
+@import "./quill/quill.snow.css";
+@import "./quill/quill.bubble.css";
+@import "./remixicon/remixicon.css";
+@import "./simple-datatables/style.css";
+
+//Template Main CSS File
+@import "css/style.css";
+
 body {
     font-family: "Poppins";
 }

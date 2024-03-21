@@ -37,8 +37,18 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Pentadbir</a>
+                            <a href="{{ route('login') }}" class="nav-link">Pentadbir</a>
                         </li>
+                      </li>
+
+                      <li class="nav-item">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Log Keluar') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                       </li>
                     </ul>
                 </div>
