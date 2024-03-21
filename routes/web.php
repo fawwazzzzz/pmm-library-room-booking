@@ -16,3 +16,4 @@ Route::get('/form-available', [MainController::class, 'formavailable']);
 Route::get('/form-details', [MainController::class, 'details']);
 Route::get('/admin', [MainController::class, 'admin']);
 
+Route::post('/process-data', [MainController::class, 'checkBetween']);

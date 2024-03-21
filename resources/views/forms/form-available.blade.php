@@ -10,7 +10,8 @@
 
         <div class="row flex-center time-form">
             <div class="col-md-6 py-3 px-5">
-                <form action="">
+                <form action="" method="POST">
+                    @csrf
                     <label for="">Tarikh</label>
                     <input type="date" id="date-flatpickr" style="width: 100%" class="form-control">
 
@@ -63,12 +64,11 @@
                     <div class="my-4"></div>
 
                     <div class="flex-end w-100">
-                        <input id="checkAvailabilityButton" type="submit" class="btn btn-primary" value="Check Availability">
+                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary" value="Check Availability">
                     </div>
-                </form>
-            </div>
-            <div class="col-md-6 py-3 px-5">
-                <form action="#">
+
+                </div>
+                <div class="col-md-6 py-3 px-5">
                     <div class="radio-tile-group">
 
                         <div class="input-container">
@@ -150,10 +150,83 @@
         // let testBtn = document.getElement
         
         $('#checkAvailabilityButton').on('click', function () {
-            const startTime = `${selectMenu[0].value}:${selectMenu[1].value} ${selectMenu[2].value}`;
+
+            // Check in section
+
+            // Set into 24 hours format
+            let hourStart = parseInt(selectMenu[0].value); 
+            
+            if (selectMenu[2].value == "PM") {
+
+                hourStart += 12;
+
+                if (hourStart == 24 ) 
+                {
+                    hourStart = 12;
+                }
+            } 
+            else if (selectMenu[2].value == "AM" && hourStart == 12) {
+                hourStart -= 12
+                hourStart = hourStart + "0";
+            }
+
+            const startTime = `${hourStart}:${selectMenu[1].value}`;
             console.log(startTime);
-        })
+
+            // Check out section
+
+            // Set into 24 hours format
+            let hourEnd = parseInt(selectMenu[3].value); 
+            
+            if (selectMenu[5].value == "PM") {
+
+                hourEnd += 12;
+
+                if (hourEnd == 24 ) 
+                {
+                    hourEnd = 12;
+                }
+            } 
+            else if (selectMenu[2].value == "AM" && hourEnd == 12) {
+                hourEnd -= 12
+                hourEnd = hourEnd + "0";
+            }
+
+            const endTime = `${hourEnd}:${selectMenu[1].value}`;
+            console.log(endTime);
+
+
+            let between = countBetween(hourStart, hourEnd);
+            console.log("Hours Between = " + between); 
+
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            $.ajax({
+                url: '/process-data',
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+                },
+                data: {
+                    checkin: startTime,
+                    checkout: endTime
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+            });
         
+        })
+
+        function countBetween(start, end) {
+
+            let start12pm = start == 12 ? 24 : start;
+            console.log(start12pm)
+            console.log(start + "-" + end);
+
+            let between = start - end;
+            return between;
+        }
 
     </script>
 @endpush
