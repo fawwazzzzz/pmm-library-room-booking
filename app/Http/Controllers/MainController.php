@@ -15,6 +15,11 @@ class MainController extends Controller
     public function details() {
         return view('forms.form-details');
     }
+  
+    public function admin() {
+        return view('admin.admin');
+    }
+}
 
     public function checkBetween(Request $request) {
 
