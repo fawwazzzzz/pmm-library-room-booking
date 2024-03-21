@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function formavailable() {
-        return view('form-available');
+    public function available() {
+        return view('forms.form-available');
+    }
+
+    public function details() {
+        return view('forms.form-details');
     }
     public function admin() {
         return view('admin.admin');

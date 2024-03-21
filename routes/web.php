@@ -12,6 +12,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/form-available', [MainController::class, 'formavailable']);
-Route::get('/admin', [MainController::class, 'admin']);
 
+Route::get('/form-details', [MainController::class, 'details']);
+Route::get('/admin', [MainController::class, 'admin']);
 
