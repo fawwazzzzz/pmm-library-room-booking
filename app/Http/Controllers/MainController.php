@@ -20,7 +20,6 @@ class MainController extends Controller
     public function admin() {
         return view('admin.admin');
     }
-}
 
     public function checkBetween(Request $request) {
 
