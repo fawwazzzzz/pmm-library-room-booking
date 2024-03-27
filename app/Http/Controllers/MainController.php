@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function available() {
+    public function availablePage() {
         return view('forms.form-available');
     }
 
-    public function details() {
-        return view('forms.form-details');
+    public function detailsPage() {
+
+        $data = session('roomID');
+        return view('forms.form-details', compact(['data']));
     }
   
     public function admin() {
@@ -28,13 +30,24 @@ class MainController extends Controller
         $hourStart = $request->input('checkin');
         $hourEnd = $request->input('checkout');
             
-        $users = Reservation::select('roomID')
+        $room = Reservation::select('roomID')
                 ->whereDate('date', '=', $date)
-                ->whereTime('checkout', '>', $hourStart)
+                ->where(function ($query) use ($hourStart, $hourEnd) {
+                    $query->where(function ($query) use ($hourStart, $hourEnd) {
+                        $query->whereTime('checkin', '<', $hourStart)
+                            ->whereTime('checkout', '>', $hourEnd);
+                    })->orWhere(function ($query) use ($hourStart, $hourEnd) {
+                        $query->whereTime('checkin', '>', $hourStart)
+                            ->whereTime('checkin', '<', $hourEnd);
+                    })->orWhere(function ($query) use ($hourStart, $hourEnd) {
+                        $query->whereTime('checkout', '>', $hourStart)
+                            ->whereTime('checkout', '<', $hourEnd);
+                    });
+                })
                 ->get();
 
         // Return a JSON response with the processed data
-        return response()->json(['test' => $users]);
+        return response()->json(['test' => $room]);
     }
 
     public function insertTime(Request $request) {
@@ -92,13 +105,44 @@ class MainController extends Controller
             'roomID' => $room
         ]);
 
-        $data = Reservation::select('id')
+        $data = Reservation::select(['id', 'roomID'])
                 ->whereDate('date', '=', $date)
                 ->whereTime('checkin', '=', $timeStart)
                 ->whereTime('checkout', '=', $timeEnd)
                 ->first();
 
-        return view('forms.form-details', compact(['data']));
+        session(['roomID' => $data]);
 
+        return redirect('/form-details');
+
+    }
+
+    public function insertDetails(Request $request) {
+
+        $id = $request->id;
+
+        $update = Reservation::where('id', $request->id)
+                ->update([
+                    'namaPengguna'=> $request->name,
+                    'noMatriks' => $request->matriks,
+                    'email' => $request->email,
+                    'Jabatan' => $request->jabatanName,
+                    'semester' => $request->semesterName,
+                    'purpose' => $request->purposeName,
+                    'groupNum' => $request->groupnum,
+                ]);
+
+        $data = Reservation::where('id', $id)
+                ->first();
+
+        session(['userDetails' => $data]);
+
+        return redirect('/form-result');
+    }
+
+    public static function result() {
+
+        $data = session('userDetails');
+        return view('forms.form-result', compact(['data']));
     }
 }

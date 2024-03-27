@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="flex-start">
+        <div class="flex-start head">
             <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 45px;"></i></a>
-            <h2 class="ms-5">Tempahan Bilik.</h2>
+            <span class="ms-5">Tempahan Bilik</span>
         </div>
         
 
@@ -13,19 +13,19 @@
                 <form action="{{ route('time') }}" method="POST">
                     @csrf
                     <label for="">Tarikh</label>
-                    <input type="date" id="date-flatpickr" name="date" style="width: 100%" class="form-control">
+                    <input type="date" id="date-flatpickr" name="date" style="width: 100%" class="form-control" required>
 
                     <div class="my-3"></div>
 
                     <label for="">Masa Mula</label>
                     <div class="content flex-center">
                         <div class="column">
-                            <select class="hour" name="sHour">
+                            <select class="hour" name="sHour" required>
                                 <option value="Hour" selected disabled hidden>Hour</option>
                             </select>
                         </div>
                         <div class="column mx-2">
-                            <select class="time" name="sMinute">
+                            <select class="time" name="sMinute" required>
                                 <option value="Minute" selected disabled hidden>Minute</option>
                                 <option value="00">00</option>
                                 <option value="15">15</option>
@@ -34,7 +34,7 @@
                             </select>
                         </div>
                         <div class="column">
-                            <select name="startAMPM">
+                            <select name="startAMPM" required>
                                 <option value="AM/PM" selected disabled hidden>AM/PM</option>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
@@ -47,12 +47,12 @@
                     <label for="">Masa Akhir</label>
                     <div class="content flex-center">
                         <div class="column">
-                            <select class="hour" name="eHour">
+                            <select class="hour" name="eHour" required>
                                 <option value="Hour" selected disabled hidden>Hour</option>
                             </select>
                         </div>
                         <div class="column mx-2">
-                            <select class="time" name="eMinute">
+                            <select class="time" name="eMinute" required>
                                 <option value="Minute" selected disabled hidden>Minute</option>
                                 <option value="00">00</option>
                                 <option value="15">15</option>
@@ -61,7 +61,7 @@
                             </select>
                         </div>
                         <div class="column">
-                            <select name="endAMPM">
+                            <select name="endAMPM" required>
                                 <option value="AM/PM" selected disabled hidden>AM/PM</option>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
@@ -80,35 +80,35 @@
                     <div class="radio-tile-group">
 
                         <div class="input-container">
-                            <input id="1" value="1" type="radio" name="room">
+                            <input id="1" value="1" type="radio" name="room" required disabled>
                             <div class="radio-tile">
                             <label for="1">A1</label>
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="2" value="2" type="radio" name="room">
+                            <input id="2" value="2" type="radio" name="room" required disabled>
                             <div class="radio-tile">
                             <label for="2">A2</label>   
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="3" value="3" type="radio" name="room">
+                            <input id="3" value="3" type="radio" name="room" required disabled>
                             <div class="radio-tile">
                             <label for="3">A3</label>
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="4" value="4" type="radio" name="room">
+                            <input id="4" value="4" type="radio" name="room" required disabled>
                             <div class="radio-tile">
                             <label for="4">B3</label>
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="5" value="5" type="radio" name="room">
+                            <input id="5" value="5" type="radio" name="room" required disabled>
                             <div class="radio-tile">
                             <label for="5">Anjung</label>
                             </div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="flex-end mt-2 w-100">
-                        <input type="submit" class="btn btn-primary" value="Next" style="width: 180px;">
+                        <input type="submit" class="btn btn-primary" value="Next" id="submitRoom" style="width: 180px;" disabled>
                     </div>
                 </form>
             </div>
@@ -150,6 +150,12 @@
         // let testBtn = document.getElement
         
         $('#checkAvailabilityButton').on('click', function () {
+
+            // If any required field is empty, display an error message
+            if (!validationTime()) {
+                alert('Please fill out all required fields.')
+                return;
+            }
 
             // Check in section
 
@@ -200,6 +206,9 @@
             let date = document.getElementById('date-flatpickr').value;
             console.log(date);
 
+            unDisabledButton();
+            document.getElementById('submitRoom').disabled = false;
+
             // Ajax send data to Controller
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -234,6 +243,32 @@
                 },
             });
         })
+
+        function validationTime() {
+            
+            var dateInput = document.getElementById('date-flatpickr');
+            var sHourSelect = document.querySelector('select[name="sHour"]');
+            var sMinuteSelect = document.querySelector('select[name="sMinute"]');
+            var startAMPMSelect = document.querySelector('select[name="startAMPM"]');
+            var eHourSelect = document.querySelector('select[name="eHour"]');
+            var eMinuteSelect = document.querySelector('select[name="eMinute"]');
+            var endAMPMSelect = document.querySelector('select[name="endAMPM"]');
+
+            var isValid = true;
+
+            // Check if any required field is empty
+            if (dateInput.value === '') {
+                return isValid = false;
+            }
+            if (sHourSelect.value === 'Hour' || sMinuteSelect.value === 'Minute' || startAMPMSelect.value === 'AM/PM') {
+                return isValid = false;
+            }
+            if (eHourSelect.value === 'Hour' || eMinuteSelect.value === 'Minute' || endAMPMSelect.value === 'AM/PM') {
+                return isValid = false;
+            }
+
+            return isValid = true;
+        }
 
         function unDisabledButton() {
 
