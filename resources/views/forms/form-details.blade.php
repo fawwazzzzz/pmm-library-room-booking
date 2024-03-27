@@ -2,43 +2,45 @@
 
 @section('content')
     <div class="container">
-        <div class="flex-start">
+        <div class="flex-start head">
             <a href="/form-available" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
-            <h2 class="ms-5">Personal Details</h2>
+            <span class="ms-5">Personal Details</span>
         </div>
-        <form action="#">
+        <form action="{{ route('details') }}" method="POST">
+            @csrf
+            <input type="hidden" name="id" value="{{ $data['id'] }}">
             <div class="radio-tile-group mt-4">
 
                     <div class="input-container">
-                        <input id="walk" type="radio" name="radio">
+                        <input id="1" type="radio" name="room">
                         <div class="radio-tile">
                         <label for="A1">A1</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="bike" type="radio" name="radio">
+                        <input id="2" type="radio" name="room">
                         <div class="radio-tile">
                         <label for="A2">A2</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="car" type="radio" name="radio">
+                        <input id="3" type="radio" name="room">
                         <div class="radio-tile">
                         <label for="A3">A3</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="fly" type="radio" name="radio">
+                        <input id="4" type="radio" name="room">
                         <div class="radio-tile">
                         <label for="B3">B3</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="fly" type="radio" name="radio">
+                        <input id="5" type="radio" name="room">
                         <div class="radio-tile">
                         <label for="Anjung">Anjung</label>
                         </div>
@@ -63,12 +65,12 @@
 
                                 <div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-                                        <label class="form-check-label" for="inlineRadio1">Student</label>
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="student" value="student" checked>
+                                        <label class="form-check-label" for="student">Student</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">Staff</label>
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="staff" value="staff">
+                                        <label class="form-check-label" for="staff">Staff</label>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +88,7 @@
                             <div class="row">
                                 <div class="col-10">
                                     <label for="jabatan" class="form-label">Jabatan</label>
-                                    <select class="form-select" aria-label="Jabatan" id="jabatan">
+                                    <select class="form-select" aria-label="Jabatan" id="jabatan" name="jabatanName">
                                         <option selected disabled hidden>Select ..</option>
                                         <option value="JP">Jabatan Perdagangan</option>
                                         <option value="JPH">JPH</option>
@@ -98,7 +100,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="semester" class="form-label">Semester</label>
-                                    <select class="form-select" aria-label="semester" id="semester">
+                                    <select class="form-select" aria-label="semester" id="semester" name="semesterName">
                                         <option selected disabled hidden></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -118,7 +120,7 @@
 
                         <div class="col-md-8">
                             <label for="purpose" class="form-label">Purpose</label>
-                            <input type="text" name="purpose" class="form-control" id="purpose" onkeydown="allowOnlyNumbers(event)">
+                            <input type="text" name="purposeName" class="form-control" id="purpose">
                         </div>
 
                         <div class="col-md-4">
@@ -141,29 +143,39 @@
 @push('scripts')
     <script>
         // Function to allow only numbers in the input field and limit to around 10 characters
-    function allowOnlyNumbers(event) {
-        // Allow: backspace, delete, tab, escape, enter, and '.' (for decimals)
-        if ([46, 8, 9, 27, 13, 110, 190].indexOf(event.keyCode) !== -1 ||
-            // Allow: Ctrl+A/Ctrl+C/Ctrl+V
-            (event.keyCode === 65 && (event.ctrlKey === true || event.metaKey === true)) || // Ctrl+A
-            (event.keyCode === 67 && (event.ctrlKey === true || event.metaKey === true)) || // Ctrl+C
-            (event.keyCode === 86 && (event.ctrlKey === true || event.metaKey === true)) || // Ctrl+V
-            // Allow: home, end, left, right
-            (event.keyCode >= 35 && event.keyCode <= 39)) {
-            // Let it happen, don't do anything
-            return;
+        function allowOnlyNumbers(event) {
+            // Allow: backspace, delete, tab, escape, enter, and '.' (for decimals)
+            if ([46, 8, 9, 27, 13, 110, 190].indexOf(event.keyCode) !== -1 ||
+                // Allow: Ctrl+A/Ctrl+C/Ctrl+V
+                (event.keyCode === 65 && (event.ctrlKey === true || event.metaKey === true)) || // Ctrl+A
+                (event.keyCode === 67 && (event.ctrlKey === true || event.metaKey === true)) || // Ctrl+C
+                (event.keyCode === 86 && (event.ctrlKey === true || event.metaKey === true)) || // Ctrl+V
+                // Allow: home, end, left, right
+                (event.keyCode >= 35 && event.keyCode <= 39)) {
+                // Let it happen, don't do anything
+                return;
+            }
+
+            // Limit to around 10 characters
+            if (event.target.value.length >= 11) {
+                event.preventDefault();
+            }
+
+            // Ensure that it is a number and stop the keypress
+            if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+                event.preventDefault();
+            }
         }
 
-        // Limit to around 10 characters
-        if (event.target.value.length >= 11) {
-            event.preventDefault();
+        for (let i = 1; i <= 5; i++) {
+            
+            if (i == {{ $data['roomID'] }}) {
+                document.getElementById(`${i}`).checked = true;
+                continue;
+            }
+            
+            document.getElementById(`${i}`).disabled = true;
         }
-
-        // Ensure that it is a number and stop the keypress
-        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
-            event.preventDefault();
-        }
-    }
 
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

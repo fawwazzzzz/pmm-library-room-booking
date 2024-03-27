@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('tempahan', function (Blueprint $table) {
             $table->id();
             $table->string('namaPengguna');
+            $table->string('noMatriks');
             $table->string('email');
             $table->string('Jabatan');
+            $table->integer('semester');
             $table->date('date');
             $table->time('checkin');
             $table->time('checkout');
