@@ -151,6 +151,12 @@
         
         $('#checkAvailabilityButton').on('click', function () {
 
+            // If any required field is empty, display an error message
+            if (!validationTime()) {
+                alert('Please fill out all required fields.')
+                return;
+            }
+
             // Check in section
 
             // Set into 24 hours format
@@ -237,6 +243,32 @@
                 },
             });
         })
+
+        function validationTime() {
+            
+            var dateInput = document.getElementById('date-flatpickr');
+            var sHourSelect = document.querySelector('select[name="sHour"]');
+            var sMinuteSelect = document.querySelector('select[name="sMinute"]');
+            var startAMPMSelect = document.querySelector('select[name="startAMPM"]');
+            var eHourSelect = document.querySelector('select[name="eHour"]');
+            var eMinuteSelect = document.querySelector('select[name="eMinute"]');
+            var endAMPMSelect = document.querySelector('select[name="endAMPM"]');
+
+            var isValid = true;
+
+            // Check if any required field is empty
+            if (dateInput.value === '') {
+                return isValid = false;
+            }
+            if (sHourSelect.value === 'Hour' || sMinuteSelect.value === 'Minute' || startAMPMSelect.value === 'AM/PM') {
+                return isValid = false;
+            }
+            if (eHourSelect.value === 'Hour' || eMinuteSelect.value === 'Minute' || endAMPMSelect.value === 'AM/PM') {
+                return isValid = false;
+            }
+
+            return isValid = true;
+        }
 
         function unDisabledButton() {
 
