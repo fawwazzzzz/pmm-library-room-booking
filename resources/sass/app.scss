@@ -134,13 +134,23 @@ input:checked + .radio-tile {
     transform: scale(1.1);
 }
 
-input:hover + .radio-tile {
+input:not(:disabled):hover + .radio-tile {
     box-shadow: 0 0 12px $primary;
 }
 
 input:checked + .radio-tile ion-icon,
 input:checked + .radio-tile label {
     color: white;
+}
+
+.input-container input:disabled + .radio-tile {
+    background-color: #ccc; /* Grey color */
+    border-color: #ccc; /* Match border color with background */
+    cursor: not-allowed; /* Change cursor to not-allowed */
+}
+
+.input-container input:disabled + .radio-tile label {
+    color: #888; /* Grey color for label */
 }
 
 // Template
