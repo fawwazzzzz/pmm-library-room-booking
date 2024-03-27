@@ -17,3 +17,5 @@ Route::get('/form-available', [MainController::class, 'available']);
 Route::get('/form-details', [MainController::class, 'details']);
 
 Route::post('/process-data', [MainController::class, 'checkBetween']);
+
+Route::post('/insert-time', [MainController::class, 'insertTime'])->name('time');

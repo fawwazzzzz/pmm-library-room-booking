@@ -10,27 +10,31 @@
 
         <div class="row flex-center time-form">
             <div class="col-md-6 py-3 px-5">
-                <form action="" method="POST">
+                <form action="{{ route('time') }}" method="POST">
                     @csrf
                     <label for="">Tarikh</label>
-                    <input type="date" id="date-flatpickr" style="width: 100%" class="form-control">
+                    <input type="date" id="date-flatpickr" name="date" style="width: 100%" class="form-control">
 
                     <div class="my-3"></div>
 
                     <label for="">Masa Mula</label>
                     <div class="content flex-center">
                         <div class="column">
-                            <select class="hour">
+                            <select class="hour" name="sHour">
                                 <option value="Hour" selected disabled hidden>Hour</option>
                             </select>
                         </div>
                         <div class="column mx-2">
-                            <select class="time">
+                            <select class="time" name="sMinute">
                                 <option value="Minute" selected disabled hidden>Minute</option>
+                                <option value="00">00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
                             </select>
                         </div>
                         <div class="column">
-                            <select>
+                            <select name="startAMPM">
                                 <option value="AM/PM" selected disabled hidden>AM/PM</option>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
@@ -43,17 +47,21 @@
                     <label for="">Masa Akhir</label>
                     <div class="content flex-center">
                         <div class="column">
-                            <select class="hour">
+                            <select class="hour" name="eHour">
                                 <option value="Hour" selected disabled hidden>Hour</option>
                             </select>
                         </div>
                         <div class="column mx-2">
-                            <select class="time">
+                            <select class="time" name="eMinute">
                                 <option value="Minute" selected disabled hidden>Minute</option>
+                                <option value="00">00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
                             </select>
                         </div>
                         <div class="column">
-                            <select>
+                            <select name="endAMPM">
                                 <option value="AM/PM" selected disabled hidden>AM/PM</option>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
@@ -72,37 +80,37 @@
                     <div class="radio-tile-group">
 
                         <div class="input-container">
-                            <input id="walk" type="radio" name="radio">
+                            <input id="1" value="1" type="radio" name="room">
                             <div class="radio-tile">
-                            <label for="A1">A1</label>
+                            <label for="1">A1</label>
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="bike" type="radio" name="radio">
+                            <input id="2" value="2" type="radio" name="room">
                             <div class="radio-tile">
-                            <label for="A2">A2</label>
+                            <label for="2">A2</label>   
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="car" type="radio" name="radio">
+                            <input id="3" value="3" type="radio" name="room">
                             <div class="radio-tile">
-                            <label for="A3">A3</label>
+                            <label for="3">A3</label>
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="fly" type="radio" name="radio">
+                            <input id="4" value="4" type="radio" name="room">
                             <div class="radio-tile">
-                            <label for="B3">B3</label>
+                            <label for="4">B3</label>
                             </div>
                         </div>
 
                         <div class="input-container">
-                            <input id="fly" type="radio" name="radio">
+                            <input id="5" value="5" type="radio" name="room">
                             <div class="radio-tile">
-                            <label for="Anjung">Anjung</label>
+                            <label for="5">Anjung</label>
                             </div>
                         </div>
                     </div>
@@ -139,14 +147,6 @@
             selectMenu[3].firstElementChild.insertAdjacentHTML("afterend", option); 
         }
 
-        for (let i = 59; i > 0; i--) {
-            i = i < 10 ? "0" + i : i;
-
-            let option = `<option value=${i}>${i}</option>`
-            selectMenu[1].firstElementChild.insertAdjacentHTML("afterend", option); 
-            selectMenu[4].firstElementChild.insertAdjacentHTML("afterend", option); 
-        }
-
         // let testBtn = document.getElement
         
         $('#checkAvailabilityButton').on('click', function () {
@@ -170,7 +170,7 @@
                 hourStart = hourStart + "0";
             }
 
-            const startTime = `${hourStart}:${selectMenu[1].value}`;
+            const startTime = `${hourStart}:${selectMenu[1].value}:00`;
             console.log(startTime);
 
             // Check out section
@@ -192,13 +192,15 @@
                 hourEnd = hourEnd + "0";
             }
 
-            const endTime = `${hourEnd}:${selectMenu[1].value}`;
+            const endTime = `${hourEnd}:${selectMenu[4].value}:00`;
             console.log(endTime);
 
-
             let between = countBetween(hourStart, hourEnd);
-            console.log("Hours Between = " + between); 
 
+            let date = document.getElementById('date-flatpickr').value;
+            console.log(date);
+
+            // Ajax send data to Controller
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
             $.ajax({
@@ -208,21 +210,41 @@
                     'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
                 },
                 data: {
+                    date: date,
                     checkin: startTime,
                     checkout: endTime
                 },
                 success: function(response) {
-                    console.log(response);
+                    
+                    // Access the JSON array data
+                    const testData = response.test;
+
+                    if(testData.length == 0) {
+                        return unDisabledButton();   
+                    }
+
+                    // Process the data as needed
+                    testData.forEach(item => {
+                        // Access each item in the JSON array and do something with it
+                        console.log(item.roomID);
+                        
+                        document.getElementById(`${item.roomID}`).disabled = true;
+                    });
+
                 },
             });
-        
         })
+
+        function unDisabledButton() {
+
+            for (let i = 0; i < 5; i++) {     
+                document.getElementById(`${i+1}`).disabled = false;    
+            }
+        }
 
         function countBetween(start, end) {
 
             let start12pm = start == 12 ? 24 : start;
-            console.log(start12pm)
-            console.log(start + "-" + end);
 
             let between = start - end;
             return between;

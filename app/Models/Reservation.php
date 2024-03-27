@@ -11,4 +11,9 @@ class Reservation extends Model
 
     protected $table = 'tempahan';
     protected $guarded = [];
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }
