@@ -9,12 +9,8 @@
 
         <h2 style="font-weight: 800" class="mb-4">Room & Time</h2>
         <div class="d-flex justify-content-between align-items-center">
-            <p>ID No :</p>
-            <p>{{ $data['id'] }}</p>
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
             <p>Room :</p>
-            <p>{{ $data['roomID'] }}</p>
+            <p>{{ $data['roomName'] }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <p>Time :</p>

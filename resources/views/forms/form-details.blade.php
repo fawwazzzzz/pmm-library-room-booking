@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="flex-start head">
-            <a href="/form-available" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
+            <a href="/delete-available/{{ $data['id'] }}" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
             <span class="ms-5">Personal Details</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
@@ -179,5 +179,35 @@
 
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+        // Student and Staff radio button function
+
+        let studentRadio = document.getElementById('student');
+        let staffRadio = document.getElementById('staff');
+        let matriksText = document.getElementById('matriks');
+
+        $('#student').on('change', function () {     
+            if (studentRadio.checked) {
+
+                matriksText.readOnly = false;
+                matriksText.value = '';
+                matriksText.placeholder = 'Enter Student ID';
+            }
+        })
+
+        $('#staff').on('change', function () {
+
+            if (staffRadio.checked) {
+                
+                matriksText.disabled = false;
+                matriksText.readOnly = true;
+                matriksText.value = 'Staff';
+            }
+
+        })
+
+
+
+
     </script>
 @endpush

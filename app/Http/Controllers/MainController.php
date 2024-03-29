@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
 use App\Models\Room;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MainController extends Controller
 {
@@ -132,7 +133,9 @@ class MainController extends Controller
                     'groupNum' => $request->groupnum,
                 ]);
 
-        $data = Reservation::where('id', $id)
+        $data = Reservation::select('tempahan.*', 'room.roomName')
+                ->join('room', 'tempahan.roomID', '=', 'room.roomID')
+                ->where('tempahan.id', $id)
                 ->first();
 
         session(['userDetails' => $data]);
@@ -144,5 +147,12 @@ class MainController extends Controller
 
         $data = session('userDetails');
         return view('forms.form-result', compact(['data']));
+    }
+
+    public function deleteTime(Request $request) {
+
+        $delete = Reservation::where('id', $request->id)->delete();
+
+        return redirect('/form-available');
     }
 }
