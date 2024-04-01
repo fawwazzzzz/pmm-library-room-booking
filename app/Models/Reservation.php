@@ -16,4 +16,14 @@ class Reservation extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class);
+    }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
 }
