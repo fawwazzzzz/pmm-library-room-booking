@@ -23,9 +23,9 @@ Route::get('/form-result', [MainController::class, 'result']);
 
 // Admin
 
-Route::get('/admin', [MainController::class, 'admin']);
+Route::get('/admin', [MainController::class, 'admin'])->name('admin');
 
-Route::get('admin/tempahan', [AdminController::class, 'index'])->name('tempahan');
+Route::get('admin/tempahan', [AdminController::class, 'index'])->name('admin-tempahan');
 
 Route::get('admin/tempahan-list', [AdminController::class, 'tempahanList'])->name('tempahan.list');
 
