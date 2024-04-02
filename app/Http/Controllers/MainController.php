@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Http\Controllers\Auth;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class MainController extends Controller
 {
@@ -144,5 +146,11 @@ class MainController extends Controller
 
         $data = session('userDetails');
         return view('forms.form-result', compact(['data']));
+    }
+    public function logout()
+    {
+        FacadesAuth::logout();
+
+        return redirect()->route('home');
     }
 }

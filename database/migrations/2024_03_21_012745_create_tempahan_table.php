@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('tempahan', function (Blueprint $table) {
             $table->id();
-            $table->string('namaPengguna');
-            $table->string('noMatriks');
-            $table->string('email');
-            $table->string('Jabatan');
-            $table->integer('semester');
-            $table->date('date');
-            $table->time('checkin');
-            $table->time('checkout');
-            $table->integer('groupNum');
-            $table->string('purpose');
+            $table->string('namaPengguna')->nullable();
+            $table->string('noMatriks')->nullable();
+            $table->string('email')->nullable();
+            $table->string('Jabatan')->nullable();
+            $table->integer('semester')->nullable();
+            $table->date('date')->nullable();
+            $table->time('checkin')->nullable();
+            $table->time('checkout')->nullable();
+            $table->integer('groupNum')->nullable();
+            $table->string('purpose')->nullable();
             $table->timestamps();
 
             $table->foreignId('roomID')->constrained('room', 'roomID')
