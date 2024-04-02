@@ -27,7 +27,7 @@ class MainController extends Controller
     }
   
     public function admin() {
-        return view('admin.admin');
+        return view('admin.admin-dashboard');
     }
 
     public function checkBetween(Request $request) {
