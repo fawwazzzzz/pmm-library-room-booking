@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(UserSeeder::class);
         $this->call(RoomSeeder::class);
-        $this->call(ReservationSeeder::class);
+        $this->call(JabatanSeeder::class);
+        $this->call(ProgramSeeder::class);
     }
 }

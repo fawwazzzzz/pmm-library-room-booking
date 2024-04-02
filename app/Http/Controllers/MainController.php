@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
-use App\Http\Controllers\Auth;
 use App\Models\Room;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Jabatan;
+use App\Models\Program;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class MainController extends Controller
 {
@@ -17,12 +16,16 @@ class MainController extends Controller
 
     public function detailsPage() {
 
+        // access jabatan and program data.
+        $jabatan = Jabatan::select('idJabatan', 'namaJabatan')->get();
+        $program = Program::select('idProgram','namaProgram')->get();
+
         $data = session('roomID');
-        return view('forms.form-details', compact(['data']));
+        return view('forms.form-details', compact(['data', 'program', 'jabatan']));
     }
   
     public function admin() {
-        return view('admin.admin');
+        return view('admin.admin-dashboard');
     }
 
     public function checkBetween(Request $request) {
@@ -63,38 +66,38 @@ class MainController extends Controller
         // Set into 24 hours format.
 
         // Start
-        if($request->startAMPM == "PM") {
+        // if($request->startAMPM == "PM") {
 
-            $hourStart += 12;
+        //     $hourStart += 12;
 
-            if ($hourStart == 24 ) {
+        //     if ($hourStart == 24 ) {
                 
-                $hourStart = 12;
-            }
-        }
-        elseif($request->startAMPM == "AM" && $hourStart == 12) {
+        //         $hourStart = 12;
+        //     }
+        // }
+        // elseif($request->startAMPM == "AM" && $hourStart == 12) {
 
-            $hourStart -= 12;
-            $hourStart = $hourStart + "0";
-        }
+        //     $hourStart -= 12;
+        //     $hourStart = $hourStart + "0";
+        // }
 
-        // End
-        if($request->endAMPM == "PM") {
+        // // End
+        // if($request->endAMPM == "PM") {
 
-            $hourEnd += 12;
+        //     $hourEnd += 12;
 
-            if ($hourEnd == 24 ) {
+        //     if ($hourEnd == 24 ) {
                 
-                $hourEnd = 12;
-            }
-        }
-        elseif($request->endAMPM == "AM" && $hourEnd == 12) {
+        //         $hourEnd = 12;
+        //     }
+        // }
+        // elseif($request->endAMPM == "AM" && $hourEnd == 12) {
 
-            $hourEnd -= 12;
-            $hourEnd = $hourEnd + "0";
-        }
+        //     $hourEnd -= 12;
+        //     $hourEnd = $hourEnd + "0";
+        // }
 
-
+        // Adjust Time format for input purpose
         $timeStart = $hourStart . ':' . $request->sMinute . ':00';
         $timeEnd = $hourEnd . ':' . $request->eMinute . ':00';
 
@@ -128,13 +131,16 @@ class MainController extends Controller
                     'namaPengguna'=> $request->name,
                     'noMatriks' => $request->matriks,
                     'email' => $request->email,
-                    'Jabatan' => $request->jabatanName,
+                    'idJabatan' => $request->jabatanID,
+                    'idProgram' => $request->programID,
                     'semester' => $request->semesterName,
                     'purpose' => $request->purposeName,
                     'groupNum' => $request->groupnum,
                 ]);
 
-        $data = Reservation::where('id', $id)
+        $data = Reservation::select('tempahan.*', 'room.roomName')
+                ->join('room', 'tempahan.roomID', '=', 'room.roomID')
+                ->where('tempahan.id', $id)
                 ->first();
 
         session(['userDetails' => $data]);
@@ -147,10 +153,5 @@ class MainController extends Controller
         $data = session('userDetails');
         return view('forms.form-result', compact(['data']));
     }
-    public function logout()
-    {
-        FacadesAuth::logout();
 
-        return redirect()->route('home');
-    }
 }

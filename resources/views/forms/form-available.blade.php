@@ -24,7 +24,7 @@
                                 <option value="Hour" selected disabled hidden>Hour</option>
                             </select>
                         </div>
-                        <div class="column mx-2">
+                        <div class="column ms-2">
                             <select class="time" name="sMinute" required>
                                 <option value="Minute" selected disabled hidden>Minute</option>
                                 <option value="00">00</option>
@@ -33,13 +33,13 @@
                                 <option value="45">45</option>
                             </select>
                         </div>
-                        <div class="column">
+                        {{-- <div class="column">
                             <select name="startAMPM" required>
                                 <option value="AM/PM" selected disabled hidden>AM/PM</option>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="my-3"></div>
@@ -51,7 +51,7 @@
                                 <option value="Hour" selected disabled hidden>Hour</option>
                             </select>
                         </div>
-                        <div class="column mx-2">
+                        <div class="column ms-2">
                             <select class="time" name="eMinute" required>
                                 <option value="Minute" selected disabled hidden>Minute</option>
                                 <option value="00">00</option>
@@ -60,13 +60,13 @@
                                 <option value="45">45</option>
                             </select>
                         </div>
-                        <div class="column">
+                        {{-- <div class="column">
                             <select name="endAMPM" required>
                                 <option value="AM/PM" selected disabled hidden>AM/PM</option>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="my-4"></div>
@@ -139,12 +139,16 @@
 
         console.log(selectMenu);
 
-        for (let i = 12; i > 0; i--) {
+        for (let i = 17; i > 8; i--) {
             i = i < 10 ? "0" + i : i;
+
+            if (i === 6 || i === 7 || i === 8) {
+                continue;
+            }
 
             let option = `<option value=${i}>${i}</option>`
             selectMenu[0].firstElementChild.insertAdjacentHTML("afterend", option); 
-            selectMenu[3].firstElementChild.insertAdjacentHTML("afterend", option); 
+            selectMenu[2].firstElementChild.insertAdjacentHTML("afterend", option); 
         }
 
         // let testBtn = document.getElement
@@ -162,19 +166,19 @@
             // Set into 24 hours format
             let hourStart = parseInt(selectMenu[0].value); 
             
-            if (selectMenu[2].value == "PM") {
+            // if (selectMenu[2].value == "PM") {
 
-                hourStart += 12;
+            //     hourStart += 12;
 
-                if (hourStart == 24 ) 
-                {
-                    hourStart = 12;
-                }
-            } 
-            else if (selectMenu[2].value == "AM" && hourStart == 12) {
-                hourStart -= 12
-                hourStart = hourStart + "0";
-            }
+            //     if (hourStart == 24 ) 
+            //     {
+            //         hourStart = 12;
+            //     }
+            // } 
+            // else if (selectMenu[2].value == "AM" && hourStart == 12) {
+            //     hourStart -= 12
+            //     hourStart = hourStart + "0";
+            // }
 
             const startTime = `${hourStart}:${selectMenu[1].value}:00`;
             console.log(startTime);
@@ -182,23 +186,23 @@
             // Check out section
 
             // Set into 24 hours format
-            let hourEnd = parseInt(selectMenu[3].value); 
+            let hourEnd = parseInt(selectMenu[2].value); 
             
-            if (selectMenu[5].value == "PM") {
+            // if (selectMenu[5].value == "PM") {
 
-                hourEnd += 12;
+            //     hourEnd += 12;
 
-                if (hourEnd == 24 ) 
-                {
-                    hourEnd = 12;
-                }
-            } 
-            else if (selectMenu[2].value == "AM" && hourEnd == 12) {
-                hourEnd -= 12
-                hourEnd = hourEnd + "0";
-            }
+            //     if (hourEnd == 24 ) 
+            //     {
+            //         hourEnd = 12;
+            //     }
+            // } 
+            // else if (selectMenu[2].value == "AM" && hourEnd == 12) {
+            //     hourEnd -= 12
+            //     hourEnd = hourEnd + "0";
+            // }
 
-            const endTime = `${hourEnd}:${selectMenu[4].value}:00`;
+            const endTime = `${hourEnd}:${selectMenu[3].value}:00`;
             console.log(endTime);
 
             let between = countBetween(hourStart, hourEnd);
@@ -249,10 +253,8 @@
             var dateInput = document.getElementById('date-flatpickr');
             var sHourSelect = document.querySelector('select[name="sHour"]');
             var sMinuteSelect = document.querySelector('select[name="sMinute"]');
-            var startAMPMSelect = document.querySelector('select[name="startAMPM"]');
             var eHourSelect = document.querySelector('select[name="eHour"]');
             var eMinuteSelect = document.querySelector('select[name="eMinute"]');
-            var endAMPMSelect = document.querySelector('select[name="endAMPM"]');
 
             var isValid = true;
 
@@ -260,10 +262,10 @@
             if (dateInput.value === '') {
                 return isValid = false;
             }
-            if (sHourSelect.value === 'Hour' || sMinuteSelect.value === 'Minute' || startAMPMSelect.value === 'AM/PM') {
+            if (sHourSelect.value === 'Hour' || sMinuteSelect.value === 'Minute') {
                 return isValid = false;
             }
-            if (eHourSelect.value === 'Hour' || eMinuteSelect.value === 'Minute' || endAMPMSelect.value === 'AM/PM') {
+            if (eHourSelect.value === 'Hour' || eMinuteSelect.value === 'Minute') {
                 return isValid = false;
             }
 

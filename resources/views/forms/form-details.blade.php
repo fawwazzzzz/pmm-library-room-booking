@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="flex-start head">
-            <a href="/form-available" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
+            <a href="/delete-available/{{ $data['id'] }}" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
             <span class="ms-5">Personal Details</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" name="matriks" class="form-control" id="matriks">
+                            <input type="text" name="matriks" class="form-control" id="matriks" placeholder="Masukkan No Matriks">
                         </div>
 
                         <div class="my-md-2 my-0"></div>
@@ -87,7 +87,8 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-10">
-                                    <label for="jabatan" class="form-label">Jabatan</label>
+                                    <div id="program-jabatan"></div>
+                                    {{-- <label for="jabatan" class="form-label">Jabatan</label>
                                     <select class="form-select" aria-label="Jabatan" id="jabatan" name="jabatanName">
                                         <option selected disabled hidden>Select ..</option>
                                         <option value="JP">Jabatan Perdagangan</option>
@@ -96,7 +97,7 @@
                                         <option value="JKA">Jabatan Kejuruteraan Awan</option>
                                         <option value="JKE">Jabatan Kejuruteraan Elektrik</option>
                                         <option value="TVET">TVET</option>
-                                    </select>
+                                    </select> --}}
                                 </div>
                                 <div class="col-2">
                                     <label for="semester" class="form-label">Semester</label>
@@ -179,5 +180,69 @@
 
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+        // Student and Staff radio button function
+
+        let studentRadio = document.getElementById('student');
+        let staffRadio = document.getElementById('staff');
+        let matriksText = document.getElementById('matriks');
+
+        switchProgram();
+
+        $('#student').on('change', function () {     
+            switchProgram();
+        })
+
+        $('#staff').on('change', function () {
+
+            if (staffRadio.checked) {
+                
+                matriksText.disabled = false;
+                matriksText.readOnly = true;
+                matriksText.value = 'Staff';
+
+                let jabatanArray = {{ Illuminate\Support\Js::from($jabatan) }};
+
+                console.log(jabatanArray);
+
+                let jabatanDrop = "<label for=\"jabatan\" class=\"form-label\">Jabatan</label>\
+                                    <select class=\"form-select\" aria-label=\"Jabatan\" id=\"jabatan\" name=\"jabatanID\"> \
+                                        <option selected disabled hidden>Select ..</option>"
+
+                jabatanArray.forEach(item => {
+                    jabatanDrop += "<option value=\"" + item.idJabatan + "\">" + item.namaJabatan + "</option>";
+                });
+
+                jabatanDrop += "</select>"
+
+                document.getElementById('program-jabatan').innerHTML = jabatanDrop;
+            }
+
+        })
+
+        function switchProgram() {
+            if (studentRadio.checked) {
+
+                matriksText.readOnly = false;
+                matriksText.value = '';
+                matriksText.placeholder = 'Masukkan No Matriks';
+
+                let programArray = {{ Illuminate\Support\Js::from($program) }};
+
+                let programDrop = "<label for=\"Program\" class=\"form-label\">Program</label>\
+                                    <select class=\"form-select\" aria-label=\"Program\" id=\"program\" name=\"programID\"> \
+                                        <option selected disabled hidden>Select ..</option>"
+
+                programArray.forEach(item => {
+                    programDrop += "<option value=\"" + item.idProgram + "\">" + item.namaProgram + "</option>";
+                });
+
+                programDrop += "</select>"
+
+                document.getElementById('program-jabatan').innerHTML = programDrop;
+
+            }
+        }
+
     </script>
 @endpush

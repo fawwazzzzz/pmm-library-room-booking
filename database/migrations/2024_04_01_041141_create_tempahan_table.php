@@ -16,11 +16,27 @@ return new class extends Migration
             $table->string('namaPengguna')->nullable();
             $table->string('noMatriks')->nullable();
             $table->string('email')->nullable();
+
             $table->string('Jabatan')->nullable();
             $table->integer('semester')->nullable();
             $table->date('date')->nullable();
             $table->time('checkin')->nullable();
             $table->time('checkout')->nullable();
+
+
+            $table->foreignId('idJabatan')->nullable()->constrained('jabatan', 'idJabatan')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignId('idProgram')->nullable()->constrained('program', 'idProgram')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+                
+            $table->integer('semester')->nullable();
+            $table->date('date');
+            $table->time('checkin');
+            $table->time('checkout');
+
             $table->integer('groupNum')->nullable();
             $table->string('purpose')->nullable();
             $table->timestamps();
@@ -28,7 +44,7 @@ return new class extends Migration
             $table->foreignId('roomID')->constrained('room', 'roomID')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-        }); 
+        });
     }
 
     /**

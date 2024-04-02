@@ -13,20 +13,28 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Form Page
+
 Route::get('/form-available', [MainController::class, 'availablePage']);
 
 Route::get('/form-details', [MainController::class, 'detailsPage']);
 
-Route::get('/admin', [MainController::class, 'admin']);
+Route::get('/form-result', [MainController::class, 'result']);
+
+// Admin
+
+Route::get('/admin', [MainController::class, 'admin'])->name('admin');
+
+Route::get('admin/tempahan', [AdminController::class, 'index'])->name('admin-tempahan');
+
+Route::get('admin/tempahan-list', [AdminController::class, 'tempahanList'])->name('tempahan.list');
+
+// Data Process
 
 Route::post('/process-data', [MainController::class, 'checkBetween']);
 
 Route::post('/insert-time', [MainController::class, 'insertTime'])->name('time');
 
-Route::get('admin/tempahan', [AdminController::class, 'index'])->name('tempahan');
-
-Route::get('admin/tempahan-list', [AdminController::class, 'tempahanList'])->name('tempahan.list');
-
 Route::post('/details', [MainController::class, 'insertDetails'])->name('details');
 
-Route::get('/form-result', [MainController::class, 'result']);
+Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
