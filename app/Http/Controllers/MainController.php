@@ -7,8 +7,6 @@ use App\Models\Jabatan;
 use App\Models\Program;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Illuminate\Database\Query\JoinClause;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MainController extends Controller
 {
@@ -156,10 +154,4 @@ class MainController extends Controller
         return view('forms.form-result', compact(['data']));
     }
 
-    public function deleteTime(Request $request) {
-
-        $delete = Reservation::where('id', $request->id)->delete();
-
-        return redirect('/form-available');
-    }
 }

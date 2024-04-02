@@ -17,6 +17,13 @@ return new class extends Migration
             $table->string('noMatriks')->nullable();
             $table->string('email')->nullable();
 
+            $table->string('Jabatan')->nullable();
+            $table->integer('semester')->nullable();
+            $table->date('date')->nullable();
+            $table->time('checkin')->nullable();
+            $table->time('checkout')->nullable();
+
+
             $table->foreignId('idJabatan')->nullable()->constrained('jabatan', 'idJabatan')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
@@ -29,6 +36,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('checkin');
             $table->time('checkout');
+
             $table->integer('groupNum')->nullable();
             $table->string('purpose')->nullable();
             $table->timestamps();
