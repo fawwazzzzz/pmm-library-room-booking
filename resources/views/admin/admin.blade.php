@@ -5,7 +5,7 @@
       <meta charset="utf-8">
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-      <title>Admin</title>
+      <title>Admin STBPP PMM</title>
       <meta content="" name="description">
       <meta content="" name="keywords">
 
@@ -78,30 +78,29 @@
 
               <li class="nav-item">
                   <a class="nav-link {{ request()->is('admin-tempahan*') ? 'active' : '' }}" href="{{ route('admin-tempahan') }}">
-                      <i class="bi bi-grid"></i>
+                      <i class="bi bi-layout-text-window-reverse"></i>
                       <span>Rekod Tempahan</span>
                   </a>
               </li>
 
               <!-- Log -->
-              <li class="nav-item">
-                  <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                      <i class="bi bi-layout-text-window-reverse"></i><span>Log</span><i
-                          class="bi bi-chevron-down ms-auto"></i>
-                  </a>
-                  <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                      <li>
-                          <a href="tables-general.html">
-                              <i class="bi bi-circle"></i><span>General Tables</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="tables-data.html">
-                              <i class="bi bi-circle"></i><span>Data Tables</span>
-                          </a>
-                      </li>
-                  </ul>
-              </li>
+            {{-- <li class="nav-item">
+                <a class="nav-link " data-bs-target="#report-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Report</span>
+                </a>
+                <ul id="report-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="report-general.html" class="active">
+                    <i class="bi bi-circle"></i><span>Monthly</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="report-data.html">
+                    <i class="bi bi-circle"></i><span>Yearly</span>
+                    </a>
+                </li>
+                </ul>
+            </li> --}}
           </ul>
           <!-- End Log Nav -->
 
