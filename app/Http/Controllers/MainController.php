@@ -8,6 +8,9 @@ use App\Models\Program;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 class MainController extends Controller
 {
     public function availablePage() {
@@ -25,7 +28,23 @@ class MainController extends Controller
     }
   
     public function admin() {
-        return view('admin.admin-dashboard');
+
+         // Query to calculate the frequency of bookings for each time slot on each date
+        $bookingsData = Reservation::
+                        select(DB::raw('date as booking_date'),
+                                DB::raw('extract(hour from checkin) as hour_of_day'),
+                                DB::raw('count(*) as booking_count'))
+                        ->groupBy('booking_date', 'hour_of_day')
+                        ->orderByRaw('booking_date asc, hour_of_day asc')
+                        ->get();
+
+        // Prepare the data for the chart
+        $chartData = [];
+        foreach ($bookingsData as $booking) {
+            $chartData[$booking->booking_date][$booking->hour_of_day] = $booking->booking_count;
+        }
+
+        return view('admin.admin-dashboard', compact('chartData'));
     }
 
     public function checkBetween(Request $request) {
