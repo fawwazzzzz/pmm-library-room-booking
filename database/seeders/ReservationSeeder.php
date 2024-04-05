@@ -16,7 +16,9 @@ class ReservationSeeder extends Seeder
         Reservation::create([
             'namaPengguna' => "Fawwaz",
             'email' => "muhdfawwaz18@gmail.com",
-            'Jabatan' => "JTMK",
+            'noMatriks' => "Staff",
+            "semester" => 5,
+            'idJabatan' => 2,
             'date' => "2024-03-27",
             'checkin' => "12:15:00",
             'checkout' => "15:15:00",
@@ -28,7 +30,9 @@ class ReservationSeeder extends Seeder
         Reservation::create([
             'namaPengguna' => "Aliya",
             'email' => "aliya@gmail.com",
-            'Jabatan' => "JP",
+            "noMatriks" => "01DDT21F2027",
+            "semester" => 2,
+            'idProgram' => 1,
             'date' => "2024-03-27",
             'checkin' => "13:30:00",
             'checkout' => "15:30:00",
