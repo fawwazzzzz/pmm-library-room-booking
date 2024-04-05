@@ -14,8 +14,22 @@ class ProgramSeeder extends Seeder
     public function run(): void
     {
         $program = [
-            [ 'idProgram' => 1, 'namaProgram' => 'Program Perakaunan'],
-            [ 'idProgram' => 2, 'namaProgram' => 'Program Teknologi Maklumat Dan Komunikasi'],
+            [ 'idProgram' => 1, 'namaProgram' => 'DUP'],
+            [ 'idProgram' => 2, 'namaProgram' => 'DCC'],
+            [ 'idProgram' => 3, 'namaProgram' => 'DEV'],
+            [ 'idProgram' => 4, 'namaProgram' => 'DHF'],
+            [ 'idProgram' => 5, 'namaProgram' => 'DPM'],
+            [ 'idProgram' => 6, 'namaProgram' => 'DAT'],
+            [ 'idProgram' => 7, 'namaProgram' => 'DPR'],
+            [ 'idProgram' => 8, 'namaProgram' => 'DKA'],
+            [ 'idProgram' => 9, 'namaProgram' => 'DGU'],
+            [ 'idProgram' => 10, 'namaProgram' => 'DSB'],
+            [ 'idProgram' => 11, 'namaProgram' => 'DKM'],
+            [ 'idProgram' => 12, 'namaProgram' => 'DTP'],
+            [ 'idProgram' => 13, 'namaProgram' => 'DEM'],
+            [ 'idProgram' => 14, 'namaProgram' => 'DET'],
+            [ 'idProgram' => 15, 'namaProgram' => 'DTK'],
+            [ 'idProgram' => 16, 'namaProgram' => 'TVET'],
         ];
 
         foreach ($program as $each) {
