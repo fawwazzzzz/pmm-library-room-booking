@@ -27,7 +27,9 @@ Route::get('/admin', [MainController::class, 'admin'])->name('admin');
 
 Route::get('admin/tempahan', [AdminController::class, 'index'])->name('admin-tempahan');
 
-Route::get('admin/tempahan-list', [AdminController::class, 'tempahanList'])->name('tempahan.list');
+Route::get('admin/tempahan-pelajar-list', [AdminController::class, 'tempahanPelajarList'])->name('tempahan.pelajar-list');
+
+Route::get('admin/tempahan-pensyarah-list', [AdminController::class, 'tempahanPensyarahList'])->name('tempahan.pensyarah-list');
 
 // Data Process
 

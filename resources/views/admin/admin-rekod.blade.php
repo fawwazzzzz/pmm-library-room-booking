@@ -9,7 +9,7 @@
 
     <div class="mt-4">
         <div class="table-responsive">
-            <table class="table data-table table-striped table-hover">
+            <table class="table data-table-pelajar table-striped table-hover">
                 <thead>
                     <tr>
                         <th style="width:5%">#</th>
@@ -32,7 +32,7 @@
 
     <div class="mt-4">
         <div class="table-responsive">
-            <table class="table data-table table-striped table-hover">
+            <table class="table data-table-pensyarah table-striped table-hover">
                 <thead>
                     <tr>
                         <th style="width:5%">#</th>
@@ -56,7 +56,7 @@
         var tablePelajar = $('.data-table-pelajar').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('tempahan.list') }}",
+            ajax: "{{ route('tempahan.pelajar-list') }}",
             language: {
                 url: "{{ asset('js/datatable-malay.json') }}"
             },
@@ -77,7 +77,7 @@
         var tablePensyarah = $('.data-table-pensyarah').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('tempahan.list') }}",
+            ajax: "{{ route('tempahan.pensyarah-list') }}",
             language: {
                 url: "{{ asset('js/datatable-malay.json') }}"
             },
