@@ -44,7 +44,28 @@ class MainController extends Controller
             $chartData[$booking->booking_date][$booking->hour_of_day] = $booking->booking_count;
         }
 
-        return view('admin.admin-dashboard', compact('chartData'));
+        $programName = Program::select('namaProgram')
+                ->orderBy('idProgram', 'asc')
+                ->get();
+
+        $programData = Reservation::join('program', 'tempahan.idProgram', '=', 'program.idProgram')
+                ->select('program.idProgram', 'program.namaProgram', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->groupBy('program.idProgram', 'program.namaProgram')
+                ->get();
+
+        // $programReservation = Reservation::select()
+
+        $program = [
+            'program' => [],
+            'data' => []
+        ];
+        
+        foreach ($programData as $data) {
+            $program['data'][] = $data->total_count;
+            $program['program'][] = $data->namaProgram;
+        }    
+
+        return view('admin.admin-dashboard', compact('chartData', 'program'));
     }
 
     public function checkBetween(Request $request) {
