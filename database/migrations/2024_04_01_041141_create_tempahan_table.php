@@ -32,6 +32,7 @@ return new class extends Migration
 
             $table->integer('groupNum')->nullable();
             $table->string('purpose')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
 
             $table->foreignId('roomID')->constrained('room', 'roomID')

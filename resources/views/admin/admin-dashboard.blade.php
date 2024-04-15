@@ -39,7 +39,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="">
                                                     <h5 class="card-title">Reserved <span>| This Year</span></h5>      
-                                                    <h6>1244</h6>
+                                                    <h6>{{ $reserveStatus['completed'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
                                                 </div>
@@ -68,7 +68,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="">
                                                     <h5 class="card-title">Pending <span>| This Year</span></h5>      
-                                                    <h6>1244</h6>
+                                                    <h6>{{ $reserveStatus['pending'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
                                                 </div>
@@ -97,7 +97,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="">
                                                     <h5 class="card-title">Cancelled <span>| This Year</span></h5>      
-                                                    <h6>1244</h6>
+                                                    <h6>{{ $reserveStatus['cancelled'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
                                                 </div>
@@ -190,8 +190,7 @@
                     </script>
                   </div>
           </section>
-
-
+          
 @endsection
 @push('scripts')
 
@@ -246,13 +245,17 @@
         }).render();
 
     // Reserved By Jabatan Chart
+        const jabatanData = {{ Illuminate\Support\Js::from($jabatan) }};
+
+        console.log("Jabatan : " + jabatanData);
+
         new Chart(document.querySelector('#jabatanChart'), {
         type: 'bar',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: jabatanData.jabatan,
             datasets: [{
             label: 'Jabatan',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data: jabatanData.data,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(255, 159, 64, 0.2)',
@@ -282,7 +285,7 @@
     // Reserved by Program Chart
         const programData = {{ Illuminate\Support\Js::from($program) }};
 
-        console.log(programData);
+        console.log("Program : " + programData.program);
 
         new Chart(document.querySelector('#programChart'), {
             type: 'bar',
