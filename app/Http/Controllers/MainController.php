@@ -27,6 +27,7 @@ class MainController extends Controller
         return view('forms.form-details', compact(['data', 'program', 'jabatan']));
     }
   
+    // Redirect to Admin PAhe
     public function admin() {
 
          // Query to calculate the frequency of bookings for each time slot on each date
@@ -44,16 +45,12 @@ class MainController extends Controller
             $chartData[$booking->booking_date][$booking->hour_of_day] = $booking->booking_count;
         }
 
-        $programName = Program::select('namaProgram')
-                ->orderBy('idProgram', 'asc')
-                ->get();
-
+        // Program Query
         $programData = Reservation::join('program', 'tempahan.idProgram', '=', 'program.idProgram')
                 ->select('program.idProgram', 'program.namaProgram', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->where('tempahan.status', 'Completed')
                 ->groupBy('program.idProgram', 'program.namaProgram')
                 ->get();
-
-        // $programReservation = Reservation::select()
 
         $program = [
             'program' => [],
@@ -65,7 +62,32 @@ class MainController extends Controller
             $program['program'][] = $data->namaProgram;
         }    
 
-        return view('admin.admin-dashboard', compact('chartData', 'program'));
+        // End of Program Query
+
+        // Jabatan Query
+        $jabatanData = Reservation::join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
+                ->select('jabatan.idJabatan', 'jabatan.namaJabatan', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->where('tempahan.status', 'Completed')
+                ->groupBy('jabatan.idJabatan', 'jabatan.namaJabatan')
+                ->get();
+
+        $jabatan = [
+            'jabatan' => [],
+            'data' => []
+        ];
+
+        $reserveStatus = [
+            'completed' => Reservation::where('status', 'Completed')->count(),
+            'pending' => Reservation::whereNull('status')->count(),
+            'cancelled' => Reservation::where('status', 'Cancelled')->count(),
+        ];
+        
+        foreach ($jabatanData as $data) {
+            $jabatan['data'][] = $data->total_count;
+            $jabatan['jabatan'][] = $data->namaJabatan;
+        }    
+
+        return view('admin.admin-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus'));
     }
 
     public function checkBetween(Request $request) {
@@ -166,7 +188,7 @@ class MainController extends Controller
 
         $id = $request->id;
 
-        $update = Reservation::where('id', $request->id)
+        $update = Reservation::where('id', $id)
                 ->update([
                     'namaPengguna'=> $request->name,
                     'noMatriks' => $request->matriks,
@@ -180,12 +202,21 @@ class MainController extends Controller
 
         $data = Reservation::select('tempahan.*', 'room.roomName')
                 ->join('room', 'tempahan.roomID', '=', 'room.roomID')
-                ->where('tempahan.id', $id)
+                ->where('id', $id)
                 ->first();
 
-        session(['userDetails' => $data]);
+        session([
+            'userDetails' => $data
+        ]);
 
         return redirect('/form-result');
+    }
+
+    public function deleteTime(Request $request) {
+
+        Reservation::where('id', $request->id)->delete();
+
+        return redirect('/form-available');
     }
 
     public static function result() {
@@ -194,4 +225,13 @@ class MainController extends Controller
         return view('forms.form-result', compact(['data']));
     }
 
+    public function cancelReserve(Request $request) {
+
+        $cancel = Reservation::where('id', $request->id)
+                ->update([
+                    'status' => 'Cancelled'
+                ]);
+        
+        return redirect('/home');
+    }
 }
