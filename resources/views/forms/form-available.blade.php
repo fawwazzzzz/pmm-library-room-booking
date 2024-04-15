@@ -21,12 +21,12 @@
                     <div class="content flex-center">
                         <div class="column">
                             <select class="hour" name="sHour" required>
-                                <option value="Hour" selected disabled hidden>Hour</option>
+                                <option value="Hour" selected disabled hidden>Jam</option>
                             </select>
                         </div>
                         <div class="column ms-2">
                             <select class="time" name="sMinute" required>
-                                <option value="Minute" selected disabled hidden>Minute</option>
+                                <option value="Minute" selected disabled hidden>Minit</option>
                                 <option value="00">00</option>
                                 <option value="15">15</option>
                                 <option value="30">30</option>
@@ -48,12 +48,12 @@
                     <div class="content flex-center">
                         <div class="column">
                             <select class="hour" name="eHour" required>
-                                <option value="Hour" selected disabled hidden>Hour</option>
+                                <option value="Hour" selected disabled hidden>Jam</option>
                             </select>
                         </div>
                         <div class="column ms-2">
                             <select class="time" name="eMinute" required>
-                                <option value="Minute" selected disabled hidden>Minute</option>
+                                <option value="Minute" selected disabled hidden>Minit</option>
                                 <option value="00">00</option>
                                 <option value="15">15</option>
                                 <option value="30">30</option>
@@ -150,14 +150,12 @@
             selectMenu[0].firstElementChild.insertAdjacentHTML("afterend", option); 
             selectMenu[2].firstElementChild.insertAdjacentHTML("afterend", option); 
         }
-
-        // let testBtn = document.getElement
         
         $('#checkAvailabilityButton').on('click', function () {
 
             // If any required field is empty, display an error message
             if (!validationTime()) {
-                alert('Please fill out all required fields.')
+                alert('Tolong isi ruang yang kosong.')
                 return;
             }
 

@@ -38,7 +38,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Reserved <span>| This Year</span></h5>      
+                                                    <h5 class="card-title">Ditempah <span>| Bulan Ini</span></h5>      
                                                     <h6>{{ $reserveStatus['completed'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -67,7 +67,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Pending <span>| This Year</span></h5>      
+                                                    <h5 class="card-title">Diproses <span>| Bulan Ini</span></h5>      
                                                     <h6>{{ $reserveStatus['pending'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -96,7 +96,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Cancelled <span>| This Year</span></h5>      
+                                                    <h5 class="card-title">Dibatal <span>| Bulan Ini</span></h5>      
                                                     <h6>{{ $reserveStatus['cancelled'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -115,7 +115,7 @@
                               <div class="card h-100">
 
                                   <div class="card-body">
-                                      <h5 class="card-title">Reserved By Jabatan <span>| Today</span></h5>
+                                      <h5 class="card-title">Penempahan Dalam Jabatan <span>| Bulan Ini</span></h5>
 
                                       <!-- Line Chart -->
                                        <canvas id="jabatanChart" style="max-height: 400px;"></canvas>
@@ -129,7 +129,7 @@
                         <div class="col-lg-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title">Recent Reservation <span>| Today</span></h5>
+                                    <h5 class="card-title">Penempahan Terkini <span>| Bulan Ini</span></h5>
 
                                     <table class="table">
                                         <thead>
@@ -169,7 +169,7 @@
                   <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Reserved By Program <span>| Today</span></h5>
+                            <h5 class="card-title">Penempahan Dalam Program <span>| Bulan Ini</span></h5>
 
                             <canvas id="programChart" style="max-height: 400px;"></canvas>
                         </div>
@@ -179,7 +179,7 @@
                   <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Time Frequently Reserved <span>| Today</span></h5>
+                            <h5 class="card-title">Masa Kerap Ditempah <span>| Bulan Ini</span></h5>
 
                             <div id="reportsChart"></div> {{-- Start Program Chart --}}
                         </div>
@@ -238,10 +238,6 @@
                 }
             },
             colors: ['#008FFB'],
-            title: {
-                text: 'Time Slots Frequently Reserved by Day',
-                align: 'center'
-            }
         }).render();
 
     // Reserved By Jabatan Chart
