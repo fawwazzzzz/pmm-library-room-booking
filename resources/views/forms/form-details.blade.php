@@ -4,7 +4,7 @@
     <div class="container">
         <div class="flex-start head">
             <a href="/delete-available/{{ $data['id'] }}" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
-            <span class="ms-5">Personal Details</span>
+            <span class="ms-5">Maklumat Penempah</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
             @csrf
@@ -55,7 +55,7 @@
                     <div class="row">
 
                         <div class="col-md-8">
-                            <label for="name" class="form-label">Full Name</label>
+                            <label for="name" class="form-label">Nama Penuh</label>
                             <input type="text" name="name" class="form-control" id="name">
                         </div>
 
@@ -120,12 +120,12 @@
                         <div class="my-2"></div>
 
                         <div class="col-md-8">
-                            <label for="purpose" class="form-label">Purpose</label>
+                            <label for="purpose" class="form-label">Tujuan</label>
                             <input type="text" name="purposeName" class="form-control" id="purpose">
                         </div>
 
                         <div class="col-md-4">
-                            <label for="groupnum" class="form-label">Number Of Group Members</label>
+                            <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
                             <input type="text" name="groupnum" class="form-control" id="groupnum" onkeydown="allowOnlyNumbers(event)">
                         </div>
                         

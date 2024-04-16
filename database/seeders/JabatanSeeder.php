@@ -14,12 +14,12 @@ class JabatanSeeder extends Seeder
     public function run(): void
     {
         $jabatan = [
-            [ 'idJabatan' => 1, 'namaJabatan' => 'Jabatan Perdagangan'],
-            [ 'idJabatan' => 2, 'namaJabatan' => 'JPH'],
-            [ 'idJabatan' => 3, 'namaJabatan' => 'Jabatan Kejuruteraan Mekanikal'],
-            [ 'idJabatan' => 4, 'namaJabatan' => 'Jabatan Kejuruteraan Elektrik'],
-            [ 'idJabatan' => 5, 'namaJabatan' => 'Jabatan Kejuruteraan Awam'],
-            [ 'idJabatan' => 6, 'namaJabatan' => 'TVET'],
+            [ 'idJabatan' => 1, 'namaJabatan' => 'Jabatan Perdagangan', 'shortJabatan' => 'JP'],
+            [ 'idJabatan' => 2, 'namaJabatan' => 'JPH', 'shortJabatan' => 'JPH'],
+            [ 'idJabatan' => 3, 'namaJabatan' => 'Jabatan Kejuruteraan Mekanikal', 'shortJabatan' => 'JKM'],
+            [ 'idJabatan' => 4, 'namaJabatan' => 'Jabatan Kejuruteraan Elektrik', 'shortJabatan' => 'JKE'],
+            [ 'idJabatan' => 5, 'namaJabatan' => 'Jabatan Kejuruteraan Awam', 'shortJabatan' => 'JKA'],
+            [ 'idJabatan' => 6, 'namaJabatan' => 'TVET', 'shortJabatan' => 'TVET'],
         ];
 
         foreach ($jabatan as $each) {

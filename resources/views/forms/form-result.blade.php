@@ -3,8 +3,7 @@
 @section('content')
     <div class="container">
         <div class="flex-start my-4 head">
-            <a href="/form-details" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
-            <span class="ms-5">Reservation Successful</span>
+            <span>Reservation Successful</span>
         </div>
 
         <h2 style="font-weight: 800" class="mb-4">Room & Time</h2>
@@ -32,10 +31,20 @@
             <p>No Matriks :</p>
             <p>{{ $data['noMatriks'] }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-            <p>Jabatan :</p>
-            <p>{{ $data['Jabatan'] }}</p>
-        </div>
+        {{-- Jabatan --}}
+        @isset($data['Jabatan']['namaJabatan'])
+            <div class="d-flex justify-content-between align-items-center">
+                <p>Jabatan :</p>
+                <p>{{ $data['Jabatan']['namaJabatan'] }}</p>
+            </div>
+        @endisset
+        {{-- Program --}}
+        @isset($data['Program']['namaProgram'])
+            <div class="d-flex justify-content-between align-items-center">
+                <p>Program :</p>
+                <p>{{ $data['Program']['namaProgram'] }}</p>
+            </div>
+        @endisset
         <div class="d-flex justify-content-between align-items-center">
             <p>Email :</p>
             <p>{{ $data['email'] }}</p>
@@ -43,6 +52,12 @@
         <div class="d-flex justify-content-between align-items-center">
             <p>Group Number :</p>
             <p>{{ $data['groupNum'] }}</p>
+        </div>
+
+        <div class="flex-end mt-2">
+            <a href="/cancel-reserve/{{ $data['id'] }}" class="w-25">
+                <button type="button" class="btn btn-outline-danger w-100">Cancel</button>
+            </a>
         </div>
     </div>
 @endsection

@@ -37,7 +37,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('admin/tempahan-recent-list', [AdminController::class, 'tempahanRecentList'])->name('tempahan.recent-list');
+
+// Data Process
+
 
 Route::get('/form-available', [MainController::class, 'availablePage']);
 
@@ -45,5 +51,11 @@ Route::get('/form-details', [MainController::class, 'detailsPage']);
 
 Route::get('/form-result', [MainController::class, 'result']);
 
+
 // Authentication routes
 Auth::routes();
+=======
+Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
+
+Route::get('/cancel-reserve/{id}', [MainController::class, 'cancelReserve']);
+

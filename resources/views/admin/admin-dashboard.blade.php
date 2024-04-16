@@ -21,7 +21,7 @@
               <div class="row">
 
                   <!-- Left side columns -->
-                  <div class="col-lg-12">
+                  <div class="col-lg-12 pb-4">
                       <div class="row">
 
                           <!-- Reserved Card -->
@@ -38,8 +38,8 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Reserved <span>| This Year</span></h5>      
-                                                    <h6>1244</h6>
+                                                    <h5 class="card-title">Ditempah <span>| Bulan Ini</span></h5>      
+                                                    <h6>{{ $reserveStatus['completed'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
                                                 </div>
@@ -67,8 +67,8 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Pending <span>| This Year</span></h5>      
-                                                    <h6>1244</h6>
+                                                    <h5 class="card-title">Diproses <span>| Bulan Ini</span></h5>      
+                                                    <h6>{{ $reserveStatus['pending'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
                                                 </div>
@@ -96,8 +96,8 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Cancelled <span>| This Year</span></h5>      
-                                                    <h6>1244</h6>
+                                                    <h5 class="card-title">Dibatal <span>| Bulan Ini</span></h5>      
+                                                    <h6>{{ $reserveStatus['cancelled'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
                                                 </div>
@@ -114,12 +114,11 @@
                           <div class="col-lg-6">
                               <div class="card h-100">
 
-
                                   <div class="card-body">
-                                      <h5 class="card-title">Reports <span>/Today</span></h5>
+                                      <h5 class="card-title">Penempahan Dalam Jabatan <span>| Bulan Ini</span></h5>
 
                                       <!-- Line Chart -->
-                                      <div id="reportsChart"></div>
+                                       <canvas id="jabatanChart" style="max-height: 400px;"></canvas>
 
                                   </div>
 
@@ -130,35 +129,20 @@
                         <div class="col-lg-6">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title">Recent Reservation <span>| Today</span></h5>
-
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" style="width: 150px;">Nama</th>
-                                                <th scope="col">Bilik</th>
-                                                <th scope="col">Tarikh</th>
-                                                <th scope="col">Masuk</th>
-                                                <th scope="col">Keluar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row"><a href="#">MUHAMMAD FAWWAZ BIN AHMED AZMAN</a></th>
-                                                <td>A1</td>
-                                                <td><a href="#" class="text-primary">2024-3-29</a></td>
-                                                <td>15:00:00</td>
-                                                <td>17:00:00</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">MUHAMMAD FAWWAZ BIN AHMED AZMAN</a></th>
-                                                <td>Anjung</td>
-                                                <td><a href="#" class="text-primary">2024-3-29</a></td>
-                                                <td>15:00:00</td>
-                                                <td>17:00:00</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <h5 class="card-title">Penempahan Terkini <span>| Bulan Ini</span></h5>
+                                    <div class="table-responsive">
+                                        <table class="table data-table-recent">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 150px;">Nama</th>
+                                                    <th>Bilik</th>
+                                                    <th>Tarikh</th>
+                                                    <th>Masuk</th>
+                                                    <th>Keluar</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                          </div>
@@ -166,14 +150,38 @@
 
                       </div>
                   </div><!-- End Left side columns -->
+
+                  <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Penempahan Dalam Program <span>| Bulan Ini</span></h5>
+
+                            <canvas id="programChart" style="max-height: 400px;"></canvas>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Masa Kerap Ditempah <span>| Bulan Ini</span></h5>
+
+                            <div id="reportsChart"></div> {{-- Start Program Chart --}}
+                        </div>
+                    </div>
+
+                    <script>
+                        
+                    </script>
+                  </div>
           </section>
-
-
+          
 @endsection
 @push('scripts')
 
 <script>
     
+    // Time Frequently Reserved
     document.addEventListener("DOMContentLoaded", () => {
         const chartData = {{ Illuminate\Support\Js::from($chartData) }};
 
@@ -187,6 +195,7 @@
             };
         });
 
+        
         new ApexCharts(document.querySelector("#reportsChart"), {
             series: seriesData,
             chart: {
@@ -203,7 +212,7 @@
                 type: 'category',
                 categories: dates,
                 labels: {
-                    show: false
+                    show: true
                 }
             },
             yaxis: {
@@ -214,13 +223,109 @@
                 }
             },
             colors: ['#008FFB'],
-            title: {
-                text: 'Time Slots Frequently Reserved by Day',
-                align: 'center'
-            }
         }).render();
+
+    // Reserved By Jabatan Chart
+        const jabatanData = {{ Illuminate\Support\Js::from($jabatan) }};
+
+        console.log("Jabatan : " + jabatanData);
+
+        new Chart(document.querySelector('#jabatanChart'), {
+        type: 'bar',
+        data: {
+            labels: jabatanData.jabatan,
+            datasets: [{
+            label: 'Jabatan',
+            data: jabatanData.data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+        }
+        });
+
+    // Reserved by Program Chart
+        const programData = {{ Illuminate\Support\Js::from($program) }};
+
+        console.log("Program : " + programData.program);
+
+        new Chart(document.querySelector('#programChart'), {
+            type: 'bar',
+            data: {
+            labels: programData.program,
+            datasets: [{
+                label: 'Program',
+                data: programData.data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     });
-</script>
-    <!-- End Line Chart -->
-    
+
+    // Datatables for recent reservation.
+    // $(function() {
+    //     var tableRecent = $('.data-table-recent').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax: "{{ route('tempahan.recent-list') }}",
+    //         language: {
+    //             url: "{{ asset('js/datatable-malay.json') }}"
+    //         },
+    //         columns: [
+    //             { data: 'namaPengguna', name: 'Nama' },
+    //             { data: 'noBilik', name: 'Bilik' },
+    //             { data: 'tarikh', name: 'Tarikh' },
+    //             { data: 'checkin', name: 'Masuk' },
+    //             { data: 'checkout', name: 'Keluar' },
+    //         ],
+    //         columnDefs: [
+    //             { targets: [0, 1, 2, 3, 4], className: "text-center" },
+    //         ]
+    //     });
+    // })
+</script>    
 @endpush
