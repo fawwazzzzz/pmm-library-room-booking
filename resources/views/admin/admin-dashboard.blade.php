@@ -130,34 +130,19 @@
                             <div class="card h-100">
                                 <div class="card-body">
                                     <h5 class="card-title">Penempahan Terkini <span>| Bulan Ini</span></h5>
-
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" style="width: 150px;">Nama</th>
-                                                <th scope="col">Bilik</th>
-                                                <th scope="col">Tarikh</th>
-                                                <th scope="col">Masuk</th>
-                                                <th scope="col">Keluar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">MUHAMMAD FAWWAZ BIN AHMED AZMAN</th>
-                                                <td>A1</td>
-                                                <td>2024-3-29</td>
-                                                <td>15:00:00</td>
-                                                <td>17:00:00</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">MUHAMMAD FAWWAZ BIN AHMED AZMAN</th>
-                                                <td>Anjung</td>
-                                                <td>2024-3-29</td>
-                                                <td>15:00:00</td>
-                                                <td>17:00:00</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table data-table-recent">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 150px;">Nama</th>
+                                                    <th>Bilik</th>
+                                                    <th>Tarikh</th>
+                                                    <th>Masuk</th>
+                                                    <th>Keluar</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                          </div>
@@ -320,7 +305,27 @@
             }
         });
     });
-</script>
-    <!-- End Line Chart -->
-    
+
+    // Datatables for recent reservation.
+    // $(function() {
+    //     var tableRecent = $('.data-table-recent').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax: "{{ route('tempahan.recent-list') }}",
+    //         language: {
+    //             url: "{{ asset('js/datatable-malay.json') }}"
+    //         },
+    //         columns: [
+    //             { data: 'namaPengguna', name: 'Nama' },
+    //             { data: 'noBilik', name: 'Bilik' },
+    //             { data: 'tarikh', name: 'Tarikh' },
+    //             { data: 'checkin', name: 'Masuk' },
+    //             { data: 'checkout', name: 'Keluar' },
+    //         ],
+    //         columnDefs: [
+    //             { targets: [0, 1, 2, 3, 4], className: "text-center" },
+    //         ]
+    //     });
+    // })
+</script>    
 @endpush

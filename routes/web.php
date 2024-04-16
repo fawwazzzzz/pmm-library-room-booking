@@ -31,6 +31,8 @@ Route::get('admin/tempahan-pelajar-list', [AdminController::class, 'tempahanPela
 
 Route::get('admin/tempahan-pensyarah-list', [AdminController::class, 'tempahanPensyarahList'])->name('tempahan.pensyarah-list');
 
+Route::get('admin/tempahan-recent-list', [AdminController::class, 'tempahanRecentList'])->name('tempahan.recent-list');
+
 // Data Process
 
 Route::post('/process-data', [MainController::class, 'checkBetween']);
