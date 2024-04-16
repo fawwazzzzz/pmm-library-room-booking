@@ -23,13 +23,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/tempahan-pensyarah-list', [AdminController::class, 'tempahanPensyarahList'])->name('tempahan.pensyarah-list');
 
-    Route::post('/process-data', [MainController::class, 'checkBetween']);
-
-    Route::post('/insert-time', [MainController::class, 'insertTime'])->name('time');
-
-    Route::post('/details', [MainController::class, 'insertDetails'])->name('details');
-
-    Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
+    Route::get('admin/tempahan-recent-list', [AdminController::class, 'tempahanRecentList'])->name('tempahan.recent-list');
 });
 
 // Routes accessible to all users
@@ -40,21 +34,25 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('admin/tempahan-recent-list', [AdminController::class, 'tempahanRecentList'])->name('tempahan.recent-list');
-
-// Data Process
-
-
 Route::get('/form-available', [MainController::class, 'availablePage']);
 
 Route::get('/form-details', [MainController::class, 'detailsPage']);
 
 Route::get('/form-result', [MainController::class, 'result']);
 
+// Data Process
+Route::post('/process-data', [MainController::class, 'checkBetween']);
+
+Route::post('/insert-time', [MainController::class, 'insertTime'])->name('time');
+
+Route::post('/details', [MainController::class, 'insertDetails'])->name('details');
+
+Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
+
 
 // Authentication routes
 Auth::routes();
-=======
+
 Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
 
 Route::get('/cancel-reserve/{id}', [MainController::class, 'cancelReserve']);
