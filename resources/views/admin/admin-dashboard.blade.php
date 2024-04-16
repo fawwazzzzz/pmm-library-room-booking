@@ -24,6 +24,34 @@
                   <div class="col-lg-12 pb-4">
                       <div class="row">
 
+                            <!-- Customers Card -->
+                          <div class="col-xxl-4 col-xl-12 pb-4">
+
+                              <div class="card info-card customers-card h-100">
+                                  <div class="card-body flex-center">
+                                    <div class="row">
+                                        <div class="col-4 flex-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                              <i class="bi bi-door-closed"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div class="">
+                                                    <h5 class="card-title">Tempahan <span>| Bulan Ini</span></h5>      
+                                                    <h6>{{ $reserveStatus['total'] }}</h6>
+                                                    {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                                        class="text-muted small pt-2 ps-1">decrease</span> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+
+                          </div>
+                          <!-- End Customers Card -->
+
                           <!-- Reserved Card -->
                           <div class="col-xxl-4 col-md-6 pb-4">
                               <div class="card info-card sales-card h-100">
@@ -38,7 +66,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Ditempah <span>| Bulan Ini</span></h5>      
+                                                    <h5 class="card-title">Berjaya <span>| Bulan Ini</span></h5>      
                                                     <h6>{{ $reserveStatus['completed'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -67,7 +95,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Diproses <span>| Bulan Ini</span></h5>      
+                                                    <h5 class="card-title">Proses <span>| Bulan Ini</span></h5>      
                                                     <h6>{{ $reserveStatus['pending'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -79,36 +107,6 @@
                               </div>
                           </div>
                           <!-- End Revenue Card -->
-
-                          <!-- Customers Card -->
-                          <div class="col-xxl-4 col-xl-12 pb-4">
-
-                              <div class="card info-card customers-card h-100">
-
-
-                                  <div class="card-body flex-center">
-                                    <div class="row">
-                                        <div class="col-4 flex-center">
-                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                              <i class="bi bi-x"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <div class="d-flex align-items-center">
-                                                <div class="">
-                                                    <h5 class="card-title">Dibatal <span>| Bulan Ini</span></h5>      
-                                                    <h6>{{ $reserveStatus['cancelled'] }}</h6>
-                                                    {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                                        class="text-muted small pt-2 ps-1">decrease</span> --}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-
-                          </div>
-                          <!-- End Customers Card -->
 
                           <!-- Reports -->
                           <div class="col-lg-6">

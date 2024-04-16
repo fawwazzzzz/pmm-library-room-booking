@@ -23,6 +23,7 @@
     <script src="https://code.jquery.com/jquery.min.js"></script>
     {{-- <script src="{{ asset('assets/js/bootstrap.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div id="app">

@@ -49,11 +49,8 @@ Route::post('/details', [MainController::class, 'insertDetails'])->name('details
 
 Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
 
+Route::get('/cancel-reserve/{id}', [MainController::class, 'cancelReserve']);
 
 // Authentication routes
 Auth::routes();
-
-Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
-
-Route::get('/cancel-reserve/{id}', [MainController::class, 'cancelReserve']);
 

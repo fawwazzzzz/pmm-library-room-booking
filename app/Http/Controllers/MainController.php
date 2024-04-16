@@ -79,7 +79,7 @@ class MainController extends Controller
         $reserveStatus = [
             'completed' => Reservation::where('status', 'Completed')->count(),
             'pending' => Reservation::whereNull('status')->count(),
-            'cancelled' => Reservation::where('status', 'Cancelled')->count(),
+            'total' => Reservation::count(),
         ];
         
         foreach ($jabatanData as $data) {
@@ -228,10 +228,9 @@ class MainController extends Controller
     public function cancelReserve(Request $request) {
 
         $cancel = Reservation::where('id', $request->id)
-                ->update([
-                    'status' => 'Cancelled'
-                ]);
-        
+                ->delete();
+
         return redirect('/home');
+
     }
 }

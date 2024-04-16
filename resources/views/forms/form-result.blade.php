@@ -56,9 +56,17 @@
 
         <div class="flex-end mt-2">
             <a href="/cancel-reserve/{{ $data['id'] }}" class="w-25">
-                <button type="button" class="btn btn-outline-danger w-100">Cancel</button>
+                <button type="button" class="btn btn-outline-danger w-25">Cancel</button>
             </a>
         </div>
+
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
     </div>
 @endsection
 @push('scripts')
