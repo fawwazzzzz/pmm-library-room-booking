@@ -71,5 +71,31 @@ class AdminController extends Controller
         })
         ->make(true);
     }
-    
+
+    public function tempahanRecentList(Request $request) {
+        
+        $data = Reservation::whereNull('status')
+                ->orderBy('id', 'desc')
+                ->with(['room'])
+                ->limit(5);
+
+        return Datatables::of($data)
+        ->addIndexColumn()
+        ->editColumn('namaPengguna', function ($row) {
+            return $row->namaPengguna;
+        })
+        ->editColumn('noBilik', function ($row) {
+            info($row);
+            return $row->room?->roomName;
+        })
+        ->editColumn('tarikh', function ($row) {
+            return $row->date;
+        })
+        ->editColumn('checkin', function ($row) {
+            return $row->checkin;
+        })
+        ->editColumn('checkout', function ($row) {
+            return $row->checkout;
+        });
+    }
 }
