@@ -3,6 +3,9 @@
 @section('content')
 
 <div class="container main-page flex-center">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-6 flex-center">
             <img src="{{ asset('assets/img/img-main.svg') }}" alt="" class="hero-img">

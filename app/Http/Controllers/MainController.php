@@ -164,14 +164,23 @@ class MainController extends Controller
 
     public function insertDetails(Request $request) {
 
-        // dd($request->all());
-
         $numGroup = $request->room == 'Anjung' ? 'min:20|max:30' : 'min:3|max:6';
+
+        if ($request->programID == null) {
+            $choice = "jabatanID";
+        } 
+        else if ($request->jabatanID == null) {
+            $choice = "programID";
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'matriks' => 'required',
             'email' => 'required|email',
+            "$choice" => 'required',
+            'purposeName' => 'required',
             'groupnum' => "required|numeric|$numGroup",
+            'semesterName' => "required"
         ]);
 
         if ($validator->fails()) {
@@ -219,10 +228,19 @@ class MainController extends Controller
 
     public function cancelReserve(Request $request) {
 
-        $cancel = Reservation::where('id', $request->id)
-                ->delete();
+        $reserve = Reservation::find($request->id);
 
-        return redirect('/home');
+        $checkinTime = Carbon::parse($reserve->checkin);
+
+        $timeDifference = Carbon::now()->diffInMinutes($checkinTime);
+
+        if ($timeDifference >= 30) {
+        // Update reservation status to Cancelled
+        $reserve->delete();
+            return redirect('/')->with('success', 'Reservation cancelled successfully.');
+        } else {
+            return back()->with('error', 'Reservation cancellation unsuccessful. Cancellation can only be made 30 minutes before checkin time.');
+        }
 
     }
 }

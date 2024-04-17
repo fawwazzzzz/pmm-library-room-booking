@@ -75,8 +75,7 @@ class AdminController extends Controller
     public function tempahanRecentList(Request $request) {
         $data = Reservation::whereNull('status')
                 ->orderBy('id', 'desc')
-                ->with(['room'])
-                ->limit(5);
+                ->with(['room']);
 
         return Datatables::of($data)
         ->addIndexColumn()
