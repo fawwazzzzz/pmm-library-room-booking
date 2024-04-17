@@ -227,9 +227,7 @@
                     const testData = response.test;
                     document.getElementById('submitRoom').disabled = false;
 
-                    if(testData.length == 0) {
-                        return unDisabledButton();   
-                    }
+                    unDisabledButton();   
 
                     // Process the data as needed
                     testData.forEach(item => {

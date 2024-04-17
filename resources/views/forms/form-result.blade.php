@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+         @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
         <div class="flex-start my-4 head">
             <span>Reservation Successful</span>
         </div>
@@ -59,14 +62,6 @@
                 <button type="button" class="btn btn-outline-danger w-25">Cancel</button>
             </a>
         </div>
-
-        @if(session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
-
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
     </div>
 @endsection
 @push('scripts')

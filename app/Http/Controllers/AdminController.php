@@ -76,7 +76,6 @@ class AdminController extends Controller
         $data = Reservation::whereNull('status')
                 ->orderBy('id', 'desc')
                 ->with(['room']);
-               
 
         return Datatables::of($data)
         ->addIndexColumn()

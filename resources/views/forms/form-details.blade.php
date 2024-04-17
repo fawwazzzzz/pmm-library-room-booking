@@ -79,7 +79,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" name="matriks" class="form-control" id="matriks" placeholder="Masukkan No Matriks">
+                            <input type="text" name="matriks" class="form-control @error('matriks') is-invalid @enderror" id="matriks" placeholder="Masukkan No Matriks">
+                            @error('matriks')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="my-md-2 my-0"></div>
@@ -87,7 +92,7 @@
                         <div class="col-md-6 my-2 my-md-0">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email">
-                            @error('name')
+                            @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -111,7 +116,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="semester" class="form-label">Semester</label>
-                                    <select class="form-select" aria-label="semester" id="semester" name="semesterName">
+                                    <select class="form-select @error('semesterName') is-invalid @enderror" aria-label="semester" id="semester" name="semesterName">
                                         <option selected disabled hidden></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -121,6 +126,11 @@
                                         <option value="6">6</option>
                                         <option value="7">7</option>
                                     </select>
+                                    @error('semesterName')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -131,7 +141,12 @@
 
                         <div class="col-md-8">
                             <label for="purpose" class="form-label">Tujuan</label>
-                            <input type="text" name="purposeName" class="form-control" id="purpose">
+                            <input type="text" name="purposeName" class="form-control @error('purposeName') is-invalid @enderror" id="purpose">
+                            @error('purposeName')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-4">
@@ -221,8 +236,13 @@
                 console.log(jabatanArray);
 
                 let jabatanDrop = "<label for=\"jabatan\" class=\"form-label\">Jabatan</label>\
-                                    <select class=\"form-select\" aria-label=\"Jabatan\" id=\"jabatan\" name=\"jabatanID\"> \
-                                        <option selected disabled hidden>Select ..</option>"
+                                    <select class=\"form-select @error('jabatanID') is-invalid @enderror\" aria-label=\"Jabatan\" id=\"jabatan\" name=\"jabatanID\"> \
+                                        <option selected disabled hidden>Select ..</option> \
+                                        @error('jabatanID') \
+                                            <span class=\"invalid-feedback\" role=\"alert\"> \
+                                                <strong>{{ $message }}</strong> \
+                                            </span> \
+                                        @enderror"
 
                 jabatanArray.forEach(item => {
                     jabatanDrop += "<option value=\"" + item.idJabatan + "\">" + item.namaJabatan + "</option>";
@@ -245,8 +265,13 @@
                 let programArray = {{ Illuminate\Support\Js::from($program) }};
 
                 let programDrop = "<label for=\"Program\" class=\"form-label\">Program</label>\
-                                    <select class=\"form-select\" aria-label=\"Program\" id=\"program\" name=\"programID\"> \
-                                        <option selected disabled hidden>Select ..</option>"
+                                    <select class=\"form-select @error('programID') is-invalid @enderror\" aria-label=\"Program\" id=\"program\" name=\"programID\"> \
+                                        <option selected disabled hidden>Select ..</option> \
+                                        @error('programID') \
+                                            <span class=\"invalid-feedback\" role=\"alert\"> \
+                                                <strong>{{ $message }}</strong> \
+                                            </span> \
+                                        @enderror"
 
                 programArray.forEach(item => {
                     programDrop += "<option value=\"" + item.idProgram + "\">" + item.namaProgram + "</option>";
