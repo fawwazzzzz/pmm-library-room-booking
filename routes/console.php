@@ -15,4 +15,4 @@ Schedule::call(function () {
             ->whereNull('status')
             ->update(['status' => 'Completed']);
 
-})->everyMinute();
+})->everyFifteenMinutes();

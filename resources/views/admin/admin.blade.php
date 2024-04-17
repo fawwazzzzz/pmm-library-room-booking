@@ -77,7 +77,7 @@
               <!-- End Dashboard Nav -->
 
               <li class="nav-item">
-                  <a class="nav-link {{ request()->is('admin-tempahan*') ? 'active' : '' }}" href="{{ route('admin-tempahan') }}">
+                  <a class="nav-link {{ request()->is('admin/tempahan') ? 'active' : '' }}" href="{{ route('admin-tempahan') }}">
                       <i class="bi bi-layout-text-window-reverse"></i>
                       <span>Rekod Tempahan</span>
                   </a>

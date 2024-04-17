@@ -208,9 +208,6 @@
             let date = document.getElementById('date-flatpickr').value;
             console.log(date);
 
-            unDisabledButton();
-            document.getElementById('submitRoom').disabled = false;
-
             // Ajax send data to Controller
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -225,10 +222,10 @@
                     checkin: startTime,
                     checkout: endTime
                 },
-                success: function(response) {
-                    
+                success: function(response) {                    
                     // Access the JSON array data
                     const testData = response.test;
+                    document.getElementById('submitRoom').disabled = false;
 
                     if(testData.length == 0) {
                         return unDisabledButton();   
@@ -241,8 +238,15 @@
                         
                         document.getElementById(`${item.roomID}`).disabled = true;
                     });
-
                 },
+                error: function(xhr, status, error) {
+
+                    $("input[name=room]").attr("disabled", true);
+                    $("#submitRoom").attr("disabled", true);
+                    
+                    alert(xhr.responseJSON.checkout[0])
+
+                }
             });
         })
 
