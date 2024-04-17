@@ -73,7 +73,6 @@ class AdminController extends Controller
     }
 
     public function tempahanRecentList(Request $request) {
-        
         $data = Reservation::whereNull('status')
                 ->orderBy('id', 'desc')
                 ->with(['room'])
@@ -84,7 +83,7 @@ class AdminController extends Controller
         ->editColumn('namaPengguna', function ($row) {
             return $row->namaPengguna;
         })
-        ->editColumn('noBilik', function ($row) {
+        ->addColumn('noBilik', function ($row) {
             info($row);
             return $row->room?->roomName;
         })
@@ -96,6 +95,7 @@ class AdminController extends Controller
         })
         ->editColumn('checkout', function ($row) {
             return $row->checkout;
-        });
+        })
+        ->make(true);
     }
 }

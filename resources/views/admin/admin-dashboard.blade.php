@@ -305,25 +305,25 @@
     });
 
     // Datatables for recent reservation.
-    // $(function() {
-    //     var tableRecent = $('.data-table-recent').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax: "{{ route('tempahan.recent-list') }}",
-    //         language: {
-    //             url: "{{ asset('js/datatable-malay.json') }}"
-    //         },
-    //         columns: [
-    //             { data: 'namaPengguna', name: 'Nama' },
-    //             { data: 'noBilik', name: 'Bilik' },
-    //             { data: 'tarikh', name: 'Tarikh' },
-    //             { data: 'checkin', name: 'Masuk' },
-    //             { data: 'checkout', name: 'Keluar' },
-    //         ],
-    //         columnDefs: [
-    //             { targets: [0, 1, 2, 3, 4], className: "text-center" },
-    //         ]
-    //     });
-    // })
+    $(function() {
+        var tableRecent = $('.data-table-recent').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('tempahan.recent-list') }}",
+            language: {
+                url: "{{ asset('js/datatable-malay.json') }}"
+            },
+            columns: [
+                { data: 'namaPengguna', name: 'namaPengguna' },
+                { data: 'noBilik', name: 'noBilik' },
+                { data: 'tarikh', name: 'tarikh' },
+                { data: 'checkin', name: 'checkin' },
+                { data: 'checkout', name: 'checkout' },
+            ],
+            columnDefs: [
+                { targets: [0, 1, 2, 3, 4], className: "text-center" },
+            ]
+        });
+    })
 </script>    
 @endpush

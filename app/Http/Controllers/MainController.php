@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\Jabatan;
 use App\Models\Program;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class MainController extends Controller
 {
@@ -92,6 +93,17 @@ class MainController extends Controller
 
     public function checkBetween(Request $request) {
 
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'checkin' => 'required|', // Checkin time in 24-hour format
+            'checkout' => 'required|after:checkin', // Checkout time must be after checkin time
+        ], [ 'after' => 'Masa keluar kena sebelum masa masuk.']);
+
+        if ($validator->fails()) {
+            // return back()->withErrors($validator->errors())->withInput();
+            return response()->json($validator->errors(), 433);
+        }
+
         // Access specific data from the request
         $date = $request->input('date');
         $hourStart = $request->input('checkin');
@@ -125,40 +137,6 @@ class MainController extends Controller
         
         $room = $request->room;
 
-        // Set into 24 hours format.
-
-        // Start
-        // if($request->startAMPM == "PM") {
-
-        //     $hourStart += 12;
-
-        //     if ($hourStart == 24 ) {
-                
-        //         $hourStart = 12;
-        //     }
-        // }
-        // elseif($request->startAMPM == "AM" && $hourStart == 12) {
-
-        //     $hourStart -= 12;
-        //     $hourStart = $hourStart + "0";
-        // }
-
-        // // End
-        // if($request->endAMPM == "PM") {
-
-        //     $hourEnd += 12;
-
-        //     if ($hourEnd == 24 ) {
-                
-        //         $hourEnd = 12;
-        //     }
-        // }
-        // elseif($request->endAMPM == "AM" && $hourEnd == 12) {
-
-        //     $hourEnd -= 12;
-        //     $hourEnd = $hourEnd + "0";
-        // }
-
         // Adjust Time format for input purpose
         $timeStart = $hourStart . ':' . $request->sMinute . ':00';
         $timeEnd = $hourEnd . ':' . $request->eMinute . ':00';
@@ -185,6 +163,20 @@ class MainController extends Controller
     }
 
     public function insertDetails(Request $request) {
+
+        // dd($request->all());
+
+        $numGroup = $request->room == 'Anjung' ? 'min:20|max:30' : 'min:3|max:6';
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'groupnum' => "required|numeric|$numGroup",
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors())->withInput();
+        }
 
         $id = $request->id;
 

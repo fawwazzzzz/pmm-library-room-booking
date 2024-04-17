@@ -12,35 +12,35 @@
             <div class="radio-tile-group mt-4">
 
                     <div class="input-container">
-                        <input id="1" type="radio" name="room">
+                        <input id="1" type="radio" name="room" value="A1">
                         <div class="radio-tile">
                         <label for="A1">A1</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="2" type="radio" name="room">
+                        <input id="2" type="radio" name="room" value="A2">
                         <div class="radio-tile">
                         <label for="A2">A2</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="3" type="radio" name="room">
+                        <input id="3" type="radio" name="room" value="A3">
                         <div class="radio-tile">
                         <label for="A3">A3</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="4" type="radio" name="room">
+                        <input id="4" type="radio" name="room" value="B3">
                         <div class="radio-tile">
                         <label for="B3">B3</label>
                         </div>
                     </div>
 
                     <div class="input-container">
-                        <input id="5" type="radio" name="room">
+                        <input id="5" type="radio" name="room" value="Anjung">
                         <div class="radio-tile">
                         <label for="Anjung">Anjung</label>
                         </div>
@@ -56,7 +56,12 @@
 
                         <div class="col-md-8">
                             <label for="name" class="form-label">Nama Penuh</label>
-                            <input type="text" name="name" class="form-control" id="name">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-4 my-2 my-md-0">
@@ -81,7 +86,12 @@
 
                         <div class="col-md-6 my-2 my-md-0">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" id="email">
+                            <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="col-md-6">
@@ -126,7 +136,12 @@
 
                         <div class="col-md-4">
                             <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
-                            <input type="text" name="groupnum" class="form-control" id="groupnum" onkeydown="allowOnlyNumbers(event)">
+                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)">
+                            @error('groupnum')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         
                         
