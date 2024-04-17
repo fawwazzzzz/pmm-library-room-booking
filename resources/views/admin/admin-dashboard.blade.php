@@ -1,4 +1,10 @@
 @extends('admin.admin')
+<style>
+    .dataTables_paginate, .dataTables_info {
+    display: none;
+}
+</style>
+
 @section('content')
     
     <div class="w-100 d-flex justify-content-end">
@@ -307,7 +313,10 @@
     // Datatables for recent reservation.
     $(function() {
         var tableRecent = $('.data-table-recent').DataTable({
+            pageLength: 5,
+            lengthChange: false,
             processing: true,
+            searching: false,
             serverSide: true,
             ajax: "{{ route('tempahan.recent-list') }}",
             language: {
