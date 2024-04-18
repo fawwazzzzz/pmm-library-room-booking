@@ -138,7 +138,7 @@
                                         <table class="table data-table-recent">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 150px;">Nama</th>
+                                                    <th style="width: 100px;">Nama</th>
                                                     <th>Bilik</th>
                                                     <th>Tarikh</th>
                                                     <th>Masuk</th>
@@ -330,7 +330,7 @@
                 { data: 'checkout', name: 'checkout' },
             ],
             columnDefs: [
-                { targets: [0, 1, 2, 3, 4], className: "text-center" },
+                { targets: [0, 1, 2, 3, 4], className: "text-start" },
             ]
         });
     })
