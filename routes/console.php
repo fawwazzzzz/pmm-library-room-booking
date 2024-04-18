@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Schedule;
 //     $this->comment(Inspiring::quote());
 // })->purpose('Display an inspiring quote')->everyFifteenSeconds();
 
-Schedule::call(function () {
+// Schedule::call(function () {
 
-    $data = Reservation::where('checkout', '<', now())
-            ->whereNull('status')
-            ->update(['status' => 'Completed']);
+    
 
-})->everyFifteenMinutes();
+// })->everySecond();
+
+Schedule::command('app:test-job')->everySecond();
