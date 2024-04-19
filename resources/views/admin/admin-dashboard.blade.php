@@ -314,9 +314,6 @@
             searching: false,
             serverSide: true,
             ajax: "{{ route('tempahan.recent-list') }}",
-            language: {
-                url: "{{ asset('js/datatable-malay.json') }}"
-            },
             columns: [
                 { data: 'namaPengguna', name: 'namaPengguna' },
                 { data: 'noBilik', name: 'noBilik' },

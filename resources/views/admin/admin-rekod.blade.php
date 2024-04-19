@@ -57,9 +57,6 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('tempahan.pelajar-list') }}",
-            language: {
-                url: "{{ asset('js/datatable-malay.json') }}"
-            },
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'namaPengguna', name: 'namaPengguna' },
@@ -78,9 +75,6 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('tempahan.pensyarah-list') }}",
-            language: {
-                url: "{{ asset('js/datatable-malay.json') }}"
-            },
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'namaPengguna', name: 'namaPengguna' },
