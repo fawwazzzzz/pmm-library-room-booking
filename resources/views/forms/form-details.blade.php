@@ -56,7 +56,7 @@
 
                         <div class="col-md-8">
                             <label for="name" class="form-label">Nama Penuh</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Masukkan Nama">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" name="matriks" class="form-control @error('matriks') is-invalid @enderror" id="matriks" placeholder="Masukkan No Matriks">
+                            <input type="text" name="matriks" class="form-control @error('matriks') is-invalid @enderror" id="matriks" placeholder="Masukkan No Matriks" value="{{ old('matriks') }}">
                             @error('matriks')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -91,7 +91,7 @@
 
                         <div class="col-md-6 my-2 my-md-0">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email">
+                            <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" placeholder="Masukkan Email">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -101,7 +101,7 @@
 
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-10">
+                                <div class="col-9">
                                     <div id="program-jabatan"></div>
                                     {{-- <label for="jabatan" class="form-label">Jabatan</label>
                                     <select class="form-select" aria-label="Jabatan" id="jabatan" name="jabatanName">
@@ -114,17 +114,17 @@
                                         <option value="TVET">TVET</option>
                                     </select> --}}
                                 </div>
-                                <div class="col-2">
+                                <div class="col-3">
                                     <label for="semester" class="form-label">Semester</label>
-                                    <select class="form-select @error('semesterName') is-invalid @enderror" aria-label="semester" id="semester" name="semesterName">
+                                    <select class="form-select @error('semesterName') is-invalid @enderror" aria-label="semester" id="semester" name="semesterName" val>
                                         <option selected disabled hidden></option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
+                                        <option value="1" {{ old('semesterName') == '1' ? 'selected' : '' }} >1</option>
+                                        <option value="2" {{ old('semesterName') == '2' ? 'selected' : '' }}>2</option>
+                                        <option value="3" {{ old('semesterName') == '3' ? 'selected' : '' }}>3</option>
+                                        <option value="4" {{ old('semesterName') == '4' ? 'selected' : '' }}>4</option>
+                                        <option value="5" {{ old('semesterName') == '5' ? 'selected' : '' }}>5</option>
+                                        <option value="6" {{ old('semesterName') == '6' ? 'selected' : '' }}>6</option>
+                                        <option value="7" {{ old('semesterName') == '7' ? 'selected' : '' }}>7</option>
                                     </select>
                                     @error('semesterName')
                                         <span class="invalid-feedback" role="alert">
@@ -141,7 +141,7 @@
 
                         <div class="col-md-8">
                             <label for="purpose" class="form-label">Tujuan</label>
-                            <input type="text" name="purposeName" class="form-control @error('purposeName') is-invalid @enderror" id="purpose">
+                            <input type="text" name="purposeName" class="form-control @error('purposeName') is-invalid @enderror" id="purpose" value="{{ old('purposeName') }}" placeholder="Nyatakan Tujuan">
                             @error('purposeName')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
 
                         <div class="col-md-4">
                             <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
-                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)">
+                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}">
                             @error('groupnum')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -245,7 +245,7 @@
                                         @enderror"
 
                 jabatanArray.forEach(item => {
-                    jabatanDrop += "<option value=\"" + item.idJabatan + "\">" + item.namaJabatan + "</option>";
+                    jabatanDrop += "<option value=\"" + item.idJabatan + "\" {{ old('jabatanID') == " + item.idJabatan + "  ? 'selected' : '' }} >" + item.namaJabatan + "</option>";
                 });
 
                 jabatanDrop += "</select>"
@@ -274,7 +274,7 @@
                                         @enderror"
 
                 programArray.forEach(item => {
-                    programDrop += "<option value=\"" + item.idProgram + "\">" + item.namaProgram + "</option>";
+                    programDrop += "<option value=\"" + item.idProgram + "\" {{ old('programID') == " + item.idProgram + "  ? 'selected' : '' }} >" + item.namaProgram + "</option>";
                 });
 
                 programDrop += "</select>"

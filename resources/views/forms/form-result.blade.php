@@ -6,26 +6,26 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
         <div class="flex-start my-4 head">
-            <span>Reservation Successful</span>
+            <span>Tempahan Berjaya</span>
         </div>
 
-        <h2 style="font-weight: 800" class="mb-4">Room & Time</h2>
+        <h2 style="font-weight: 800" class="mb-4">Bilik & Masa</h2>
         <div class="d-flex justify-content-between align-items-center">
-            <p>Room :</p>
+            <p>Bilik :</p>
             <p>{{ $data['roomName'] }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-            <p>Time :</p>
+            <p>Masa :</p>
             <p>{{ $data['checkin'] }} - {{ $data['checkout'] }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-            <p>Date :</p>
+            <p>Tarikh :</p>
             <p>{{ $data['date'] }}</p>
         </div>
 
         <div class="line-bottom my-4"></div>
 
-        <h2 style="font-weight: 800" class="mb-4">Participant</h2>
+        <h2 style="font-weight: 800" class="mb-4">Penempah</h2>
         <div class="d-flex justify-content-between align-items-center">
             <p>Nama :</p>
             <p>{{ $data['namaPengguna'] }}</p>
@@ -53,13 +53,13 @@
             <p>{{ $data['email'] }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-            <p>Group Number :</p>
+            <p>Bilangan Dalam Kumpulan :</p>
             <p>{{ $data['groupNum'] }}</p>
         </div>
 
         <div class="flex-end mt-2">
             <a href="/cancel-reserve/{{ $data['id'] }}" class="w-25">
-                <button type="button" class="btn btn-outline-danger w-25">Cancel</button>
+                <button type="button" class="btn btn-outline-danger w-100">Cancel</button>
             </a>
         </div>
     </div>
