@@ -26,7 +26,7 @@ class TestJob extends Command
      */
     public function handle()
     {
-        $data = Reservation::where('checkout', '<', now())
+        $data = Reservation::where('checkout', '<=', now())
             ->whereDate('date', '<=', now())
             ->whereNull('status')
             ->update(['status' => 'Completed']);
