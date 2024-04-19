@@ -27,11 +27,11 @@
               <div class="row">
 
                   <!-- Left side columns -->
-                  <div class="col-lg-12 pb-4">
+                  <div class="col-lg-12">
                       <div class="row">
 
                             <!-- Customers Card -->
-                          <div class="col-xxl-4 col-xl-12 pb-4">
+                          <div class="col-md-4 pb-4">
 
                               <div class="card info-card customers-card h-100">
                                   <div class="card-body flex-center">
@@ -54,12 +54,11 @@
                                     </div>
                                   </div>
                               </div>
-
                           </div>
                           <!-- End Customers Card -->
 
                           <!-- Reserved Card -->
-                          <div class="col-xxl-4 col-md-6 pb-4">
+                          <div class="col-md-4 pb-4">
                               <div class="card info-card sales-card h-100">
 
                                   <div class="card-body flex-center">
@@ -87,10 +86,8 @@
                           <!-- End Sales Card -->
 
                           <!-- Revenue Card -->
-                          <div class="col-xxl-4 col-md-6 pb-4">
+                          <div class="col-md-4 pb-4">
                               <div class="card info-card revenue-card h-100">
-
-
                                   <div class="card-body flex-center">
                                     <div class="row">
                                         <div class="col-4 flex-center">
@@ -113,11 +110,10 @@
                               </div>
                           </div>
                           <!-- End Revenue Card -->
-
+                          
                           <!-- Reports -->
-                          <div class="col-lg-6">
+                          <div class="col-lg-6 pb-4">
                               <div class="card h-100">
-
                                   <div class="card-body">
                                       <h5 class="card-title">Penempahan Dalam Jabatan <span>| Bulan Ini</span></h5>
 
@@ -125,12 +121,11 @@
                                        <canvas id="jabatanChart" style="max-height: 400px;"></canvas>
 
                                   </div>
-
                               </div>
                           </div><!-- End Reports -->
                           
                         {{-- Latest Reservation --}}
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 pb-4">
                             <div class="card h-100">
                                 <div class="card-body">
                                     <h5 class="card-title">Penempahan Terkini <span>| Bulan Ini</span></h5>
@@ -313,7 +308,7 @@
     // Datatables for recent reservation.
     $(function() {
         var tableRecent = $('.data-table-recent').DataTable({
-            pageLength: 5,
+            pageLength: 3,
             lengthChange: false,
             processing: true,
             searching: false,

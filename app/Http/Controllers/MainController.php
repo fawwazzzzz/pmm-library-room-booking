@@ -173,9 +173,11 @@ class MainController extends Controller
             $choice = "programID";
         }
 
+        $options = $request->inlineRadioOptions == "student" ? 'id_format' : '';
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'matriks' => 'required',
+            'matriks' => "required|$options",
             'email' => 'required|email',
             "$choice" => 'required',
             'purposeName' => 'required',
