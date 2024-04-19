@@ -142,6 +142,13 @@
       @stack('scripts')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        if (select('.toggle-sidebar-btn')) {
+            on('click', '.toggle-sidebar-btn', function(e) {
+            select('body').classList.toggle('toggle-sidebar')
+            })
+        }
+    </script>
   </body>
 
   </html>
