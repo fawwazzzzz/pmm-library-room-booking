@@ -134,9 +134,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-1"></div>
-
+                        
                         <div class="my-2"></div>
 
                         <div class="col-md-8">
@@ -150,7 +148,15 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
+                                <p class="bi bi-info-circle"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-custom-class="custom-tooltip"
+                                        data-bs-html="true"
+                                        data-bs-title="<p><strong>Limit person per room</strong></p><p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>">
+                                </p>
+                            </div>
                             <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}">
                             @error('groupnum')
                                 <span class="invalid-feedback" role="alert">
@@ -207,10 +213,6 @@
             
             document.getElementById(`${i}`).disabled = true;
         }
-
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
         // Student and Staff radio button function
 
         let studentRadio = document.getElementById('student');
@@ -274,7 +276,7 @@
                                         @enderror"
 
                 programArray.forEach(item => {
-                    programDrop += "<option value=\"" + item.idProgram + "\" {{ old('programID') == " + item.idProgram + "  ? 'selected' : '' }} >" + item.namaProgram + "</option>";
+                    programDrop += "<option value=\"" + item.idProgram + "\">" + item.namaProgram + "</option>";
                 });
 
                 programDrop += "</select>"
