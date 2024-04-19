@@ -30,6 +30,8 @@
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+
       <!-- =======================================================
     * Template Name: NiceAdmin
     * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/

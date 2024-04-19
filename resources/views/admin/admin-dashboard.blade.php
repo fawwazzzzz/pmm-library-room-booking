@@ -227,7 +227,7 @@
     // Reserved By Jabatan Chart
         const jabatanData = {{ Illuminate\Support\Js::from($jabatan) }};
 
-        console.log("Jabatan : " + jabatanData);
+        console.log("Jabatan : " + jabatanData.jabatan);
 
         new Chart(document.querySelector('#jabatanChart'), {
         type: 'bar',
