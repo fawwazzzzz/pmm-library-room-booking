@@ -27,9 +27,6 @@
       <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
-      <!-- Template Main CSS File -->
-      <link href="assets/css/style.css" rel="stylesheet">
-
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
