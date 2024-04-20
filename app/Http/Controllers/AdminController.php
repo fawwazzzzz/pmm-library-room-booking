@@ -26,7 +26,7 @@ class AdminController extends Controller
             return $row->date;
         })
         ->editColumn('program', function ($row) {
-            return $row->program->namaProgram;
+            return $row->program?->namaProgram;
         })
         ->editColumn('noMatrik', function ($row) {
             return $row->noMatriks;
@@ -46,7 +46,7 @@ class AdminController extends Controller
 
     public function tempahanPensyarahList(Request $request){
 
-        $data = Reservation::where('noMatriks','=', 'Staff')->orderBy('id', 'desc')->with(['room', 'jabatan']);
+        $data = Reservation::where('noMatriks', '=', 'Staff')->orderBy('id', 'desc')->with(['room', 'jabatan']);
 
         return Datatables::of($data)
         ->addIndexColumn()
@@ -56,10 +56,10 @@ class AdminController extends Controller
         ->editColumn('tarikh', function ($row) {
             return $row->date;
         })
-        ->editColumn('jabatan', function ($row) {
+        ->addColumn('jabatan', function ($row) {
             return $row->jabatan->namaJabatan;
         })
-        ->editColumn('noBilik', function ($row) {
+        ->addColumn('noBilik', function ($row) {
             info($row);
             return $row->room?->roomName;
         })
