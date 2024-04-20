@@ -42,14 +42,6 @@
                     <ul class="navbar-nav me-auto">
                         
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a href="{{ route('login') }}" class="nav-link">Pentadbir</a>
-                        </li>
-                      </li>
-                    </ul>
                 </div>
             </div>
             {{-- <div class="container">
