@@ -308,7 +308,7 @@
     // Datatables for recent reservation.
     $(function() {
         var tableRecent = $('.data-table-recent').DataTable({
-            pageLength: 3,
+            pageLength: 4,
             lengthChange: false,
             processing: true,
             searching: false,

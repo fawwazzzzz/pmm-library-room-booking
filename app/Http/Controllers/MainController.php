@@ -182,8 +182,24 @@ class MainController extends Controller
             "$choice" => 'required',
             'purposeName' => 'required',
             'groupnum' => "required|numeric|$numGroup",
-            'semesterName' => "required"
+            'semesterName' => "required",
         ]);
+
+        $customMessages = [
+            'name.required' => 'Sila masukkan Nama.',
+            'matriks.required' => 'Sila masukkan No Matriks',
+            'email.required' => 'Sila masukkan Email.',
+            "$choice.required" => 'Sila pilih satu pilihan.',
+            'purposeName.required' => 'Sila masukkan tujuan penempahan.',
+            'groupnum.required' => 'Sila masukkan bilangan dalam kumpulan.',
+            'groupnum.numeric' => 'Masukkan nombor sahaja di dalam bilangan dalam kumpulan.',
+            'semesterName.required' => '',
+            'matriks.id_format' => 'Sila masukkan format No Matriks dengan betul'
+        ];
+
+
+
+        $validator->setCustomMessages($customMessages);
 
         if ($validator->fails()) {
             return back()->withErrors($validator->errors())->withInput();

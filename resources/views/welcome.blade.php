@@ -11,7 +11,7 @@
             <img src="{{ asset('assets/img/img-main.svg') }}" alt="" class="hero-img">
         </div>
         <div class="col-md-6 d-flex justify-content-center align-items-start flex-column hero-desc pe-md-5 mb-5">
-            <h2>SISTEM TEMPAHAN BILIK PERBINCANGAN PERPUSTAKAAN PMM.</h2>
+            <h2>SISTEM TEMPAHAN BILIK PERBINCANGAN PERPUSTAKAAN <br> AL-KHAWARIZMI.</h2>
             <div class="mb-4 mt-2"></div>
             <a href="/form-available" class="w-100 mt-2">
                 <button type="button" class="btn btn-outline-primary w-100">Tempah Bilik</button>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-logo')
 
 @section('content')
     <div class="container">
@@ -276,7 +276,7 @@
                                         @enderror"
 
                 programArray.forEach(item => {
-                    programDrop += "<option value=\"" + item.idProgram + "\">" + item.namaProgram + "</option>";
+                    programDrop += "<option value=\"" + item.idProgram + "\" {{ old('programID') == " + item.idProgram + " ? 'selected' : '' }}>" + item.namaProgram + "</option>";
                 });
 
                 programDrop += "</select>"
