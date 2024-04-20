@@ -30,6 +30,7 @@
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
 
       <!-- =======================================================
@@ -143,6 +144,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
+        const select = (el, all = false) => {
+            el = el.trim()
+            if (all) {
+            return [...document.querySelectorAll(el)]
+            } else {
+            return document.querySelector(el)
+            }
+        }
+
+        const on = (type, el, listener, all = false) => {
+            if (all) {
+            select(el, all).forEach(e => e.addEventListener(type, listener))
+            } else {
+            select(el, all).addEventListener(type, listener)
+            }
+        }
+
         if (select('.toggle-sidebar-btn')) {
             on('click', '.toggle-sidebar-btn', function(e) {
             select('body').classList.toggle('toggle-sidebar')
