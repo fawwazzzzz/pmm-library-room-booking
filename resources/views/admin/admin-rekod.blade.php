@@ -68,7 +68,7 @@
                 { data: 'checkout', name: 'checkout' }
             ],
             columnDefs: [
-                { targets: [0, 1, 2, 3, 4, 5, 6, 7], className: "text-center" },
+                { targets: [0, 1, 2, 3, 4, 5, 6, 7], className: "text-start" },
             ]
         });
         var tablePensyarah = $('.data-table-pensyarah').DataTable({
@@ -85,7 +85,7 @@
                 { data: 'checkout', name: 'checkout' }
             ],
             columnDefs: [
-                { targets: [0, 1, 2, 3, 4, 5, 6], className: "text-center" },
+                { targets: [0, 1, 2, 3, 4, 5, 6], className: "text-start" },
             ]
         })
 

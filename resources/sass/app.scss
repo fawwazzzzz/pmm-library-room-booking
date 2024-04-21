@@ -170,6 +170,20 @@ input:checked + .radio-tile label {
     background-color: #666666;
 }
 
+@media (max-width: 769px) {
+    .main-page {
+        padding-top: 50px;
+    }
+
+    .hero-desc {
+        margin-top: 50px;
+
+        h2 {
+            font-size: 40px;
+        }
+    }
+}
+
 // Template
 
 .flex-center {
