@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="flex-start head">
+        <div class="head d-flex justify-content-md-center justify-content-xxl-start align-items-center">
             <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 45px;"></i></a>
-            <span class="ms-5">Tempahan Bilik</span>
+            <span class="ms-4">Tempahan Bilik</span>
         </div>
         
 
@@ -72,7 +72,7 @@
                     <div class="my-4"></div>
 
                     <div class="flex-end w-100">
-                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary" value="Check Availability">
+                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary btn-availability" value="Check Availability">
                     </div>
 
                 </div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="flex-end mt-2 w-100">
-                        <input type="submit" class="btn btn-primary" value="Next" id="submitRoom" style="width: 180px;" disabled>
+                        <input type="submit" class="btn btn-primary btn-availability" value="Next" id="submitRoom" disabled>
                     </div>
                 </form>
             </div>
