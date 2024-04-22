@@ -4,7 +4,7 @@
     <div class="container">
         <div class="flex-start head">
             <a href="/delete-available/{{ $data['id'] }}" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
-            <span class="ms-5">Maklumat Penempah</span>
+            <span class="ms-4">Maklumat Penempah</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
             @csrf
@@ -117,7 +117,7 @@
                                 <div class="col-3">
                                     <label for="semester" class="form-label">Semester</label>
                                     <select class="form-select @error('semesterName') is-invalid @enderror" aria-label="semester" id="semester" name="semesterName" val>
-                                        <option selected disabled hidden></option>
+                                        <option selected disabled hidden>Select ..</option>
                                         <option value="1" {{ old('semesterName') == '1' ? 'selected' : '' }} >1</option>
                                         <option value="2" {{ old('semesterName') == '2' ? 'selected' : '' }}>2</option>
                                         <option value="3" {{ old('semesterName') == '3' ? 'selected' : '' }}>3</option>
@@ -152,7 +152,7 @@
                                 <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
                                 <a tabindex="0" class="bi bi-info-circle popover-icon" role="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-title="Limit Person Per Room" data-bs-content="<p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>"></a>                                
                             </div>
-                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}">
+                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}" placeholder="Min: 3 - 6 (Anjung: 20 - 30)">
                             @error('groupnum')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

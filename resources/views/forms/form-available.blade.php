@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="head d-flex justify-content-md-center justify-content-xxl-start align-items-center">
-            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 45px;"></i></a>
+            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
             <span class="ms-4">Tempahan Bilik</span>
         </div>
         
