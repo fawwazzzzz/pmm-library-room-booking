@@ -30,7 +30,6 @@
       <!-- Scripts -->
       @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
 
       <!-- =======================================================
@@ -104,8 +103,8 @@
           </ul>
           <!-- End Log Nav -->
 
-          <div class="dropup-center dropup">
-            <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __('Pentadbir') }}</button>
+        <div class="dropup-center dropup">
+            <button class="btn btn-logout dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ __('Pentadbir') }}</button>
             <ul class="dropdown-menu">
                 <li class="nav-item">
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -141,7 +140,6 @@
               class="bi bi-arrow-up-short"></i></a>
               
       @stack('scripts')
-
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   </body>
 

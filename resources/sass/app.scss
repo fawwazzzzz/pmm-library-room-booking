@@ -170,6 +170,11 @@ input:checked + .radio-tile label {
     background-color: #666666;
 }
 
+.btn-logout {
+    background-color: #4154f1;
+    color: #ffffff;
+}
+
 @media (max-width: 769px) {
     .main-page {
         padding-top: 50px;
