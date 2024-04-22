@@ -4,7 +4,7 @@
     <div class="container">
         <div class="flex-start head">
             <a href="/delete-available/{{ $data['id'] }}" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
-            <span class="ms-5">Maklumat Penempah</span>
+            <span class="ms-4">Maklumat Penempah</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
             @csrf
@@ -54,7 +54,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-8">
+                        <div class="col-md-8 my-2">
                             <label for="name" class="form-label">Nama Penuh</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Masukkan Nama">
                             @error('name')
@@ -64,7 +64,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-4 my-2 my-md-0">
+                        <div class="col-md-4 my-2">
                             <div class="d-flex justify-content-between align-items-center">
                                 <label for="matriks" class="form-label">No Matriks</label> 
 
@@ -87,9 +87,7 @@
                             @enderror
                         </div>
 
-                        <div class="my-md-2 my-0"></div>
-
-                        <div class="col-md-6 my-2 my-md-0">
+                        <div class="col-md-6 my-2">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" placeholder="Masukkan Email">
                             @error('email')
@@ -99,7 +97,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 my-2">
                             <div class="row">
                                 <div class="col-9">
                                     <div id="program-jabatan"></div>
@@ -117,7 +115,7 @@
                                 <div class="col-3">
                                     <label for="semester" class="form-label">Semester</label>
                                     <select class="form-select @error('semesterName') is-invalid @enderror" aria-label="semester" id="semester" name="semesterName" val>
-                                        <option selected disabled hidden></option>
+                                        <option selected disabled hidden>Select ..</option>
                                         <option value="1" {{ old('semesterName') == '1' ? 'selected' : '' }} >1</option>
                                         <option value="2" {{ old('semesterName') == '2' ? 'selected' : '' }}>2</option>
                                         <option value="3" {{ old('semesterName') == '3' ? 'selected' : '' }}>3</option>
@@ -135,9 +133,7 @@
                             </div>
                         </div>
                         
-                        <div class="my-2"></div>
-
-                        <div class="col-md-8">
+                        <div class="col-md-8 my-2">
                             <label for="purpose" class="form-label">Tujuan</label>
                             <input type="text" name="purposeName" class="form-control @error('purposeName') is-invalid @enderror" id="purpose" value="{{ old('purposeName') }}" placeholder="Nyatakan Tujuan">
                             @error('purposeName')
@@ -147,12 +143,12 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-between align-items-center">
+                        <div class="col-md-4 my-2">
+                            {{-- <div class="d-flex justify-content-between align-items-center"> --}}
                                 <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
-                                <a tabindex="0" class="bi bi-info-circle popover-icon" role="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-title="Limit Person Per Room" data-bs-content="<p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>"></a>                                
-                            </div>
-                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}">
+                                {{-- <a tabindex="0" class="bi bi-info-circle popover-icon" role="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-title="Limit Person Per Room" data-bs-content="<p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>"></a>                                 --}}
+                            {{-- </div> --}}
+                            <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}" placeholder="Min: 3 - 6 (Anjung: 20 - 30)">
                             @error('groupnum')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -230,8 +226,6 @@
                 matriksText.value = 'Staff';
 
                 let jabatanArray = {{ Illuminate\Support\Js::from($jabatan) }};
-
-                console.log(jabatanArray);
 
                 let jabatanDrop = "<label for=\"jabatan\" class=\"form-label\">Jabatan</label>\
                                     <select class=\"form-select @error('jabatanID') is-invalid @enderror\" aria-label=\"Jabatan\" id=\"jabatan\" name=\"jabatanID\"> \

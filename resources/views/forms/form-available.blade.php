@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="head d-flex justify-content-md-center justify-content-xxl-start align-items-center">
-            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 45px;"></i></a>
+            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
             <span class="ms-4">Tempahan Bilik</span>
         </div>
         
@@ -137,8 +137,6 @@
 
         const selectMenu = document.querySelectorAll('select');
 
-        console.log(selectMenu);
-
         for (let i = 17; i > 8; i--) {
             i = i < 10 ? "0" + i : i;
 
@@ -179,7 +177,6 @@
             // }
 
             const startTime = `${hourStart}:${selectMenu[1].value}:00`;
-            console.log(startTime);
 
             // Check out section
 
@@ -201,12 +198,9 @@
             // }
 
             const endTime = `${hourEnd}:${selectMenu[3].value}:00`;
-            console.log(endTime);
 
             let between = countBetween(hourStart, hourEnd);
-
             let date = document.getElementById('date-flatpickr').value;
-            console.log(date);
 
             // Ajax send data to Controller
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -231,9 +225,7 @@
 
                     // Process the data as needed
                     testData.forEach(item => {
-                        // Access each item in the JSON array and do something with it
-                        console.log(item.roomID);
-                        
+                        // Access each item in the JSON array and do something with it                        
                         document.getElementById(`${item.roomID}`).disabled = true;
                     });
                 },
