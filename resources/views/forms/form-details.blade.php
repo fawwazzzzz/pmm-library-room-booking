@@ -150,12 +150,7 @@
                         <div class="col-md-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
-                                <p class="bi bi-info-circle"
-                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-custom-class="custom-tooltip"
-                                        data-bs-html="true"
-                                        data-bs-title="<p><strong>Limit person per room</strong></p><p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>">
-                                </p>
+                                <a tabindex="0" class="bi bi-info-circle popover-icon" role="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-title="Limit Person Per Room" data-bs-content="<p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>"></a>                                
                             </div>
                             <input type="text" name="groupnum" class="form-control @error('groupnum') is-invalid @enderror" id="groupnum" onkeydown="allowOnlyNumbers(event)" value="{{ old('groupnum') }}">
                             @error('groupnum')
@@ -179,6 +174,7 @@
 @endsection
 @push('scripts')
     <script>
+
         // Function to allow only numbers in the input field and limit to around 10 characters
         function allowOnlyNumbers(event) {
             // Allow: backspace, delete, tab, escape, enter, and '.' (for decimals)
