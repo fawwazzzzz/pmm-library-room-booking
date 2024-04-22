@@ -7,4 +7,11 @@ import "./vendor/simple-datatables/simple-datatables.js";
 import "./vendor/tinymce/tinymce.min.js";
 import "./vendor/php-email-form/validate.js";
 
+const popoverTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="popover"]'
+);
+const popoverList = [...popoverTriggerList].map(
+    (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+);
+
 import "./main.js";
