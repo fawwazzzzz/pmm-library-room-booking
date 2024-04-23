@@ -17,7 +17,7 @@
 
                     <div class="my-3"></div>
 
-                    <label for="">Masa Mula</label>
+                    <label for="">Masa Masuk</label>
                     <div class="content flex-center">
                         <div class="column">
                             <select class="hour" name="sHour" required>
@@ -44,7 +44,7 @@
 
                     <div class="my-3"></div>
 
-                    <label for="">Masa Akhir</label>
+                    <label for="">Masa Keluar</label>
                     <div class="content flex-center">
                         <div class="column">
                             <select class="hour" name="eHour" required>
