@@ -72,7 +72,7 @@
                     <div class="my-4"></div>
 
                     <div class="flex-end w-100">
-                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary btn-availability" value="Check Availability">
+                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary btn-availability" value="Semak Kekosongan">
                     </div>
 
                 </div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="flex-end mt-2 w-100">
-                        <input type="submit" class="btn btn-primary btn-availability" value="Next" id="submitRoom" disabled>
+                        <input type="submit" class="btn btn-primary btn-availability" value="Seterusnya" id="submitRoom" disabled>
                     </div>
                 </form>
             </div>

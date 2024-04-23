@@ -97,7 +97,7 @@ class MainController extends Controller
         $validator = Validator::make($request->all(), [
             'checkin' => 'required|', // Checkin time in 24-hour format
             'checkout' => 'required|after:checkin', // Checkout time must be after checkin time
-        ], [ 'after' => 'Masa keluar kena sebelum masa masuk.']);
+        ], [ 'after' => 'Masa keluar kena selepas masa masuk.']);
 
         if ($validator->fails()) {
             // return back()->withErrors($validator->errors())->withInput();
