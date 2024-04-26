@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Schedule;
 // })->everySecond();
 
 Schedule::command('app:test-job')->everyFifteenMinutes();
-Schedule::command('app:delete-time')->daily();
+Schedule::command('app:delete-time')->dailyAt('17:00');
