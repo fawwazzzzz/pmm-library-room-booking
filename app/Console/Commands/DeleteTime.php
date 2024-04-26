@@ -26,7 +26,7 @@ class DeleteTime extends Command
      */
     public function handle()
     {
-        Reservation::where('name', '')
+        Reservation::whereNull('namaPengguna')
         ->delete();
     }
 }
