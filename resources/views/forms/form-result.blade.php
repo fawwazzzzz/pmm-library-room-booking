@@ -11,6 +11,10 @@
 
         <h2 style="font-weight: 800" class="mb-4">Bilik & Masa</h2>
         <div class="d-flex justify-content-between align-items-center">
+            <p>No Rujukan Tempahan :</p>
+            <p>{{ $data['id'] }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
             <p>Bilik :</p>
             <p>{{ $data['roomName'] }}</p>
         </div>
@@ -25,7 +29,7 @@
 
         <div class="line-bottom my-4"></div>
 
-        <h2 style="font-weight: 800" class="mb-4">Penempah</h2>
+        <h2 style="font-weight: 800" class="mb-4">Pemohon</h2>
         <div class="d-flex justify-content-between align-items-center">
             <p>Nama :</p>
             <p>{{ $data['namaPengguna'] }}</p>
@@ -57,10 +61,13 @@
             <p>{{ $data['groupNum'] }}</p>
         </div>
 
-        <div class="flex-end mt-2">
+        <div class="d-flex justify-content-center align-items-end flex-column mt-2">
             <a href="/cancel-reserve/{{ $data['id'] }}" class="w-25">
-                <button type="button" class="btn btn-outline-danger w-100">Cancel</button>
+                <button type="button" class="btn btn-outline-danger w-100">Batal</button>
             </a>
+            <span class="my-2 text-danger">
+                <i class="bi bi-info-circle-fill me-1 text-danger"></i> <strong>Batal hanya dibenarkan 30 minit sebelum masa masuk</strong>
+            </span>
         </div>
     </div>
 @endsection

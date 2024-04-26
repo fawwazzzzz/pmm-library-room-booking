@@ -4,7 +4,7 @@
     <div class="container">
         <div class="flex-start head">
             <a href="/delete-available/{{ $data['id'] }}" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
-            <span class="ms-4">Maklumat Penempah</span>
+            <span class="ms-4">Maklumat Tempahan</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
             @csrf
@@ -54,7 +54,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-8 my-2">
+                        <div class="col-lg-8 my-2">
                             <label for="name" class="form-label">Nama Penuh</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Masukkan Nama">
                             @error('name')
@@ -64,10 +64,9 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-4 my-2">
+                        <div class="col-lg-4 my-2">
                             <div class="d-flex justify-content-between align-items-center">
-                                <label for="matriks" class="form-label">No Matriks</label> 
-
+                                <div id="label-matriks-ic"></div>
                                 <div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="student" value="student" checked>
@@ -79,15 +78,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" name="matriks" class="form-control @error('matriks') is-invalid @enderror" id="matriks" placeholder="Masukkan No Matriks" value="{{ old('matriks') }}">
-                            @error('matriks')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div id="text-matriks-ic"></div>
                         </div>
 
-                        <div class="col-md-6 my-2">
+                        <div class="col-lg-6 my-2">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" placeholder="Masukkan Email">
                             @error('email')
@@ -97,7 +91,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6 my-2">
+                        <div class="col-lg-6 my-2">
                             <div class="row">
                                 <div class="col-9">
                                     <div id="program-jabatan"></div>
@@ -132,8 +126,18 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="col-md-8 my-2">
+
+                        <div class="col-lg-4 my-2">
+                            <label for="noPhone" class="form-label">No Phone</label>
+                            <input type="text" name="noPhone" class="form-control @error('noPhone') is-invalid @enderror" id="noPhone" onkeydown="allowOnlyNumbers(event)" value="{{ old('noPhone') }}" placeholder="Masukkan Nombor Telefon">
+                            @error('noPhone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="col-lg-5 my-2">
                             <label for="purpose" class="form-label">Tujuan</label>
                             <input type="text" name="purposeName" class="form-control @error('purposeName') is-invalid @enderror" id="purpose" value="{{ old('purposeName') }}" placeholder="Nyatakan Tujuan">
                             @error('purposeName')
@@ -143,7 +147,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-4 my-2">
+                        <div class="col-lg-3 my-2">
                             {{-- <div class="d-flex justify-content-between align-items-center"> --}}
                                 <label for="groupnum" class="form-label">Bilangan Dalam Kumpulan</label>
                                 {{-- <a tabindex="0" class="bi bi-info-circle popover-icon" role="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-title="Limit Person Per Room" data-bs-content="<p>A1, A2, A3, B3 : 3 - 4</p><p>Anjung : 20 - 30</p>"></a>                                 --}}
@@ -168,6 +172,7 @@
         </form>
     </div>    
 @endsection
+
 @push('scripts')
     <script>
 
@@ -209,21 +214,31 @@
 
         let studentRadio = document.getElementById('student');
         let staffRadio = document.getElementById('staff');
-        let matriksText = document.getElementById('matriks');
+        let matriks = document.getElementById('matriks');
+        let icnum = document.getElementById('icnum');
 
         switchProgram();
 
-        $('#student').on('change', function () {     
+        $('#student').on('change', function () { 
+            
             switchProgram();
         })
 
         $('#staff').on('change', function () {
 
             if (staffRadio.checked) {
+
+                let icLabel = "<label for=\"icnum\" class=\"form-label\">No IC</label>";
                 
-                matriksText.disabled = false;
-                matriksText.readOnly = true;
-                matriksText.value = 'Staff';
+                let icText = "<input type=\"text\" name=\"icnum\" class=\"form-control @error('icnum') is-invalid @enderror\" id=\"icnum\" onkeydown=\"allowOnlyNumbers(event)\" value=\"{{ old('icnum') }}\" placeholder=\"Masukkan Nombor IC\"> \
+                            @error('icnum') \
+                                <span class=\"invalid-feedback\" role=\"alert\"> \
+                                    <strong>{{ $message }}</strong> \
+                                </span> \
+                            @enderror";
+
+                document.getElementById('label-matriks-ic').innerHTML = icLabel;
+                document.getElementById('text-matriks-ic').innerHTML = icText;
 
                 let jabatanArray = {{ Illuminate\Support\Js::from($jabatan) }};
 
@@ -234,13 +249,13 @@
                                             <span class=\"invalid-feedback\" role=\"alert\"> \
                                                 <strong>{{ $message }}</strong> \
                                             </span> \
-                                        @enderror"
+                                        @enderror";
 
                 jabatanArray.forEach(item => {
                     jabatanDrop += "<option value=\"" + item.idJabatan + "\" {{ old('jabatanID') == " + item.idJabatan + "  ? 'selected' : '' }} >" + item.namaJabatan + "</option>";
                 });
 
-                jabatanDrop += "</select>"
+                jabatanDrop += "</select>";
 
                 document.getElementById('program-jabatan').innerHTML = jabatanDrop;
             }
@@ -250,9 +265,17 @@
         function switchProgram() {
             if (studentRadio.checked) {
 
-                matriksText.readOnly = false;
-                matriksText.value = '';
-                matriksText.placeholder = 'Masukkan No Matriks';
+                let matriksLabel = "<label for=\"matriks\" class=\"form-label\">No Matriks</label>"
+
+                let matriksText = "<input type=\"text\" name=\"matriks\" class=\"form-control @error('matriks') is-invalid @enderror\" id=\"matriks\" placeholder=\"Masukkan No Matriks\" onkeydown=\"allowOnlyNumbers(event)\" value=\"{{ old('matriks') }}\">  \
+                                    @error('matriks') \
+                                        <span class=\"invalid-feedback\" role=\"alert\">  \
+                                            <strong>{{ $message }}</strong>\
+                                        </span> \
+                                    @enderror";
+
+                document.getElementById('label-matriks-ic').innerHTML = matriksLabel;
+                document.getElementById('text-matriks-ic').innerHTML = matriksText;
 
                 let programArray = {{ Illuminate\Support\Js::from($program) }};
 
@@ -263,16 +286,15 @@
                                             <span class=\"invalid-feedback\" role=\"alert\"> \
                                                 <strong>{{ $message }}</strong> \
                                             </span> \
-                                        @enderror"
+                                        @enderror";
 
                 programArray.forEach(item => {
                     programDrop += "<option value=\"" + item.idProgram + "\" {{ old('programID') == " + item.idProgram + " ? 'selected' : '' }}>" + item.namaProgram + "</option>";
                 });
 
-                programDrop += "</select>"
+                programDrop += "</select>";
 
                 document.getElementById('program-jabatan').innerHTML = programDrop;
-
             }
         }
 

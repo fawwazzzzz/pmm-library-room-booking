@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('namaPengguna')->nullable();
             $table->string('noMatriks')->nullable();
             $table->string('email')->nullable();
+            $table->string('IC')->nullable();
+            $table->string('noPhone')->nullable();
 
             $table->integer('semester')->nullable();
             $table->date('date')->nullable();
             $table->time('checkin')->nullable();
             $table->time('checkout')->nullable();
+
 
             $table->foreignId('idJabatan')->nullable()->constrained('jabatan', 'idJabatan')
                 ->onUpdate('cascade')
