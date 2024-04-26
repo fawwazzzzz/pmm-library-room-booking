@@ -18,7 +18,9 @@ class AdminController extends Controller
         $data = Reservation::where('noMatriks','!=', 'Staff')->orderBy('id', 'desc')->with(['room','program']);
 
         return Datatables::of($data)
-        ->addIndexColumn()
+        ->editColumn('id', function ($row) {
+            return $row->id;
+        })
         ->editColumn('namaPengguna', function ($row) {
             return $row->namaPengguna;
         })
@@ -49,7 +51,9 @@ class AdminController extends Controller
         $data = Reservation::where('noMatriks', '=', 'Staff')->orderBy('id', 'desc')->with(['room', 'jabatan']);
 
         return Datatables::of($data)
-        ->addIndexColumn()
+        ->editColumn('id', function ($row) {
+            return $row->id;
+        })
         ->editColumn('namaPengguna', function ($row) {
             return $row->namaPengguna;
         })

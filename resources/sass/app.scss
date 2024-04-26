@@ -34,8 +34,14 @@ body {
 .hero-desc {
     h2 {
         font-family: "Poppins";
-        font-size: 48px;
-        font-weight: 800;
+        font-size: 50px;
+        font-weight: 900;
+        text-align: center;
+    }
+
+    p {
+        font-size: 19px;
+        text-align: center;
     }
 
     a {
@@ -189,7 +195,7 @@ input:checked + .radio-tile label {
         margin-top: 50px;
 
         h2 {
-            font-size: 35px;
+            font-size: 45px;
         }
     }
 

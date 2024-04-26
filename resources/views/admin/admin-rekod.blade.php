@@ -12,7 +12,7 @@
             <table class="table data-table-pelajar table-striped table-hover">
                 <thead>
                     <tr>
-                        <th style="width:5%">#</th>
+                        <th style="width: 5%;">No Tempahan</th>
                         <th>Nama Pengguna</th>
                         <th>Tarikh</th>
                         <th>Program</th>
@@ -35,7 +35,7 @@
             <table class="table data-table-pensyarah table-striped table-hover">
                 <thead>
                     <tr>
-                        <th style="width:5%">#</th>
+                        <th style="width: 5%;">No Tempahan</th>
                         <th>Nama Pengguna</th>
                         <th>Tarikh</th>
                         <th>Jabatan</th>
@@ -58,7 +58,8 @@
             serverSide: true,
             ajax: "{{ route('tempahan.pelajar-list') }}",
             columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'id', name: 'id'},
                 { data: 'namaPengguna', name: 'namaPengguna' },
                 { data: 'tarikh', name: 'tarikh' },
                 { data: 'program', name: 'program' },
@@ -76,7 +77,8 @@
             serverSide: true,
             ajax: "{{ route('tempahan.pensyarah-list') }}",
             columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'id', name: 'id'},
                 { data: 'namaPengguna', name: 'namaPengguna' },
                 { data: 'tarikh', name: 'tarikh' },
                 { data: 'jabatan', name: 'jabatan' },

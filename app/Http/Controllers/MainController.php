@@ -175,11 +175,23 @@ class MainController extends Controller
 
         $options = $request->inlineRadioOptions == "student" ? 'id_format' : '';
 
+        $studentStaff = $request->inlineRadioOptions;
+
+        if ($studentStaff == "student") {
+            $matriksIC = 'matriks';
+            $options = 'id_format';
+        } else {
+            $matriksIC = 'icnum';
+            $options = "min:12";
+        }
+        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'matriks' => "required|$options",
+            "$matriksIC" => "required|$options",
             'email' => 'required|email',
             "$choice" => 'required',
+            'noPhone' => 'required|min:11',
             'purposeName' => 'required',
             'groupnum' => "required|numeric|$numGroup",
             'semesterName' => "required",
@@ -188,13 +200,15 @@ class MainController extends Controller
         $customMessages = [
             'name.required' => 'Sila masukkan Nama.',
             'matriks.required' => 'Sila masukkan No Matriks',
+            'icnum.required' => 'Sila masukkan nombor IC',
             'email.required' => 'Sila masukkan Email.',
             "$choice.required" => 'Sila pilih satu pilihan.',
             'purposeName.required' => 'Sila masukkan tujuan penempahan.',
             'groupnum.required' => 'Sila masukkan bilangan dalam kumpulan.',
             'groupnum.numeric' => 'Masukkan nombor sahaja di dalam bilangan dalam kumpulan.',
             'semesterName.required' => '',
-            'matriks.id_format' => 'Sila masukkan format No Matriks dengan betul'
+            'matriks.id_format' => 'Sila masukkan format No Matriks dengan betul',
+            'icnum.min' => 'Sila masukkan nombor IC dengan betul',
         ];
 
 
@@ -211,6 +225,8 @@ class MainController extends Controller
                 ->update([
                     'namaPengguna'=> $request->name,
                     'noMatriks' => $request->matriks,
+                    'IC' => $request->icnum,
+                    'noPhone' => $request->noPhone,
                     'email' => $request->email,
                     'idJabatan' => $request->jabatanID,
                     'idProgram' => $request->programID,
