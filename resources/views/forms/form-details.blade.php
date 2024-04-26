@@ -191,7 +191,7 @@
             }
 
             // Limit to around 10 characters
-            if (event.target.value.length >= 11) {
+            if (event.target.value.length >= 12) {
                 event.preventDefault();
             }
 
