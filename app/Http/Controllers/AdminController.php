@@ -48,7 +48,7 @@ class AdminController extends Controller
 
     public function tempahanPensyarahList(Request $request){
 
-        $data = Reservation::where('noMatriks', '=', 'Staff')->orderBy('id', 'desc')->with(['room', 'jabatan']);
+        $data = Reservation::whereNull('noMatriks')->orderBy('id', 'desc')->with(['room', 'jabatan']);
 
         return Datatables::of($data)
         ->editColumn('id', function ($row) {

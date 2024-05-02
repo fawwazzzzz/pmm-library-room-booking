@@ -22,6 +22,15 @@
                         <div class="column">
                             <select class="hour" name="sHour" required>
                                 <option value="Hour" selected disabled hidden>Jam</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
                             </select>
                         </div>
                         <div class="column ms-2">
@@ -49,6 +58,15 @@
                         <div class="column">
                             <select class="hour" name="eHour" required>
                                 <option value="Hour" selected disabled hidden>Jam</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
                             </select>
                         </div>
                         <div class="column ms-2">
@@ -137,17 +155,17 @@
 
         const selectMenu = document.querySelectorAll('select');
 
-        for (let i = 17; i > 8; i--) {
-            i = i < 10 ? "0" + i : i;
+        // for (let i = 17; i > 8; i--) {
+        //     i = i < 10 ? "0" + i : i;
 
-            if (i === 6 || i === 7 || i === 8) {
-                continue;
-            }
+        //     if (i === 6 || i === 7 || i === 8) {
+        //         continue;
+        //     }
 
-            let option = `<option value=${i}>${i}</option>`
-            selectMenu[0].firstElementChild.insertAdjacentHTML("afterend", option); 
-            selectMenu[2].firstElementChild.insertAdjacentHTML("afterend", option); 
-        }
+        //     let option = `<option value=${i}>${i}</option>`
+        //     selectMenu[0].firstElementChild.insertAdjacentHTML("afterend", option); 
+        //     selectMenu[2].firstElementChild.insertAdjacentHTML("afterend", option); 
+        // }
         
         $('#checkAvailabilityButton').on('click', function () {
 
