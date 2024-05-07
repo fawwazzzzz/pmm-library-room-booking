@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="head d-flex justify-content-md-center justify-content-xxl-start align-items-center">
-            <a href="/" class="text-decoration-none" style="color: #000000"><i class="bi bi-chevron-left" style="font-size: 36px;"></i></a>
+            <a href="/" class="btn btn-outline-primary text-decoration-none" style="color: #000000">Kembali</a>
             <span class="ms-4">Tempahan Bilik</span>
         </div>
         
@@ -176,46 +176,35 @@
             }
 
             // Check in section
+            // let hourStart = parseInt(selectMenu[0].value); 
 
-            // Set into 24 hours format
+            // // Check out section
+            // let hourEnd = parseInt(selectMenu[2].value); 
+
             let hourStart = parseInt(selectMenu[0].value); 
-            
-            // if (selectMenu[2].value == "PM") {
-
-            //     hourStart += 12;
-
-            //     if (hourStart == 24 ) 
-            //     {
-            //         hourStart = 12;
-            //     }
-            // } 
-            // else if (selectMenu[2].value == "AM" && hourStart == 12) {
-            //     hourStart -= 12
-            //     hourStart = hourStart + "0";
-            // }
-
-            const startTime = `${hourStart}:${selectMenu[1].value}:00`;
+            let minuteStart = parseInt(selectMenu[1].value); 
+            const startLimit = new Date(0, 0, 0, hourStart, minuteStart);
 
             // Check out section
-
-            // Set into 24 hours format
             let hourEnd = parseInt(selectMenu[2].value); 
-            
-            // if (selectMenu[5].value == "PM") {
+            let minuteEnd = parseInt(selectMenu[3].value); 
+            const endLimit = new Date(0, 0, 0, hourEnd, minuteEnd);
 
-            //     hourEnd += 12;
+            // Calculate the time difference in milliseconds
+            const timeDiff = endLimit.getTime() - startLimit.getTime();
+            // Convert milliseconds to hours
+            const hoursDiff = timeDiff / (1000 * 3600);
 
-            //     if (hourEnd == 24 ) 
-            //     {
-            //         hourEnd = 12;
-            //     }
-            // } 
-            // else if (selectMenu[2].value == "AM" && hourEnd == 12) {
-            //     hourEnd -= 12
-            //     hourEnd = hourEnd + "0";
-            // }
+            // Check if the duration is within the allowed range (2 hours)
+            if (hoursDiff > 2) {
+                alert('Masa tempahan melebihi had masa maksimum 2 jam.');
+                $("input[name=room]").attr("disabled", true);
+                $("#submitRoom").attr("disabled", true);
+                return;
+            }
 
-            const endTime = `${hourEnd}:${selectMenu[3].value}:00`;
+            const startTime = `${hourStart}:${minuteStart}:00`;
+            const endTime = `${hourEnd}:${minuteEnd}:00`;
 
             let between = countBetween(hourStart, hourEnd);
             let date = document.getElementById('date-flatpickr').value;
