@@ -191,10 +191,9 @@ class MainController extends Controller
             "$matriksIC" => "required|$options",
             'email' => 'required|email',
             "$choice" => 'required',
-            'noPhone' => 'required|min:11',
+            'noPhone' => 'required|min:10',
             'purposeName' => 'required',
             'groupnum' => "required|numeric|$numGroup",
-            'semesterName' => "required",
         ]);
 
         $customMessages = [
@@ -206,7 +205,6 @@ class MainController extends Controller
             'purposeName.required' => 'Sila masukkan tujuan penempahan.',
             'groupnum.required' => 'Sila masukkan bilangan dalam kumpulan.',
             'groupnum.numeric' => 'Masukkan nombor sahaja di dalam bilangan dalam kumpulan.',
-            'semesterName.required' => '',
             'matriks.id_format' => 'Sila masukkan format No Matriks dengan betul',
             'icnum.min' => 'Sila masukkan nombor IC dengan betul',
         ];

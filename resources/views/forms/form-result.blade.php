@@ -29,15 +29,28 @@
 
         <div class="line-bottom my-4"></div>
 
-        <h2 style="font-weight: 800" class="mb-4">Pemohon</h2>
+        @if ( $data['noMatriks'] == "")
+            <h2 style="font-weight: 800" class="mb-4">Staf</h2>
+        @else
+            <h2 style="font-weight: 800" class="mb-4">Pemohon</h2>
+        @endif
+
         <div class="d-flex justify-content-between align-items-center">
             <p>Nama :</p>
             <p>{{ $data['namaPengguna'] }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-            <p>No Matriks :</p>
-            <p>{{ $data['noMatriks'] }}</p>
-        </div>
+        @if ($data['noMatriks'] != "")
+            <div class="d-flex justify-content-between align-items-center">
+                <p>No Matriks :</p>
+                <p>{{ $data['noMatriks'] }}</p>
+            </div>
+        @else
+            <div class="d-flex justify-content-between align-items-center">
+                <p>No Ic :</p>
+                <p>{{ $data['IC'] }}</p>
+            </div>
+        @endif
+        
         {{-- Jabatan --}}
         @isset($data['Jabatan']['namaJabatan'])
             <div class="d-flex justify-content-between align-items-center">
@@ -53,8 +66,12 @@
             </div>
         @endisset
         <div class="d-flex justify-content-between align-items-center">
-            <p>Email :</p>
+            <p>E-mel :</p>
             <p>{{ $data['email'] }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <p>No Phone :</p>
+            <p>{{ $data['noPhone'] }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <p>Bilangan Dalam Kumpulan :</p>

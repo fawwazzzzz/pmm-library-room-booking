@@ -15,7 +15,7 @@ class JabatanSeeder extends Seeder
     {
         $jabatan = [
             [ 'idJabatan' => 1, 'namaJabatan' => 'Jabatan Perdagangan', 'shortJabatan' => 'JP'],
-            [ 'idJabatan' => 2, 'namaJabatan' => 'JPH', 'shortJabatan' => 'JPH'],
+            [ 'idJabatan' => 2, 'namaJabatan' => 'Jabatan Pelancongan & Hospitaliti', 'shortJabatan' => 'JPH'],
             [ 'idJabatan' => 3, 'namaJabatan' => 'Jabatan Kejuruteraan Mekanikal', 'shortJabatan' => 'JKM'],
             [ 'idJabatan' => 4, 'namaJabatan' => 'Jabatan Kejuruteraan Elektrik', 'shortJabatan' => 'JKE'],
             [ 'idJabatan' => 5, 'namaJabatan' => 'Jabatan Kejuruteraan Awam', 'shortJabatan' => 'JKA'],
