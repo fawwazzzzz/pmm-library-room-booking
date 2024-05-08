@@ -92,27 +92,25 @@
                         </div>
 
                         <div class="col-lg-6 my-2">
-                            <div class="row">
-                                <div id="program-jabatan"></div>
-                                {{-- <label for="jabatan" class="form-label">Jabatan</label>
-                                <select class="form-select" aria-label="Jabatan" id="jabatan" name="jabatanName">
-                                    <option selected disabled hidden>Select ..</option>
-                                    <option value="JP">Jabatan Perdagangan</option>
-                                    <option value="JPH">JPH</option>
-                                    <option value="JKM">Jabatan Kejuruteraan Mekanikal</option>
-                                    <option value="JKA">Jabatan Kejuruteraan Awan</option>
-                                    <option value="JKE">Jabatan Kejuruteraan Elektrik</option>
-                                    <option value="TVET">TVET</option>
-                                </select> --}}
-                                <div class="col-lg-6 my-2" id="otherJabatan" style="display: none"> 
-                                    <label for="otherJabatan" class="form-label">Jabatan Lain</label> 
-                                    <input type="text" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror" id="purpose" value="{{ old('jabatan') }}" placeholder="Nyatakan Tujuan"> 
-                                    @error('jabatan') 
-                                        <span class="invalid-feedback" role="alert"> 
-                                            <strong>{{ $message }}</strong> 
-                                        </span> 
-                                    @enderror 
-                                </div>
+                            <div id="program-jabatan" class="row"></div>
+                            {{-- <label for="jabatan" class="form-label">Jabatan</label>
+                            <select class="form-select" aria-label="Jabatan" id="jabatan" name="jabatanName">
+                                <option selected disabled hidden>Select ..</option>
+                                <option value="JP">Jabatan Perdagangan</option>
+                                <option value="JPH">JPH</option>
+                                <option value="JKM">Jabatan Kejuruteraan Mekanikal</option>
+                                <option value="JKA">Jabatan Kejuruteraan Awan</option>
+                                <option value="JKE">Jabatan Kejuruteraan Elektrik</option>
+                                <option value="TVET">TVET</option>
+                            </select> --}}
+                            <div class="col-lg-6 my-2" id="otherJabatan" style="display: none"> 
+                                <label for="otherJabatan" class="form-label">Jabatan Lain</label> 
+                                <input type="text" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror" id="purpose" value="{{ old('jabatan') }}" placeholder="Nyatakan Tujuan"> 
+                                @error('jabatan') 
+                                    <span class="invalid-feedback" role="alert"> 
+                                        <strong>{{ $message }}</strong> 
+                                    </span> 
+                                @enderror 
                             </div>
                         </div>
 
@@ -232,9 +230,9 @@
                 let jabatanArray = {{ Illuminate\Support\Js::from($jabatan) }};
                 let jabatanDiv = document.getElementById('program-jabatan');
 
-                jabatanDiv.classList.add('col-12');
+                // jabatanDiv.classList.add('col-12');
 
-                let jabatanDrop = "<label for=\"jabatan\" class=\"form-label\">Jabatan</label>\
+                let jabatanDrop = "<div class=\"col-12\"><label for=\"jabatan\" class=\"form-label\">Jabatan</label>\
                                     <select class=\"form-select @error('jabatanID') is-invalid @enderror\" aria-label=\"Jabatan\" id=\"jabatan\" name=\"jabatanID\"> \
                                         <option selected disabled hidden>Pilih ..</option> \
                                         @error('jabatanID') \
@@ -247,25 +245,25 @@
                     jabatanDrop += "<option value=\"" + item.idJabatan + "\" {{ old('jabatanID') == " + item.idJabatan + "  ? 'selected' : '' }} >" + item.namaJabatan + "</option>";
                 });
 
-                jabatanDrop += "<option value=\"other\">Other</option></select>";
+                jabatanDrop += "<option value=\"Lain-Lain\">Lain-Lain</option></select></div>";
                 
                 jabatanDiv.innerHTML = jabatanDrop; 
                 
-                const jabatanDropdown = document.getElementById('jabatan');
-                const otherJabatanField = document.getElementById('otherJabatan');
+                // const jabatanDropdown = document.getElementById('jabatan');
+                // const otherJabatanField = document.getElementById('otherJabatan');
 
-                jabatanDropdown.addEventListener('change', function() {
-                    if (jabatanDropdown.value === 'other') {
-                        jabatanDiv.classList.remove('col-12');
-                        jabatanDiv.classList.add('col-lg-6');
-                        otherJabatanField.style.display = 'block';
+                // jabatanDropdown.addEventListener('change', function() {
+                //     if (jabatanDropdown.value === 'other') {
+                //         jabatanDiv.classList.remove('col-12');
+                //         jabatanDiv.classList.add('col-lg-6');
+                //         otherJabatanField.style.display = 'block';
 
-                    } else {
-                        jabatanDiv.classList.remove('col-lg-6');
-                        jabatanDiv.classList.add('col-12');
-                        otherJabatanField.style.display = 'none';
-                    }
-                });
+                //     } else {
+                //         jabatanDiv.classList.remove('col-lg-6');
+                //         jabatanDiv.classList.add('col-12');
+                //         otherJabatanField.style.display = 'none';
+                //     }
+                // });
                 
             }
 
@@ -276,7 +274,7 @@
 
                 let matriksLabel = "<label for=\"matriks\" class=\"form-label\">No Matriks</label>"
 
-                let matriksText = "<input type=\"text\" name=\"matriks\" class=\"form-control @error('matriks') is-invalid @enderror\" id=\"matriks\" placeholder=\"Masukkan No Matriks\" onkeydown=\"allowOnlyNumbers(event)\" value=\"{{ old('matriks') }}\">  \
+                let matriksText = "<input type=\"text\" name=\"matriks\" class=\"form-control @error('matriks') is-invalid @enderror\" id=\"matriks\" placeholder=\"Masukkan No Matriks\" value=\"{{ old('matriks') }}\">  \
                                     @error('matriks') \
                                         <span class=\"invalid-feedback\" role=\"alert\">  \
                                             <strong>{{ $message }}</strong>\
@@ -288,7 +286,7 @@
 
                 let programArray = {{ Illuminate\Support\Js::from($program) }};
 
-                let programDrop = "<div class=\"row\"><div class=\"col-9\"> \
+                let programDrop = "<div class=\"col-9\"> \
                                     <label for=\"Program\" class=\"form-label\">Program</label>\
                                     <select class=\"form-select @error('programID') is-invalid @enderror\" aria-label=\"Program\" id=\"program\" name=\"programID\"> \
                                         <option selected disabled hidden>Pilih ..</option> \
@@ -315,13 +313,17 @@
                                         <option value=\"5\" {{ old('semesterName') == '5' ? 'selected' : '' }}>5</option> \
                                         <option value=\"6\" {{ old('semesterName') == '6' ? 'selected' : '' }}>6</option> \
                                         <option value=\"7\" {{ old('semesterName') == '7' ? 'selected' : '' }}>7</option> \
+                                        <option value=\"8\" {{ old('semesterName') == '8' ? 'selected' : '' }}>8</option> \
                                     </select> \
                                     @error('semesterName') \
                                         <span class=\"invalid-feedback\" role=\"alert\"> \
                                             <strong>{{ $message }}</strong> \
                                         </span> \
                                     @enderror \
-                                </div></div>";
+                                </div>";
+
+                // const otherJabatanField = document.getElementById('otherJabatan');
+                // otherJabatanField.style.display = 'none';
 
                 document.getElementById('program-jabatan').innerHTML = programDrop;
             }
