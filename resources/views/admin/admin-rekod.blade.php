@@ -5,7 +5,10 @@
         <i class="bi bi-list toggle-sidebar-btn d-block d-xl-none"></i>
     </div>
 
-    <span class="head-rekod">Pelajar</span>
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="head-rekod">Pelajar</span>
+        <a href="/pdf-student"><button class="btn btn-outline-primary">Cetak</button></a>
+    </div>
 
     <div class="mt-4">
         <div class="table-responsive">
@@ -28,7 +31,10 @@
 
     <div class="my-5 line-bottom"></div>
 
-    <span class="head-rekod">Pensyarah</span>
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="head-rekod">Pensyarah</span>
+        <a href="/pdf-staff"><button class="btn btn-outline-primary">Cetak</button></a>
+    </div>
 
     <div class="mt-4">
         <div class="table-responsive">

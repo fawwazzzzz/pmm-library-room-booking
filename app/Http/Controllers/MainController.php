@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
+use function Pest\Laravel\get;
+
 class MainController extends Controller
 {
     public function availablePage() {
@@ -274,5 +278,41 @@ class MainController extends Controller
             return back()->with('error', 'Reservation cancellation unsuccessful. Cancellation can only be made 30 minutes before checkin time.');
         }
 
+    }
+
+    public function pdfStudent() {
+
+        $student = Reservation::select('tempahan.id', 'tempahan.namaPengguna', 'tempahan.noMatriks', 'program.namaProgram', 'room.roomName', 'tempahan.date', 'tempahan.checkin', 'tempahan.checkout')
+        ->join('room', 'tempahan.roomID', '=', 'room.roomID')
+        ->join('program', 'tempahan.idProgram', '=', 'program.idProgram')
+        ->orderBy('id', 'desc')
+        ->get()->toArray();
+
+        $data = [
+            'title' => 'List Pelajar',
+            'date' => date('d/m/y'),
+            'student' => $student
+        ];
+
+        $pdf = Pdf::loadView('pdf.student-pdf', $data);
+        return $pdf->download('student.pdf');
+    }
+
+    public function pdfStaff() {
+
+        $staff = Reservation::select('tempahan.id', 'tempahan.namaPengguna', 'jabatan.namaJabatan', 'room.roomName', 'tempahan.date', 'tempahan.checkin', 'tempahan.checkout')
+        ->join('room', 'tempahan.roomID', '=', 'room.roomID')
+        ->join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
+        ->orderBy('id', 'desc')
+        ->get()->toArray();
+
+        $data = [
+            'title' => 'List Pensyarah',
+            'date' => date('d/m/y'),
+            'staff' => $staff
+        ];
+
+        $pdf = Pdf::loadView('pdf.staff-pdf', $data);
+        return $pdf->download('staff.pdf');
     }
 }
