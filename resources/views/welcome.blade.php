@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-6 d-flex justify-content-center align-items-center flex-column hero-desc pe-md-5 mb-5">
             <h2>BookMy Bilik Perbincangan</h2>
-            <p class="lead">Perpustakaan Politeknik Merlimau, Kementerian Pelajaran Malaysia</p>
+            <p class="lead">Perpustakaan Politeknik Merlimau, Kementerian Pengajian Tinggi</p>
             <div class="mb-4 mt-2"></div>
             <a href="/form-available" class="w-100 mt-2">
                 <button type="button" class="btn btn-outline-primary w-100">Tempah Bilik</button>

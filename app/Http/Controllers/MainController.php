@@ -273,9 +273,9 @@ class MainController extends Controller
         if ($timeDifference >= 30) {
         // Update reservation status to Cancelled
         $reserve->delete();
-            return redirect('/')->with('success', 'Reservation cancelled successfully.');
+            return redirect('/')->with('success', 'Tempahan berjaya dibatalkan.');
         } else {
-            return back()->with('error', 'Reservation cancellation unsuccessful. Cancellation can only be made 30 minutes before checkin time.');
+            return back()->with('error', 'Tempahan tidak berjaya dibatalkan. Pembatalan hanya boleh dibuat sebelum 30 minit dari masa keluar.');
         }
 
     }
