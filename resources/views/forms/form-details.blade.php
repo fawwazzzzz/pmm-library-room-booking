@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <div class="flex-start head">
-            <a href="/delete-available/{{ $data['id'] }}" class="btn btn-outline-primary text-decoration-none" style="color: #000000">Kembali</a>
             <span class="ms-4">Maklumat Tempahan</span>
         </div>
         <form action="{{ route('details') }}" method="POST">
@@ -153,6 +152,7 @@
 
                 {{-- right side of form --}}
                 <div class="flex-end mt-3 pe-md-4 w-100">
+                    <a href="/delete-available/{{ $data['id'] }}" class="btn btn-outline-primary text-decoration-none me-3" style="color: #000000">Kembali</a>
                     <input type="submit" class="btn btn-primary" value="Hantar" style="width: 180px;">
                 </div>
             </div>

@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <div class="head d-flex justify-content-md-center justify-content-xxl-start align-items-center">
-            <a href="/" class="btn btn-outline-primary text-decoration-none" style="color: #000000">Kembali</a>
             <span class="ms-4">Tempahan Bilik</span>
         </div>
         
@@ -134,6 +133,7 @@
                     </div>
 
                     <div class="flex-end mt-2 w-100">
+                        <a href="/" class="btn btn-outline-primary text-decoration-none me-3" style="color: #000000">Kembali</a>
                         <input type="submit" class="btn btn-primary btn-availability" value="Seterusnya" id="submitRoom" disabled>
                     </div>
                 </form>
