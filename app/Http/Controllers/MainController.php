@@ -213,8 +213,6 @@ class MainController extends Controller
             'icnum.min' => 'Sila masukkan nombor IC dengan betul',
         ];
 
-
-
         $validator->setCustomMessages($customMessages);
 
         if ($validator->fails()) {
@@ -242,8 +240,11 @@ class MainController extends Controller
                 ->where('id', $id)
                 ->first();
 
+
+
         session([
-            'userDetails' => $data
+            'userDetails' => $data,
+            'success' => "Tempahan berjaya."
         ]);
 
         return redirect('/form-result');
@@ -273,7 +274,7 @@ class MainController extends Controller
         if ($timeDifference >= 30) {
         // Update reservation status to Cancelled
         $reserve->delete();
-            return redirect('/')->with('success', 'Tempahan berjaya dibatalkan.');
+            return redirect('/')->with('fail', 'Tempahan berjaya dibatalkan.');
         } else {
             return back()->with('error', 'Tempahan tidak berjaya dibatalkan. Pembatalan hanya boleh dibuat sebelum 30 minit dari masa keluar.');
         }
