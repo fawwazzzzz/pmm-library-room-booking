@@ -238,13 +238,17 @@ class MainController extends Controller
         $data = Reservation::select('tempahan.*', 'room.roomName')
                 ->join('room', 'tempahan.roomID', '=', 'room.roomID')
                 ->where('id', $id)
+                ->first()->toArray();
+
+        $update_at = Reservation::select('updated_at')
+                ->where('id', $id)
                 ->first();
 
-
+        $update_test = $update_at['updated_at'];
 
         session([
             'userDetails' => $data,
-            'success' => "Tempahan berjaya."
+            'success' => "Tempahan berjaya dibuat pada $update_test"
         ]);
 
         return redirect('/form-result');
@@ -315,5 +319,29 @@ class MainController extends Controller
 
         $pdf = Pdf::loadView('pdf.staff-pdf', $data);
         return $pdf->download('staff.pdf');
+    }
+
+    public function pdfReserve(Request $request) {
+
+        // $data = Reservation::select('tempahan.*', 'room.roomName')
+        //     ->join('room', 'tempahan.roomID', '=', 'room.roomID')
+        //     ->where('id', $request->id)
+        //     ->get()->toArray();
+
+        $reserve = session('userDetails');
+
+        $data = [
+            'title' => 'Tempahan Berjaya',
+            'detail' => $reserve
+        ];
+                
+        $pdf = Pdf::loadView('pdf.reservation-pdf', $data)
+                ->setOption([
+                    'fontDir' => public_path('/fonts'),
+                    'fontCache' => public_path('/fonts'),
+                    'defaultFont' => 'Poppins',
+                ]);
+        return $pdf->download('Bookmy Room Reservation.pdf');
+
     }
 }

@@ -48,9 +48,12 @@ Route::get('/delete-available/{id}', [MainController::class, 'deleteTime']);
 
 Route::get('/cancel-reserve/{id}', [MainController::class, 'cancelReserve']);
 
+// PDF Files
 Route::get('/pdf-student', [MainController::class, 'pdfStudent'])->name('generate-pdf-student');
 
 Route::get('/pdf-staff', [MainController::class, 'pdfStaff'])->name('generate-pdf-staff');
+
+Route::get('/pdf-reservation/{id}', [MainController::class, 'pdfReserve'])->name('generate-pdf-reservation');
 
 // Authentication routes
 Auth::routes();
