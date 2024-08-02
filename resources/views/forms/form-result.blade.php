@@ -7,7 +7,7 @@
         @endif
         <div class="flex-start my-4 head d-flex justify-content-between align-items-center">
             <span>Tempahan Berjaya</span>
-            <a href="#" class="btn btn-outline-primary">Cetak Tempahan</a>
+            <a href="/pdf-reservation/{{ $data['id'] }}" class="btn btn-outline-primary">Cetak Tempahan</a>
         </div>
 
         <h2 style="font-weight: 800" class="mb-4">Bilik & Masa</h2>
