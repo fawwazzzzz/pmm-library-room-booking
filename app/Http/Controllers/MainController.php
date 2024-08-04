@@ -267,22 +267,56 @@ class MainController extends Controller
         return view('forms.form-result', compact(['data']));
     }
 
+    // public function cancelReserve(Request $request) {
+
+    //     $reserve = Reservation::find($request->id);
+
+    //     $checkinTime = Carbon::parse($reserve->checkin);
+
+    //     $timeDifference = Carbon::now()->diffInMinutes($checkinTime);
+
+    //     if ($timeDifference >= 30) {
+    //     // Update reservation status to Cancelled
+    //     $reserve->delete();
+    //         return redirect('/')->with('fail', 'Tempahan berjaya dibatalkan.');
+    //     } else {
+    //         return back()->with('error', 'Tempahan tidak berjaya dibatalkan. Pembatalan hanya boleh dibuat sebelum 30 minit dari masa keluar.');
+    //     }
+    // }
+
     public function cancelReserve(Request $request) {
-
         $reserve = Reservation::find($request->id);
-
-        $checkinTime = Carbon::parse($reserve->checkin);
-
-        $timeDifference = Carbon::now()->diffInMinutes($checkinTime);
-
-        if ($timeDifference >= 30) {
-        // Update reservation status to Cancelled
-        $reserve->delete();
-            return redirect('/')->with('fail', 'Tempahan berjaya dibatalkan.');
-        } else {
-            return back()->with('error', 'Tempahan tidak berjaya dibatalkan. Pembatalan hanya boleh dibuat sebelum 30 minit dari masa keluar.');
+    
+        if (!$reserve) {
+            return back()->with('error', 'Tempahan tidak ditemui.');
         }
-
+        
+        // Receive Checkin Time
+        $checkinTime = Carbon::parse($reserve->checkin);
+        // Receive Checkin Date
+        $checkinDate = Carbon::parse($reserve->date);
+        // Receive Current Date
+        $currentDateTime = Carbon::now();
+        
+        // Check if the check-in date is the same as the current date
+        if ($checkinDate->isSameDay($currentDateTime)) {
+            
+            // Calculate the time difference in minutes
+            $timeDifference = $currentDateTime->diffInMinutes($checkinTime, false);
+    
+            // Ensure that the cancellation is made at least 30 minutes before the check-in time
+            if ($timeDifference >= 30) {
+                // Update reservation status to Cancelled
+                $reserve->delete();
+                return redirect('/')->with('fail', 'Tempahan berjaya dibatalkan.');
+            } else {
+                return back()->with('error', 'Tempahan tidak berjaya dibatalkan. Pembatalan hanya boleh dibuat sebelum 30 minit dari masa keluar.');
+            }
+        } else {
+            // If the current date is not the same as the check-in date, allow cancellation
+            $reserve->delete();
+            return redirect('/')->with('fail', 'Tempahan berjaya dibatalkan.');
+        }
     }
 
     public function pdfStudent() {
