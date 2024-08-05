@@ -41,6 +41,10 @@ return new class extends Migration
             $table->foreignId('roomID')->constrained('room', 'roomID')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            
+            $table->foreignId('monthID')->nullable()->constrained('month', 'monthID')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
