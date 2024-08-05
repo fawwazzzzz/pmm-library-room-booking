@@ -26,4 +26,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Program::class, 'idProgram');
     }
+
+    public function month() 
+    {
+        return $this->belongsTo(Month::class, 'monthID');
+    }
 }

@@ -5,7 +5,7 @@
       <meta charset="utf-8">
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-      <title>Admin STBPP PMM</title>
+      <title>Admin BookMy</title>
       <meta content="" name="description">
       <meta content="" name="keywords">
 
@@ -64,7 +64,7 @@
 
             <li class="nav-item d-flex justify-content-center align-items-center mt-2 mb-4">
                 <a href="/admin" class="logo d-flex align-items-center">
-                  <span>STBPP PMM</span>
+                  <span>BookMy</span>
               </a>
             </li>
 

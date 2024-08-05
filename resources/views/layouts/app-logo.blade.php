@@ -9,7 +9,7 @@
 
     <link rel="icon" href="{{ asset('assets/img/Politeknik Merlimau PNG.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/img/Politeknik Merlimau PNG.png') }}">
-    <title>STBPP</title>
+    <title>BookMy</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
