@@ -7,6 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" href="{{ asset('assets/img/Politeknik Merlimau PNG.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/img/Politeknik Merlimau PNG.png') }}">
     <title>STBPP</title>
 
     <!-- Fonts -->
