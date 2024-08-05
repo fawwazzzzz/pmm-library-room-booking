@@ -10,8 +10,9 @@
       <meta content="" name="keywords">
 
       <!-- Favicons -->
-      <link href="assets/img/favicon.png" rel="icon">
-      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+      <link rel="icon" href="{{ asset('assets/img/Politeknik Merlimau PNG.png') }}">
+      <link rel="apple-touch-icon" href="{{ asset('assets/img/Politeknik Merlimau PNG.png') }}">
+
 
       <!-- Google Fonts -->
       <link href="https://fonts.gstatic.com" rel="preconnect">
