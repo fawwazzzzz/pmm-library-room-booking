@@ -44,7 +44,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Tempahan <span>| Bulan Semasa</span></h5>      
+                                                    <h5 class="card-title">Tempahan <span>| {{ $month }}</span></h5>      
                                                     <h6>{{ $reserveStatus['total'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -71,7 +71,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Berjaya <span>| Bulan Semasa</span></h5>      
+                                                    <h5 class="card-title">Berjaya <span>| {{ $month }}</span></h5>      
                                                     <h6>{{ $reserveStatus['completed'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -98,7 +98,7 @@
                                         <div class="col-8">
                                             <div class="d-flex align-items-center">
                                                 <div class="">
-                                                    <h5 class="card-title">Proses <span>| Bulan Semasa</span></h5>      
+                                                    <h5 class="card-title">Proses <span>| {{ $month }}</span></h5>      
                                                     <h6>{{ $reserveStatus['pending'] }}</h6>
                                                     {{-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                                         class="text-muted small pt-2 ps-1">decrease</span> --}}
@@ -115,7 +115,7 @@
                           <div class="col-lg-6 pb-4">
                               <div class="card h-100">
                                   <div class="card-body">
-                                      <h5 class="card-title">Penempahan Dalam Jabatan <span>| Bulan Semasa</span></h5>
+                                      <h5 class="card-title">Penempahan Dalam Jabatan <span>| {{ $month }}</span></h5>
 
                                       <!-- Line Chart -->
                                        <canvas id="jabatanChart" style="max-height: 400px;"></canvas>
@@ -128,7 +128,7 @@
                         <div class="col-lg-6 pb-4">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title">Penempahan Terkini <span>| Bulan Semasa</span></h5>
+                                    <h5 class="card-title">Penempahan Terkini <span>| {{ $month }}</span></h5>
                                     <div class="table-responsive">
                                         <table class="table data-table-recent">
                                             <thead>
@@ -153,7 +153,7 @@
                   <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Penempahan Dalam Program <span>| Bulan Semasa</span></h5>
+                            <h5 class="card-title">Penempahan Dalam Program <span>| {{ $month }}</span></h5>
 
                             <canvas id="programChart" style="max-height: 400px;"></canvas>
                         </div>
@@ -163,7 +163,7 @@
                   <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Masa Kerap Ditempah <span>| Bulan Semasa</span></h5>
+                            <h5 class="card-title">Masa Kerap Ditempah <span>| {{ $month }}</span></h5>
 
                             <div id="reportsChart"></div> {{-- Start Program Chart --}}
                         </div>

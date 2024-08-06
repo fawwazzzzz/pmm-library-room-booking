@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Month;
 
 use function Pest\Laravel\get;
 
@@ -40,6 +41,7 @@ class MainController extends Controller
                         select(DB::raw('date as booking_date'),
                                 DB::raw('extract(hour from checkin) as hour_of_day'),
                                 DB::raw('count(*) as booking_count'))
+                                ->where('tempahan.monthID', Carbon::now()->month)
                         ->groupBy('booking_date', 'hour_of_day')
                         ->orderByRaw('booking_date asc, hour_of_day asc')
                         ->get();
@@ -53,6 +55,7 @@ class MainController extends Controller
         // Program Query
         $programData = Reservation::join('program', 'tempahan.idProgram', '=', 'program.idProgram')
                 ->select('program.idProgram', 'program.namaProgram', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->where('tempahan.monthID', Carbon::now()->month)
                 ->where('tempahan.status', 'Completed')
                 ->groupBy('program.idProgram', 'program.namaProgram')
                 ->get();
@@ -72,6 +75,7 @@ class MainController extends Controller
         // Jabatan Query
         $jabatanData = Reservation::join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
                 ->select('jabatan.idJabatan', 'jabatan.namaJabatan', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->where('tempahan.monthID', Carbon::now()->month)
                 ->where('tempahan.status', 'Completed')
                 ->groupBy('jabatan.idJabatan', 'jabatan.namaJabatan')
                 ->get();
@@ -82,17 +86,62 @@ class MainController extends Controller
         ];
 
         $reserveStatus = [
-            'completed' => Reservation::where('status', 'Completed')->count(),
-            'pending' => Reservation::whereNull('status')->count(),
-            'total' => Reservation::count(),
+            'completed' => Reservation::where('tempahan.monthID', Carbon::now()->month)->where('status', 'Completed')->count(),
+            'pending' => Reservation::where('tempahan.monthID', Carbon::now()->month)->whereNull('status')->count(),
+            'total' => Reservation::where('tempahan.monthID', Carbon::now()->month)->count(),
         ];
         
         foreach ($jabatanData as $data) {
             $jabatan['data'][] = $data->total_count;
             $jabatan['jabatan'][] = $data->namaJabatan;
-        }    
+        }
+        
+        $currentMonth = Carbon::now()->month;
+        $month = "";
 
-        return view('admin.admin-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus'));
+        switch ($currentMonth) {
+            case 1:
+                $month = "Januari";
+                break;
+            case 2:
+                $month = "Februari";
+                break;
+            case 3:
+                $month = "Mac";
+                break;
+            case 4:
+                $month = "April";
+                break;
+            case 5:
+                $month = "Mei";
+                break;
+            case 6:
+                $month = "Jun";
+                break;
+            case 7:
+                $month = "Julai";
+                break;
+            case 8:
+                $month = "Ogos";
+                break;
+            case 9:
+                $month = "September";
+                break;
+            case 10:
+                $month = "Oktober";
+                break;
+            case 11:
+                $month = "November";
+                break;
+            case 12:
+                $month = "Disember";
+                break;
+            default:
+                $month = "...";
+                break;
+        }
+        
+        return view('admin.admin-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus', 'month'));
     }
 
     public function checkBetween(Request $request) {
@@ -221,6 +270,8 @@ class MainController extends Controller
 
         $id = $request->id;
 
+        $date = Reservation::select('date')->where('id', $id)->first();
+
         $update = Reservation::where('id', $id)
                 ->update([
                     'namaPengguna'=> $request->name,
@@ -233,6 +284,7 @@ class MainController extends Controller
                     'semester' => $request->semesterName,
                     'purpose' => $request->purposeName,
                     'groupNum' => $request->groupnum,
+                    'monthID' => Carbon::parse($date['date'])->month
                 ]);
 
         $data = Reservation::select('tempahan.*', 'room.roomName')
