@@ -86,11 +86,11 @@
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
                 { data: 'namaPengguna', name: 'namaPengguna' },
-                { data: 'tarikh', name: 'tarikh' },
-                { data: 'jabatan', name: 'jabatan' },
-                { data: 'noBilik', name: 'noBilik' },
-                { data: 'checkin', name: 'checkin' },
-                { data: 'checkout', name: 'checkout' }
+                { data: 'date', name: 'date' , searchable: false},
+                { data: 'jabatan', name: 'jabatan', searchable: false },
+                { data: 'noBilik', name: 'noBilik', searchable: false },
+                { data: 'checkin', name: 'checkin', searchable: false },
+                { data: 'checkout', name: 'checkout', searchable: false }
             ],
             columnDefs: [
                 { targets: [0, 1, 2, 3, 4, 5, 6], className: "text-start" },
