@@ -48,7 +48,17 @@ class AdminController extends Controller
 
     public function tempahanPensyarahList(Request $request){
 
-        $data = Reservation::whereNull('noMatriks')->orderBy('id', 'desc')->with(['room', 'jabatan']);
+        $search = $request->search['value'];
+
+        $data = Reservation::query()
+        ->where(function ($q) use ($search) {
+            if ($search) {
+                $q->where('namaPengguna', $search);
+            }
+        })
+        ->whereNull('noMatriks')
+        ->orderBy('id', 'desc')
+        ->with(['room', 'jabatan']);
 
         return Datatables::of($data)
         ->editColumn('id', function ($row) {
@@ -57,7 +67,7 @@ class AdminController extends Controller
         ->editColumn('namaPengguna', function ($row) {
             return $row->namaPengguna;
         })
-        ->editColumn('tarikh', function ($row) {
+        ->editColumn('date', function ($row) {
             return $row->date;
         })
         ->addColumn('jabatan', function ($row) {

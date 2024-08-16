@@ -284,7 +284,7 @@ class MainController extends Controller
                     'semester' => $request->semesterName,
                     'purpose' => $request->purposeName,
                     'groupNum' => $request->groupnum,
-                    'monthID' => Carbon::parse($date['date'])->month
+                    'monthID' => Carbon::parse($date['date'])->month // get month based on date data.
                 ]);
 
         $data = Reservation::select('tempahan.*', 'room.roomName')
