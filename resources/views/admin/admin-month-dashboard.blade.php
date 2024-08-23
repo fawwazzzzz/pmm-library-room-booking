@@ -291,7 +291,7 @@
             data: {
             labels: dayData.date,
             datasets: [{
-                label: 'Test',
+                label: 'Reservation',
                 data: dayData.total,
                 backgroundColor: gradient, // Replace with a single color for the background
                 borderColor: 'rgba(255, 99, 132, 1)', // Replace with a single color for the border
