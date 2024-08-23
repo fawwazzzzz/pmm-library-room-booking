@@ -83,6 +83,13 @@
                   </a>
               </li>
 
+              <li class="nav-item">
+                <a id="laporan" class="nav-link {{ request()->is('admin/laporan-bulanan') ? 'active' : '' }}" href="{{ route('admin-laporan-bulanan') }}">
+                    <i class="bi bi-files"></i>
+                    <span>Laporan Bulanan</span>
+                </a>
+            </li>
+
               <!-- Log -->
             {{-- <li class="nav-item">
                 <a class="nav-link " data-bs-target="#report-nav" data-bs-toggle="collapse" href="#">

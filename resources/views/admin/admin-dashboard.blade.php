@@ -259,6 +259,11 @@
         },
         options: {
             indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
         }
         });
 
@@ -298,7 +303,12 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
             }

@@ -13,15 +13,8 @@ class MonthSeeder extends Seeder
      */
     public function run(): void
     {
-        $month = [
-            [ 'monthID' => 5 ],
-            [ 'monthID' => 6 ],
-            [ 'monthID' => 7 ],
-            [ 'monthID' => 8 ],
-        ];
-
-        foreach($month as $each) {
-            Month::create($each);
+        for ($month=1; $month <= 12 ; $month++) { 
+            Month::create(['monthID' => $month]);
         }
     }
 }

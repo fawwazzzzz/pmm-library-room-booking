@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class AdminController extends Controller
@@ -110,5 +112,140 @@ class AdminController extends Controller
             return $row->checkout;
         })
         ->make(true);
+    }
+
+    // Redirect to monthly report dashboard.
+    public function laporanBulanan()
+    {   
+        $month = Reservation::select('monthID')
+                ->distinct()
+                ->orderBy('monthID', 'desc')
+                ->get();
+                
+        return view('admin.admin-report', compact('month'));
+    }
+
+    public function bulanDashboard(Request $request) { // Dashboard spesifik untuk data bulanan
+
+        $month = $request->month;
+
+        // Query to calculate the frequency of bookings for each time slot on each date
+        $bookingsData = Reservation::
+                        select(DB::raw('date as booking_date'),
+                                DB::raw('extract(hour from checkin) as hour_of_day'),
+                                DB::raw('count(*) as booking_count'))
+                                ->where('tempahan.monthID', $month)
+                        ->groupBy('booking_date', 'hour_of_day')
+                        ->orderByRaw('booking_date asc, hour_of_day asc')
+                        ->get();
+
+        // Prepare the data for the chart
+        $chartData = [];
+        foreach ($bookingsData as $booking) {
+            $chartData[$booking->booking_date][$booking->hour_of_day] = $booking->booking_count;
+        }
+
+        // Program Query
+        $programData = Reservation::join('program', 'tempahan.idProgram', '=', 'program.idProgram')
+                ->select('program.idProgram', 'program.namaProgram', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->where('tempahan.monthID', $month)
+                ->groupBy('program.idProgram', 'program.namaProgram')
+                ->get();
+
+        $program = [
+            'program' => [],
+            'data' => []
+        ];
+        
+        foreach ($programData as $data) {
+            $program['data'][] = $data->total_count;
+            $program['program'][] = $data->namaProgram;
+        }
+        // End of Program Query
+
+        // Jabatan Query
+        $jabatanData = Reservation::join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
+                ->select('jabatan.idJabatan', 'jabatan.namaJabatan', DB::raw('COUNT(tempahan.id) as total_count'))
+                ->where('tempahan.monthID', $month)
+                ->groupBy('jabatan.idJabatan', 'jabatan.namaJabatan')
+                ->get();
+
+        $jabatan = [
+            'jabatan' => [],
+            'data' => []
+        ];
+        
+        foreach ($jabatanData as $data) {
+            $jabatan['data'][] = $data->total_count;
+            $jabatan['jabatan'][] = $data->namaJabatan;
+        }
+        // End Of Jabatan Query
+        
+        // Count Reserved by day
+        $day = Reservation::select('date', DB::raw('count(id) as total_day'))
+        ->where('monthID', $month)
+        ->groupBy('monthID', 'date')
+        ->get();
+        
+        $dayData = [
+            'date' => [],
+            'total' => [],
+        ];
+
+        foreach ($day as $data) {
+            $dayData['date'][] = $data->date;
+            $dayData['total'][] = $data->total_day;
+        }
+        
+        // Get total and completed reservation
+        $reserveStatus = [
+            'completed' => Reservation::where('tempahan.monthID', $month)->where('status', 'Completed')->count(),
+            'total' => Reservation::where('tempahan.monthID', $month)->count(),
+        ];
+
+        // Set Month Name
+        switch ($month) {
+            case 1:
+                $month = "Januari";
+                break;
+            case 2:
+                $month = "Februari";
+                break;
+            case 3:
+                $month = "Mac";
+                break;
+            case 4:
+                $month = "April";
+                break;
+            case 5:
+                $month = "Mei";
+                break;
+            case 6:
+                $month = "Jun";
+                break;
+            case 7:
+                $month = "Julai";
+                break;
+            case 8:
+                $month = "Ogos";
+                break;
+            case 9:
+                $month = "September";
+                break;
+            case 10:
+                $month = "Oktober";
+                break;
+            case 11:
+                $month = "November";
+                break;
+            case 12:
+                $month = "Disember";
+                break;
+            default:
+                $month = "...";
+                break;
+        }
+        
+        return view('admin.admin-month-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus', 'month', 'dayData'));
     }
 }

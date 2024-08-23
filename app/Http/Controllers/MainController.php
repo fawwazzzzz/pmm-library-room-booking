@@ -56,7 +56,6 @@ class MainController extends Controller
         $programData = Reservation::join('program', 'tempahan.idProgram', '=', 'program.idProgram')
                 ->select('program.idProgram', 'program.namaProgram', DB::raw('COUNT(tempahan.id) as total_count'))
                 ->where('tempahan.monthID', Carbon::now()->month)
-                ->where('tempahan.status', 'Completed')
                 ->groupBy('program.idProgram', 'program.namaProgram')
                 ->get();
 
@@ -76,7 +75,6 @@ class MainController extends Controller
         $jabatanData = Reservation::join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
                 ->select('jabatan.idJabatan', 'jabatan.namaJabatan', DB::raw('COUNT(tempahan.id) as total_count'))
                 ->where('tempahan.monthID', Carbon::now()->month)
-                ->where('tempahan.status', 'Completed')
                 ->groupBy('jabatan.idJabatan', 'jabatan.namaJabatan')
                 ->get();
 
