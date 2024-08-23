@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Route;
 
 // Routes accessible to authenticated users only
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return 'Dashboard';
-    });
+    // Route::get('/dashboard', function () {
+    //     return 'Dashboard';
+    // });
 
-    Route::get('/users', function () {
-        return 'Users';
-    });
+    // Route::get('/users', function () {
+    //     return 'Users';
+    // });
 
     Route::get('/admin', [MainController::class, 'admin'])->name('admin');
 
@@ -24,6 +24,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/tempahan-pensyarah-list', [AdminController::class, 'tempahanPensyarahList'])->name('tempahan.pensyarah-list');
 
     Route::get('admin/tempahan-recent-list', [AdminController::class, 'tempahanRecentList'])->name('tempahan.recent-list');
+
+    Route::get('/admin/laporan-bulanan', [AdminController::class, 'laporanBulanan'])->name('admin-laporan-bulanan');
+    
+    Route::get('/admin/laporan-bulanan/{month}', [AdminController::class, 'bulanDashboard']);
 });
 
 // Routes accessible to all users
