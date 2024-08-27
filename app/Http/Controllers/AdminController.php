@@ -139,14 +139,14 @@ class AdminController extends Controller
 
     public function bulanDashboard(Request $request) { // Dashboard spesifik untuk data bulanan
 
-        $month = $request->month;
+        $monthNo = $request->month;
 
         // Query to calculate the frequency of bookings for each time slot on each date
         $bookingsData = Reservation::
                         select(DB::raw('date as booking_date'),
                                 DB::raw('extract(hour from checkin) as hour_of_day'),
                                 DB::raw('count(*) as booking_count'))
-                                ->where('tempahan.monthID', $month)
+                                ->where('tempahan.monthID', $monthNo)
                         ->groupBy('booking_date', 'hour_of_day')
                         ->orderByRaw('booking_date asc, hour_of_day asc')
                         ->get();
@@ -160,7 +160,7 @@ class AdminController extends Controller
         // Program Query
         $programData = Reservation::join('program', 'tempahan.idProgram', '=', 'program.idProgram')
                 ->select('program.idProgram', 'program.namaProgram', DB::raw('COUNT(tempahan.id) as total_count'))
-                ->where('tempahan.monthID', $month)
+                ->where('tempahan.monthID', $monthNo)
                 ->groupBy('program.idProgram', 'program.namaProgram')
                 ->get();
 
@@ -178,7 +178,7 @@ class AdminController extends Controller
         // Jabatan Query
         $jabatanData = Reservation::join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
                 ->select('jabatan.idJabatan', 'jabatan.namaJabatan', DB::raw('COUNT(tempahan.id) as total_count'))
-                ->where('tempahan.monthID', $month)
+                ->where('tempahan.monthID', $monthNo)
                 ->groupBy('jabatan.idJabatan', 'jabatan.namaJabatan')
                 ->get();
 
@@ -195,7 +195,7 @@ class AdminController extends Controller
         
         // Count Reserved by day
         $day = Reservation::select('date', DB::raw('count(id) as total_day'))
-        ->where('monthID', $month)
+        ->where('monthID', $monthNo)
         ->groupBy('monthID', 'date')
         ->get();
         
@@ -211,12 +211,12 @@ class AdminController extends Controller
         
         // Get total and completed reservation
         $reserveStatus = [
-            'completed' => Reservation::where('tempahan.monthID', $month)->where('status', 'Completed')->count(),
-            'total' => Reservation::where('tempahan.monthID', $month)->count(),
+            'completed' => Reservation::where('tempahan.monthID', $monthNo)->where('status', 'Completed')->count(),
+            'total' => Reservation::where('tempahan.monthID', $monthNo)->count(),
         ];
 
         // Set Month Name
-        switch ($month) {
+        switch ($monthNo) {
             case 1:
                 $month = "Januari";
                 break;
@@ -258,6 +258,95 @@ class AdminController extends Controller
                 break;
         }
         
-        return view('admin.admin-month-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus', 'month', 'dayData'));
+        return view('admin.admin-month-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus', 'month', 'dayData', 'monthNo'));
+    }
+
+    public function bulananPelajarList(Request $request)
+    {
+        $month = $request->month;
+        $search = $request->search['value'];
+
+        $data = Reservation::query()
+        ->where(function ($q) use ($search) {
+            if ($search) {
+                $q->where('namaPengguna', 'ILIKE', $search . '%');
+            }
+        })
+        ->join('program', 'tempahan.idProgram', '=', 'program.idProgram')
+        ->where('monthID', $month)
+        ->where('noMatriks','!=', 'Staff')
+        ->orderBy('id', 'desc')
+        ->get();
+        
+        return Datatables::of($data)
+        ->editColumn('id', function ($row) {
+            return $row->id;
+        })
+        ->editColumn('namaPengguna', function ($row) {
+            return $row->namaPengguna;
+        })
+        ->editColumn('tarikh', function ($row) {
+            return $row->date;
+        })
+        ->editColumn('program', function ($row) {
+            return $row->program?->namaProgram;
+        })
+        ->editColumn('noMatrik', function ($row) {
+            return $row->noMatriks;
+        })
+        ->editColumn('noBilik', function ($row) {
+            info($row);
+            return $row->room?->roomName;
+        })
+        ->editColumn('checkin', function ($row) {
+            return $row->checkin;
+        })
+        ->editColumn('checkout', function ($row) {
+            return $row->checkout;
+        })
+        ->make(true);
+    }
+
+    public function bulananPensyarahList(Request $request){
+
+        $month = $request->month;
+        $search = $request->search['value'];
+        
+        $data = Reservation::query()
+        ->where(function ($q) use ($search) {
+            if ($search) {
+                $q->where('namaPengguna', 'ILIKE', $search . '%');    
+            }
+        })
+        ->join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
+        ->where('monthID', $month)
+        ->whereNull('noMatriks')
+        ->orderBy('id', 'desc')
+        ->get();
+
+        return Datatables::of($data)
+        ->editColumn('id', function ($row) {
+            return $row->id;
+        })
+        ->editColumn('namaPengguna', function ($row) {
+            return $row->namaPengguna;
+        })
+        ->editColumn('date', function ($row) {
+            return $row->date;
+        })
+        ->addColumn('jabatan', function ($row) {
+            return $row->namaJabatan;
+        })
+        ->addColumn('noBilik', function ($row) {
+            info($row);
+            return $row->room?->roomName;
+        })
+        ->editColumn('checkin', function ($row) {
+            return $row->checkin;
+        })
+        ->editColumn('checkout', function ($row) {
+            return $row->checkout;
+        })
+        ->make(true);
     }
 }
