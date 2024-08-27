@@ -15,10 +15,21 @@ class AdminController extends Controller
         return view('admin.admin-rekod');
     }
 
-    public function tempahanPelajarList()
+    public function tempahanPelajarList(Request $request)
     {
-        $data = Reservation::where('noMatriks','!=', 'Staff')->orderBy('id', 'desc')->with(['room','program']);
+        $search = $request->search['value'];
 
+        $data = Reservation::query()
+        ->where(function ($q) use ($search) {
+            if ($search) {
+                $q->where('namaPengguna', 'ILIKE', $search . '%');
+            }
+        })
+        ->join('program', 'tempahan.idProgram', '=', 'program.idProgram')
+        ->where('noMatriks','!=', 'Staff')
+        ->orderBy('id', 'desc')
+        ->get();
+        
         return Datatables::of($data)
         ->editColumn('id', function ($row) {
             return $row->id;
@@ -51,16 +62,17 @@ class AdminController extends Controller
     public function tempahanPensyarahList(Request $request){
 
         $search = $request->search['value'];
-
+        
         $data = Reservation::query()
         ->where(function ($q) use ($search) {
             if ($search) {
-                $q->where('namaPengguna', $search);
+                $q->where('namaPengguna', 'ILIKE', $search . '%');    
             }
         })
+        ->join('jabatan', 'tempahan.idJabatan', '=', 'jabatan.idJabatan')
         ->whereNull('noMatriks')
         ->orderBy('id', 'desc')
-        ->with(['room', 'jabatan']);
+        ->get();
 
         return Datatables::of($data)
         ->editColumn('id', function ($row) {
@@ -73,7 +85,7 @@ class AdminController extends Controller
             return $row->date;
         })
         ->addColumn('jabatan', function ($row) {
-            return $row->jabatan->namaJabatan;
+            return $row->namaJabatan;
         })
         ->addColumn('noBilik', function ($row) {
             info($row);
