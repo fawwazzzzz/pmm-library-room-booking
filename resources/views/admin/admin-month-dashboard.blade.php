@@ -381,7 +381,7 @@
         var tablePelajar = $('.data-table-pelajar').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('bulanan.pelajar-list') }}",
+            ajax: `/admin/bulanan-pelajar-list/${ {{ $monthNo }} }`,
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
@@ -401,7 +401,7 @@
         var tablePensyarah = $('.data-table-pensyarah').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('tempahan.pensyarah-list') }}",
+            ajax: `/admin/bulanan-pensyarah-list/${ {{ $monthNo }} }`,
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
