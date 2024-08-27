@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/laporan-bulanan', [AdminController::class, 'laporanBulanan'])->name('admin-laporan-bulanan');
     
     Route::get('/admin/laporan-bulanan/{month}', [AdminController::class, 'bulanDashboard']);
+
+    Route::get('/admin/bulanan-pelajar-list', [AdminController::class, 'bulananPelajarList'])->name('bulanan.pelajar-list');
 });
 
 // Routes accessible to all users

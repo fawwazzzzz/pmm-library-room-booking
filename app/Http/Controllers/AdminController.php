@@ -260,4 +260,49 @@ class AdminController extends Controller
         
         return view('admin.admin-month-dashboard', compact('chartData', 'program', 'jabatan', 'reserveStatus', 'month', 'dayData'));
     }
+
+    public function bulananPelajarList(Request $request)
+    {
+        
+        $search = $request->search['value'];
+
+        $data = Reservation::query()
+        ->where(function ($q) use ($search) {
+            if ($search) {
+                $q->where('namaPengguna', 'ILIKE', $search . '%');
+            }
+        })
+        ->join('program', 'tempahan.idProgram', '=', 'program.idProgram')
+        ->where('noMatriks','!=', 'Staff')
+        ->orderBy('id', 'desc')
+        ->get();
+        
+        return Datatables::of($data)
+        ->editColumn('id', function ($row) {
+            return $row->id;
+        })
+        ->editColumn('namaPengguna', function ($row) {
+            return $row->namaPengguna;
+        })
+        ->editColumn('tarikh', function ($row) {
+            return $row->date;
+        })
+        ->editColumn('program', function ($row) {
+            return $row->program?->namaProgram;
+        })
+        ->editColumn('noMatrik', function ($row) {
+            return $row->noMatriks;
+        })
+        ->editColumn('noBilik', function ($row) {
+            info($row);
+            return $row->room?->roomName;
+        })
+        ->editColumn('checkin', function ($row) {
+            return $row->checkin;
+        })
+        ->editColumn('checkout', function ($row) {
+            return $row->checkout;
+        })
+        ->make(true);
+    }
 }

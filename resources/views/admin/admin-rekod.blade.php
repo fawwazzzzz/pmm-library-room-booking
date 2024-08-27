@@ -62,6 +62,7 @@
         var tablePelajar = $('.data-table-pelajar').DataTable({
             processing: true,
             serverSide: true,
+            paging: true,
             ajax: "{{ route('tempahan.pelajar-list') }}",
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
@@ -78,6 +79,7 @@
                 { targets: [0, 1, 2, 3, 4, 5, 6, 7], className: "text-start" },
             ]
         });
+
         var tablePensyarah = $('.data-table-pensyarah').DataTable({
             processing: true,
             serverSide: true,

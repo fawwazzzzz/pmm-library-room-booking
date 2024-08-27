@@ -1,9 +1,4 @@
 @extends('admin.admin')
-<style>
-    .dataTables_paginate, .dataTables_info {
-    display: none;
-}
-</style>
 
 @section('content')
 
@@ -382,13 +377,11 @@
                 }
             }
         });
-    });
 
-    $(function () {
         var tablePelajar = $('.data-table-pelajar').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('tempahan.pelajar-list') }}",
+            ajax: "{{ route('bulanan.pelajar-list') }}",
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
@@ -404,7 +397,7 @@
                 { targets: [0, 1, 2, 3, 4, 5, 6, 7], className: "text-start" },
             ]
         });
-        
+
         var tablePensyarah = $('.data-table-pensyarah').DataTable({
             processing: true,
             serverSide: true,
@@ -422,9 +415,12 @@
             columnDefs: [
                 { targets: [0, 1, 2, 3, 4, 5, 6], className: "text-start" },
             ]
-        })
-    })
-
+        });
+    });
     
+    // $(function () {
+        
+    // })
+
 </script>    
 @endpush
