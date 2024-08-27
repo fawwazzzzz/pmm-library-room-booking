@@ -64,6 +64,7 @@
             serverSide: true,
             paging: true,
             ajax: "{{ route('tempahan.pelajar-list') }}",
+            order: [[0, 'desc']],
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
@@ -84,6 +85,7 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('tempahan.pensyarah-list') }}",
+            order: [[0, 'desc']],
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
