@@ -382,6 +382,7 @@
             processing: true,
             serverSide: true,
             ajax: `/admin/bulanan-pelajar-list/${ {{ $monthNo }} }`,
+            order: [[0, 'desc']],
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
@@ -402,6 +403,7 @@
             processing: true,
             serverSide: true,
             ajax: `/admin/bulanan-pensyarah-list/${ {{ $monthNo }} }`,
+            order: [[0, 'desc']],
             columns: [
                 // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'id', name: 'id'},
