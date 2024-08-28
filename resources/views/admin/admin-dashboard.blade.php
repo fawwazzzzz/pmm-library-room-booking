@@ -227,8 +227,6 @@
     // Reserved By Jabatan Chart
         const jabatanData = {{ Illuminate\Support\Js::from($jabatan) }};
 
-        console.log("Jabatan : " + jabatanData.jabatan);
-
         new Chart(document.querySelector('#jabatanChart'), {
         type: 'bar',
         data: {
@@ -269,8 +267,6 @@
 
     // Reserved by Program Chart
         const programData = {{ Illuminate\Support\Js::from($program) }};
-
-        console.log("Program : " + programData.program);
 
         new Chart(document.querySelector('#programChart'), {
             type: 'bar',

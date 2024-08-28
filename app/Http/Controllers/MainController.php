@@ -159,6 +159,14 @@ class MainController extends Controller
         $date = $request->input('date');
         $hourStart = $request->input('checkin');
         $hourEnd = $request->input('checkout');
+
+        $array = [
+            'date' => $date,
+            'start' => $hourStart,
+            'end' => $hourEnd
+        ];
+
+        // dd($array);
             
         $room = Reservation::select('roomID')
                 ->whereDate('date', '=', $date)
@@ -167,11 +175,11 @@ class MainController extends Controller
                         $query->whereTime('checkin', '<', $hourStart)
                             ->whereTime('checkout', '>', $hourEnd);
                     })->orWhere(function ($query) use ($hourStart, $hourEnd) {
-                        $query->whereTime('checkin', '>', $hourStart)
+                        $query->whereTime('checkin', '>=', $hourStart)
                             ->whereTime('checkin', '<', $hourEnd);
                     })->orWhere(function ($query) use ($hourStart, $hourEnd) {
                         $query->whereTime('checkout', '>', $hourStart)
-                            ->whereTime('checkout', '<', $hourEnd);
+                            ->whereTime('checkout', '<=', $hourEnd);
                     });
                 })
                 ->get();

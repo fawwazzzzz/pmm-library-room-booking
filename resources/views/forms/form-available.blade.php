@@ -227,11 +227,13 @@
                     // Access the JSON array data
                     const testData = response.test;
                     document.getElementById('submitRoom').disabled = false;
-
+                    
                     unDisabledButton();   
 
                     // Process the data as needed
                     testData.forEach(item => {
+                        console.log('test');
+                        
                         // Access each item in the JSON array and do something with it                        
                         document.getElementById(`${item.roomID}`).disabled = true;
                     });
