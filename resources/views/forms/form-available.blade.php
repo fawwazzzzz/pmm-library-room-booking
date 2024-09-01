@@ -85,15 +85,17 @@
                             </select>
                         </div> --}}
                     </div>
+                    <div class="form-text"><i class="bi bi-info-circle me-2"></i>Tempahan hanya boleh dibuat dalam 2 jam.</div>
 
                     <div class="my-4"></div>
 
                     <div class="flex-end w-100">
-                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary btn-availability" value="Semak Kekosongan">
+                        <input id="checkAvailabilityButton" type="button" class="btn btn-primary btn-availability" value="Semak Kekosongan Bilik">
                     </div>
 
                 </div>
                 <div class="col-md-6 py-3 px-5">
+                    {{-- <label for="">Bilik</label> --}}
                     <div class="radio-tile-group">
 
                         <div class="input-container">
