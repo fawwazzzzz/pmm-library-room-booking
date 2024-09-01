@@ -130,6 +130,7 @@ class AdminController extends Controller
     public function laporanBulanan()
     {   
         $month = Reservation::select('monthID')
+                ->whereNotNull('monthID')
                 ->distinct()
                 ->orderBy('monthID', 'desc')
                 ->get();
