@@ -37,8 +37,12 @@ class AdminController extends Controller
         ->editColumn('namaPengguna', function ($row) {
             return $row->namaPengguna;
         })
-        ->editColumn('tarikh', function ($row) {
-            return $row->date;
+        ->editColumn('date', function ($row) {
+
+            // Formatted Date
+            $formattedDate = Carbon::createFromFormat('Y-m-d', $row->date)->format('d/m/Y');
+            return $formattedDate;
+            
         })
         ->editColumn('program', function ($row) {
             return $row->program?->namaProgram;
@@ -82,7 +86,11 @@ class AdminController extends Controller
             return $row->namaPengguna;
         })
         ->editColumn('date', function ($row) {
-            return $row->date;
+            
+            // Formatted Date
+            $formattedDate = Carbon::createFromFormat('Y-m-d', $row->date)->format('d/m/Y');
+            return $formattedDate;
+
         })
         ->addColumn('jabatan', function ($row) {
             return $row->namaJabatan;
@@ -115,7 +123,11 @@ class AdminController extends Controller
             return $row->room?->roomName;
         })
         ->editColumn('tarikh', function ($row) {
-            return $row->date;
+            
+            // Formatted Date
+            $formattedDate = Carbon::createFromFormat('Y-m-d', $row->date)->format('d/m/Y');
+            return $formattedDate;
+
         })
         ->editColumn('checkin', function ($row) {
             return $row->checkin;
