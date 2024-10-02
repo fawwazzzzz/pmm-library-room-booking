@@ -20,6 +20,7 @@ class JabatanSeeder extends Seeder
             [ 'idJabatan' => 4, 'namaJabatan' => 'Jabatan Kejuruteraan Elektrik', 'shortJabatan' => 'JKE'],
             [ 'idJabatan' => 5, 'namaJabatan' => 'Jabatan Kejuruteraan Awam', 'shortJabatan' => 'JKA'],
             [ 'idJabatan' => 6, 'namaJabatan' => 'TVET', 'shortJabatan' => 'TVET'],
+            [ 'idJabatan' => 7, 'namaJabatan' => 'Lain-lain', 'shortJabatan' => 'Lain-lain'],
         ];
 
         foreach ($jabatan as $each) {
