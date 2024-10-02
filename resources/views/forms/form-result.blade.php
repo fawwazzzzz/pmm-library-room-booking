@@ -80,15 +80,15 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-end flex-column mt-2">
-            <a href="/" class="btn-result">
-                <button type="button" class="btn btn-outline-primary w-100">Halaman Utama</button>
-            </a>
-            <a href="/cancel-reserve/{{ $data['id'] }}" class="btn-result mt-3">
+            <a href="/cancel-reserve/{{ $data['id'] }}" class="btn-result">
                 <button type="button" class="btn btn-danger w-100">Batal</button>
             </a>
-            <span class="my-2 text-danger">
+            <span class=" text-danger">
                 <i class="bi bi-info-circle-fill me-1 text-danger"></i> <strong>Batal hanya dibenarkan 30 minit sebelum masa masuk</strong>
             </span>
+            <a href="/" class="btn-result my-3">
+                <button type="button" class="btn btn-outline-primary w-100">Halaman Utama</button>
+            </a>
         </div>
     </div>
 @endsection
