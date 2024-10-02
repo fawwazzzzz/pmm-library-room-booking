@@ -245,7 +245,7 @@
                     jabatanDrop += "<option value=\"" + item.idJabatan + "\" {{ old('jabatanID') == " + item.idJabatan + "  ? 'selected' : '' }} >" + item.namaJabatan + "</option>";
                 });
 
-                jabatanDrop += "<option value=\"Lain-Lain\">Lain-Lain</option></select></div>";
+                // jabatanDrop += "<option value=\"Lain-Lain\">Lain-Lain</option></select></div>";
                 
                 jabatanDiv.innerHTML = jabatanDrop; 
                 
