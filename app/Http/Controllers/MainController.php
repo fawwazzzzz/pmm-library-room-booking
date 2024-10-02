@@ -200,8 +200,6 @@ class MainController extends Controller
         $timeStart = $hourStart . ':' . $request->sMinute . ':00';
         $timeEnd = $hourEnd . ':' . $request->eMinute . ':00';
 
-        // dd([$date, $timeStart, $timeEnd]);
-
         $time = Reservation::create([
             'date' => $date,
             'checkin' => $timeStart,
@@ -224,6 +222,7 @@ class MainController extends Controller
     public function insertDetails(Request $request) {
 
         $numGroup = $request->room == 'Anjung' ? 'min:20|max:30' : 'min:3|max:6';
+        $groupCheck = $numGroup == 'min:20|max:30' ? 'Bilangan minima adalah 20 dan maksimum adalah 30' : 'Bilangan minima adalah 3 dan maksimum adalah 6';
 
         if ($request->programID == null) {
             $choice = "jabatanID";
@@ -264,6 +263,8 @@ class MainController extends Controller
             'purposeName.required' => 'Sila masukkan tujuan penempahan.',
             'groupnum.required' => 'Sila masukkan bilangan dalam kumpulan.',
             'groupnum.numeric' => 'Masukkan nombor sahaja di dalam bilangan dalam kumpulan.',
+            "groupnum.max" => $groupCheck, 
+            "groupnum.min" => $groupCheck, 
             'matriks.id_format' => 'Sila masukkan format No Matriks dengan betul',
             'icnum.min' => 'Sila masukkan nombor IC dengan betul',
         ];

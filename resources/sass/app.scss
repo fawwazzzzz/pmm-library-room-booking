@@ -186,6 +186,10 @@ input:checked + .radio-tile label {
     text-decoration: none;
 }
 
+.btn-result {
+    width: 25%;
+}
+
 @media (max-width: 769px) {
     .main-page {
         padding-top: 50px;
@@ -214,6 +218,10 @@ input:checked + .radio-tile label {
     }
 
     .btn-availability {
+        width: 100%;
+    }
+
+    .btn-result {
         width: 100%;
     }
 }
